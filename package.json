@@ -12,6 +12,8 @@
     "react-redux": "^5.1.1",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2"
   },
@@ -23,7 +25,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack --watch --mode=development"
   },
   "repository": {
     "type": "git",
@@ -35,5 +38,13 @@
   "bugs": {
     "url": "https://github.com/trevorzs/CryptoNight/issues"
   },
-  "homepage": "https://github.com/trevorzs/CryptoNight#readme"
+  "homepage": "https://github.com/trevorzs/CryptoNight#readme",
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0"
+  }
 }

@@ -1,0 +1,21 @@
+import React from 'react';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+import {login,logout} from '../../actions/session_actions';
+import SessionForm from './session_form';
+
+const msp = (state) => (
+  {
+    username:"",
+    password:""
+  }
+);
+
+const mdp = (dispatch) => (
+  {
+    processForm: user => dispatch(login(user)),
+    logout: () => dispatch(logout())
+  }
+);
+
+export default connect(msp,mdp)(SessionForm);
