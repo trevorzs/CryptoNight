@@ -56,17 +56,17 @@ class SessionForm extends React.Component{
             <h2>Welcome to CryptoNight</h2>
             <form className="login-form" onSubmit={this.handleSubmit.bind(this)}>
               <label>Email or Username </label><br/>
-              <input className="input-field" type="text" onChange={this.update("username")} value={this.state.username}></input><br/>
+              <input className="input-field" type="text" onChange={this.update("username")} value={this.state.username} required></input><br/>
               <label>Password </label><br/>
-              <input className="input-field" type="password" onChange={this.update("password")} value={this.state.password}></input><br/>
+              <input className="input-field" type="password" onChange={this.update("password")} value={this.state.password} required></input><br/>
               {this.props.link}<br/>
             <br/>
               <span className="sessionlink" onClick={this.props.demoLogin}>Demo Login</span>
               <br/>
+              {this.renderErrors()}
               <input className="session-form-btn" type="submit" value={this.props.button}/><br/>
-
             </form>
-            {this.renderErrors()}
+
           </div>
 
         </div>
