@@ -17,13 +17,20 @@ class WelcomePage extends React.Component{
       <button onClick={this.props.logout}>Logout</button></>)
     }else{
       content =
-    ( <><h1>Welcome to Crypto Night</h1>
-      <Link to="/login">Login</Link>
-      <Link to="/signup">Signup</Link></>
+    ( <div className="splash">
+      <h1 className="splash-title">Don't Sleep</h1>
+      <nav className="navbar">
+        <img className="logo"></img>
+        <div className="navlinks">
+          <Link to="/login">Log In</Link>
+          <Link to="/signup">Sign Up</Link>
+        </div>
+      </nav>
+      </div>
     )
     }
     return (
-      <div>
+      <div className="fullsize">
         {content}
       </div>
     )
