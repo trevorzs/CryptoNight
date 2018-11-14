@@ -16,7 +16,11 @@ const mdp = (dispatch) => (
   {
     processForm: user => dispatch(login(user)),
     logout: () => dispatch(logout()),
-    clearErrors: () => dispatch(clearErrors())
+    clearErrors: () => dispatch(clearErrors()),
+    demoLogin: () => {
+      const user = {username:"Potential_Cryptonaut", password:"starwars"}
+      return (dispatch(login(user)))
+    }
   }
 );
 

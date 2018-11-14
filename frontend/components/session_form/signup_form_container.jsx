@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {signup,clearErrors} from '../../actions/session_actions';
+import {login,signup,clearErrors} from '../../actions/session_actions';
 import SessionForm from './session_form';
 
 const msp = (state) => (
@@ -14,7 +14,11 @@ const msp = (state) => (
 const mdp = (dispatch) => (
   {
     processForm: user => dispatch(signup(user)),
-    clearErrors: () => dispatch(clearErrors())
+    clearErrors: () => dispatch(clearErrors()),
+    demoLogin: () => {
+      const user = {username:"Potential_Cryptonaut", password:"starwars"}
+      return (dispatch(login(user)))
+    }
   }
 );
 
