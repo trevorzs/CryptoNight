@@ -53,7 +53,7 @@ class SessionForm extends React.Component{
         <div className="login-right halfsize">
 
           <div className="login-form-wrapper">
-            <h2>Welcome to Cryptonight</h2>
+            <h2>Welcome to CryptoNight</h2>
             <form className="login-form" onSubmit={this.handleSubmit.bind(this)}>
               <label>Email or Username </label><br/>
               <input className="input-field" type="text" onChange={this.update("username")} value={this.state.username}></input><br/>
