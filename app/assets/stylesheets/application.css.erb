@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ //= depend_on_asset "login_image.png"
  */
  body, h1{
    margin: 0;
@@ -48,7 +49,7 @@
 }
 
 .login-left{
-  background-image:url("login_image.png");
+  background-image:url('<%= asset_path("login_image.png") %>');
   background-size:cover;
   background-position:center;
   min-width: 518px;
