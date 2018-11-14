@@ -15,6 +15,7 @@
  */
  body, h1{
    margin: 0;
+   font-family: 'Ropa Sans', sans-serif;
  }
 
  .fullsize{
@@ -57,7 +58,66 @@
   display:flex;
   justify-content: center;
   flex-direction: column;
-  text-align: center;
+  align-items: flex-start;
   background-color:#151515;
   color:white;
+}
+
+.session-form-btn{
+  background-color:#e72ebe;
+  color:white;
+  font-family: 'Ropa Sans', sans-serif;
+  min-width:120px;
+  padding:0 48px;
+  height:48px;
+  border:none;
+  border-radius:4px;
+  font-size:15px;
+  margin-top:60px;
+}
+
+.session-form-btn:hover{
+  background-color:#ef50d0;
+  cursor:pointer;
+}
+
+.sessionlink{
+  color:#e72ebe;
+  text-decoration:none;
+}
+
+.input-field{
+  background-color:	#414142;
+  padding: 15px 20px;
+  border-radius:4px;
+  border: 1px solid transparent;
+  color:white;
+  width:370px;
+  margin: 10px 0;
+}
+
+.input-field:hover{
+  background-color:#6e6d6e;
+  border:1px solid grey;
+}
+.input-field:focus{
+  outline: none !important;
+  background-color:#6e6d6e;
+  border:1px solid #e72ebe;
+}
+
+.login-form-wrapper{
+  margin-left: 52px;
+}
+
+.login-form label{
+  line-height:20px;
+}
+
+.login-form-wrapper h2{
+    font-size: 28px;
+    letter-spacing: 0.4px;
+    font-weight: 500;
+    line-height: 30px;
+    margin: 0 0 30px;
 }

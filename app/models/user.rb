@@ -37,6 +37,7 @@ class User < ApplicationRecord
     self.session_token = SecureRandom::urlsafe_base64
     self.save!
     self.session_token
+
   end
 
   def ensure_session_token

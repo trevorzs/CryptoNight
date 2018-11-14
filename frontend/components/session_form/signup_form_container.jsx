@@ -8,7 +8,7 @@ const msp = (state) => (
   {
     errors: state.errors.session,
     button: "Sign Up",
-    link: <Link to="/login">Already have an account? Sign in now</Link>,
+    link:  <span className="sessionlink"><Link to="/login">Already have an account? Sign in now</Link></span>,
   }
 );
 const mdp = (dispatch) => (
