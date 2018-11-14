@@ -13,3 +13,51 @@
  *= require_tree .
  *= require_self
  */
+ body, h1{
+   margin: 0;
+ }
+
+ .fullsize{
+   height:100%;
+   width:100%;
+ }
+
+ .halfsize{
+   height:100%;
+   width:50%;
+ }
+
+#root{
+  height:100%;
+  width:100%;
+  position:fixed;
+}
+.main{
+  background-color:#151515;
+  color:white;
+  margin: 0;
+}
+
+.main a{
+  color:white;
+}
+
+.login-main{
+  display:flex;
+}
+
+.login-left{
+  background-image:url("login_image.png");
+  background-size:cover;
+  background-position:center;
+  min-width: 518px;
+}
+
+.login-right{
+  display:flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  background-color:#151515;
+  color:white;
+}

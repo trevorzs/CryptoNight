@@ -1,20 +1,22 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {login,logout} from '../../actions/session_actions';
+import {login,logout,clearErrors} from '../../actions/session_actions';
 import SessionForm from './session_form';
 
 const msp = (state) => (
   {
-    username:"",
-    password:""
+    errors: state.errors.session,
+    button: "Sign In",
+    link: <Link to="/signup">Don't have an account? Sign up now</Link>
   }
 );
 
 const mdp = (dispatch) => (
   {
     processForm: user => dispatch(login(user)),
-    logout: () => dispatch(logout())
+    logout: () => dispatch(logout()),
+    clearErrors: () => dispatch(clearErrors())
   }
 );
 
