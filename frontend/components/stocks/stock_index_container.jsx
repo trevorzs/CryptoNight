@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import StockIndex from './stock_index';
 import {fetchStocks} from '../../actions/stocks_actions';
+import {logout} from '../../actions/session_actions';
 
 const msp = (state, ownProps) => {
   return({
