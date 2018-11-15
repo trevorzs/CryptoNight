@@ -11,12 +11,12 @@ class StockIndex extends React.Component{
   }
 
   componentDidMount(){
-    this.props.fetchStocks();
+    this.props.fetchStocks()
   }
 
   render(){
     const stocks = this.props.stocks.map(stock => (
-    <Link key={stock.id}  to={`stocks/${stock.id}`}><div className="stock-index-list-item">{stock.name}</div></Link>
+    <Link key={stock.id}  to={`stocks/${stock.id}`}><li className="stock-index-list-item">{stock.name}</li></Link>
     ))
     return (
       <div className="overall fullsize">
@@ -36,7 +36,7 @@ class StockIndex extends React.Component{
           <h1>Cryptocurrencies</h1>
           <p>{stocks.length} Cryptocurrencies</p>
           <div className="stock-index-list">
-            <div className="stock-index-list-header">Name</div>
+            <li className="stock-index-list-header">Name</li>
             {stocks}
           </div>
         </div>

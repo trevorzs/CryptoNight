@@ -3,6 +3,7 @@ import * as StocksApiUtil from '../util/stocks_api_util';
 export const RECEIVE_STOCKS = "RECEIVE_STOCKS";
 export const RECEIVE_STOCK = "RECEIVE_STOCK";
 export const RECEIVE_PRICE = "RECEIVE_PRICE";
+export const RECEIVE_DATA = "RECEIVE_DATA";
 
 export const receivePrice = (price,id) => {
   return (
@@ -23,11 +24,17 @@ export const receiveStock = (stock) => {
   )
 }
 
-
 export const receiveStocks = (stocks) => (
   {
     type: RECEIVE_STOCKS,
     stocks
+  }
+)
+
+export const receiveData = (data) => (
+  {
+    type: RECEIVE_DATA,
+    data
   }
 )
 
@@ -43,8 +50,22 @@ export const fetchStocks = () => dispatch => (
   )
 )
 
+// .then(response=>
+//   dispatch(Object.keys(response.stocks).map((id)=>(
+//   response.stocks[id].symbol)))
+// )
+
 export const fetchPrice = (sym,id) => dispatch => (
   StocksApiUtil.fetchPrice(sym).then(
     price => dispatch(receivePrice(price,id))
   )
 )
+
+// export const fetchStocksData = (symbols) => dispatch => {
+//   debugger
+//   return (
+//     StocksApiUtil.fetchStocksData(symbols).then(
+//       data => dispatch(receiveData(data))
+//     )
+//   )
+// }
