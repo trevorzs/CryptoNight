@@ -11,3 +11,10 @@ export const fetchStock = (id) => (
     method: "GET"
   })
 )
+
+export const fetchPrice = (sym) => (
+  $.ajax({
+    url: `https://min-api.cryptocompare.com/data/price?fsym=${sym}&tsyms=USD`,
+    method: "GET"
+  })
+)

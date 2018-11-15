@@ -50,4 +50,9 @@ stocks = Stock.create([{
     name: "NEO",
     symbol: "NEO",
     details: "The One"
-    }])
+    },
+    {
+      name: "DashCoin",
+      symbol: "DASH",
+      details: "Fast"
+      }])

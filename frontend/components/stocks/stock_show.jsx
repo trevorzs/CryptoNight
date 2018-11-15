@@ -13,7 +13,9 @@ class StockShowPage extends React.Component{
   }
 
   componentDidMount(){
-    this.props.fetchStock(this.props.match.params.stock_id);
+    this.props.fetchStock(this.props.match.params.stock_id).then((response)=>{
+      this.props.fetchPrice(response.stock.symbol,response.stock.id)
+    })
   }
 
   render(){
@@ -41,9 +43,9 @@ class StockShowPage extends React.Component{
               <button className="nav-link-a" onClick={this.props.logout}>Log Out</button>
             </div>
         </div>
-        <div className="user-show-main">
-          <h1>{this.props.stock.name}</h1>
-          <h1>{this.props.stock.symbol}</h1>
+        <div className="stock-show-main">
+          <h1>{this.props.stock.name} - {this.props.stock.symbol}</h1>
+          <h1>${this.props.stock.price}</h1>
         </div>
 
       </div>

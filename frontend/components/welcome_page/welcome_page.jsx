@@ -18,7 +18,7 @@ class WelcomePage extends React.Component{
       content =
     ( <div className="splash">
       <h1 className="splash-title">Don't Sleep</h1>
-      <nav className="navbar">
+      <nav className="splash-navbar">
         <img className="logo"></img>
         <div className="navlinks">
           <Link to="/login">Log In</Link>
