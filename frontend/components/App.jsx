@@ -4,11 +4,13 @@ import {AuthRoute, ProtectedRoute} from '../util/route_util';
 import SignupFormContainer from './session_form/signup_form_container';
 import LoginFormContainer from './session_form/login_form_container';
 import WelcomePageContainer from "./welcome_page/welcome_page_container";
+import UserShowContainer from "./users/users_show_container";
 
 const App = () => (
   <div className="main fullsize">
     <AuthRoute exact path="/signup" component={SignupFormContainer}/>
     <AuthRoute exact path="/login" component={LoginFormContainer}/>
+    <ProtectedRoute exact path ="/api/users/:user_id" component={UserShowContainer}/>
     <Route exact path="/" component={WelcomePageContainer}/>
   </div>
 )

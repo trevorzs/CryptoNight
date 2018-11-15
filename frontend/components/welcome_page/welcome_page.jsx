@@ -13,8 +13,7 @@ class WelcomePage extends React.Component{
     let content;
     if (this.props.loggedIn){
       content =
-      (<><h1> Hello, {this.props.currentUser.username}</h1>
-      <button onClick={this.props.logout}>Logout</button></>)
+      (<Redirect to={this.props.link}/>)
     }else{
       content =
     ( <div className="splash">
