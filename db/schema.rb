@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_14_220735) do
+ActiveRecord::Schema.define(version: 2018_11_15_144427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "stocks", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "symbol", null: false
+    t.string "details", null: false
+    t.integer "change"
+    t.integer "tag_id"
+    t.index ["tag_id"], name: "index_stocks_on_tag_id", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username", null: false

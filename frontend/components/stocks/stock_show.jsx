@@ -4,12 +4,29 @@ import {merge} from 'lodash';
 import {connect} from 'react-redux';
 
 
-class UserShowPage extends React.Component{
+class StockShowPage extends React.Component{
   constructor(props){
     super(props);
+    this.state  = {
+      stock: ""
+    }
+  }
+
+  componentDidMount(){
+    this.props.fetchStock(this.props.match.params.stock_id);
   }
 
   render(){
+    if (!this.props.stock){
+      return (
+        <div className="overall fullsize">
+          <div className="poo">
+            <div className="oswego">
+            </div>
+          </div>
+        </div>
+      )
+    }
     return (
       <div className="overall fullsize">
         <div className="poo">
@@ -25,8 +42,8 @@ class UserShowPage extends React.Component{
             </div>
         </div>
         <div className="user-show-main">
-          <h1>Welcome to CryptoNight</h1>
-          <Link to="/api/stocks">Cryptocurrencies</Link>
+          <h1>{this.props.stock.name}</h1>
+          <h1>{this.props.stock.symbol}</h1>
         </div>
 
       </div>
@@ -34,4 +51,4 @@ class UserShowPage extends React.Component{
   }
 }
 
-export default UserShowPage;
+export default StockShowPage;

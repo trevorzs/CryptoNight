@@ -1,17 +1,18 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
-import {AuthRoute, ProtectedRoute} from '../util/route_util';
+import {AuthRoute, ProtectedRoute, DashboardRoute} from '../util/route_util';
 import SignupFormContainer from './session_form/signup_form_container';
 import LoginFormContainer from './session_form/login_form_container';
-import WelcomePageContainer from "./welcome_page/welcome_page_container";
-import UserShowContainer from "./users/users_show_container";
+import StockIndexContainer from './stocks/stock_index_container';
+import StockShowContainer from './stocks/stock_show_container';
 
 const App = () => (
   <div className="main fullsize">
     <AuthRoute exact path="/signup" component={SignupFormContainer}/>
     <AuthRoute exact path="/login" component={LoginFormContainer}/>
-    <ProtectedRoute exact path ="/api/users/:user_id" component={UserShowContainer}/>
-    <Route exact path="/" component={WelcomePageContainer}/>
+    <ProtectedRoute exact path="/api/stocks" component={StockIndexContainer}/>
+    <ProtectedRoute exact path="/api/stocks/:stock_id" component={StockShowContainer}/>
+    <DashboardRoute exact path="/"/>
   </div>
 )
 export default App;

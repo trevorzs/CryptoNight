@@ -7,7 +7,7 @@ const msp = state => (
   {
     loggedIn: Boolean(state.session.id),
     currentUser: state.entities.users[state.session.id],
-    homeLink: `/api/users/${state.session.id}`
+    homeLink: `/`
   }
 );
 

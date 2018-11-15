@@ -15,7 +15,7 @@
  //= depend_on_asset "login_image.png"
 //= depend_on_asset "splash.gif"
  */
- body, h1, div{
+ body, h1, div, ul{
    margin: 0;
    font-family: 'Ropa Sans', sans-serif;
    padding:0;
@@ -28,7 +28,12 @@
  a{
    text-decoration: none;
    margin:0;
+   color:white;
  }
+ a:hover{
+     color:#e72ebe;
+}
+
 
  .fullsize{
    height:100%;
@@ -257,10 +262,12 @@
 }
 
 .user-show-main {
+  position:relative;
   display:flex;
   justify-content: flex-start;
   margin: 103px 0 0 168px;
 }
+
 
 .user-show-main h1{
   font-size: 36px;
@@ -271,4 +278,56 @@
 
 .logo{
   margin-left:100px;
+}
+
+ul li a:hover{
+  color:#e72ebe;
+}
+
+.stock-index{
+    position:relative;
+    display:flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 103px 0 0 128px;
+}
+
+.stock-index h1{
+  font-size: 36px;
+  font-weight: bold;
+  letter-spacing: 2.5px;
+  line-height: 42px;
+}
+
+.stock-index p{
+  margin: 4px 0 0 0;
+}
+
+.stock-index-list{
+  margin-top:15px;
+}
+
+.stock-index-list-header{
+  width:735px;
+  height:40px;
+  list-style: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.25px;
+  line-height: 19px;
+  padding:5px 0;
+}
+
+.stock-index-list-item{
+  width:735px;
+  height:40px;
+  list-style: none;
+  padding: 20px 0;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  line-height: 22px;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
 }

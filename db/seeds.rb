@@ -14,3 +14,40 @@ users = User.create([{
     last_name:"Cryptonaut"
   }
   ])
+
+Stock.destroy_all
+stocks = Stock.create([{
+    name: "Bitcoin",
+    symbol: "BTC",
+    details: "Bitcoin is bestcoin"
+  },
+  {
+    name: "Dogecoin",
+    symbol: "DOGE",
+    details: "So money, much coin"
+    },
+  {
+    name: "Ethereum",
+    symbol: "ETH",
+    details: "Ethereal"
+      },
+  {
+    name: "Stellar",
+    symbol: "XLM",
+    details: "Shoot for the stars"
+    },
+  {
+    name: "Litecoin",
+    symbol: "LTC",
+    details: "Not heavy"
+    },
+  {
+    name: "Ripple",
+    symbol: "XRP",
+    details: "Make waves"
+    },
+  {
+    name: "NEO",
+    symbol: "NEO",
+    details: "The One"
+    }])
