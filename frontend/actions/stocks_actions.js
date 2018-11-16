@@ -62,13 +62,36 @@ export const receiveData = (data,symbols) => (
   }
 )
 
-const historicFetches = (sym,id) => {
+const historicFetches = (sym,id,dispatch) => {
   const obj = {};
-  obj.price = StocksApiUtil.fetchPrice(sym,id);
-  obj.daily = StocksApiUtil.fetchStockDaily(sym);
-  obj.weekly = StocksApiUtil.fetchStockWeekly(sym);
-  obj.monthly = StocksApiUtil.fetchStockMonthly(sym);
-  obj.yearly = StocksApiUtil.fetchStockYearly(sym);
+  const check = () => {
+    const completed = ((Boolean(obj.price) && Boolean(obj.daily) && Boolean(obj.weekly) && Boolean(obj.monthly) && Boolean(obj.yearly)));
+    if (completed) {
+      dispatch(receiveStockData(obj));
+    }
+  }
+
+  StocksApiUtil.fetchPrice(sym,id).then(response=>{
+      obj.price = response.USD;
+      check();
+  });
+  StocksApiUtil.fetchStockDaily(sym).then(response=>{
+      obj.daily = response.Data;
+      check();
+  });
+  StocksApiUtil.fetchStockWeekly(sym,id).then(response=>{
+      obj.weekly = response.Data;
+      check();
+  });
+  StocksApiUtil.fetchStockMonthly(sym,id).then(response=>{
+      obj.monthly = response.Data;
+      check();
+  });
+  StocksApiUtil.fetchStockYearly(sym,id).then(response=>{
+      obj.yearly = response.Data;
+      check();
+  });
+
   return (obj);
 }
 
@@ -76,7 +99,8 @@ export const fetchStock = (id) => dispatch => (
   StocksApiUtil.fetchStock(id).then(
     stock => dispatch(receiveStock(stock))
   ).then(response=>{
-    dispatch(fetchPrice(response.stock.symbol,response.stock.id))
+    historicFetches(response.stock.symbol, response.stock.id, dispatch);
+    // dispatch(receiveStockData(historicFetches(response.stock.symbol,response.stock.id)))
   })
 )
 

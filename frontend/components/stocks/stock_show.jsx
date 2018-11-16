@@ -19,12 +19,23 @@ class StockShowPage extends React.Component{
   }
 
   render(){
-    if (!this.props.stock){
+    if (!this.props.stock || !this.props.data){
       return (
         <div className="overall fullsize">
           <div className="poo">
             <div className="oswego">
             </div>
+          </div>
+          <div className="user-show-navbar">
+              <Link to="/"><div className="logo"/></Link>
+              <div className="nav-links">
+                <Link to="/" className="nav-link-a">Home</Link>
+                <a className="nav-link-a">Notifications</a>
+                <button className="nav-link-a" onClick={this.props.logout}>Log Out</button>
+              </div>
+          </div>
+          <div className="stock-show-main">
+            <h1>LOADING</h1>
           </div>
         </div>
       )
@@ -45,10 +56,8 @@ class StockShowPage extends React.Component{
         </div>
         <div className="stock-show-main">
           <h1>{this.props.stock.name} - {this.props.stock.symbol}</h1>
-          <h1>${this.props.stock.price}</h1>
-            <LineChart width={400} height={400} data={[this.props.stock]}>
-              <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-            </LineChart>
+          <h1>${this.props.data.price}</h1>
+
         </div>
 
       </div>
