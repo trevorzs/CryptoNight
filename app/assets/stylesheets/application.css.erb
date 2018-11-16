@@ -16,6 +16,11 @@
 //= depend_on_asset "splash.gif"
 //= depend_on_asset "cosmonaut3.png"
  */
+
+ /*
+ green highlight: #00ea9c
+ purple highlight: #e72ebe
+  */
  body, h1, div, ul{
    margin: 0;
    font-family: 'Ropa Sans', sans-serif;
@@ -254,6 +259,7 @@
   border:none;
 }
 
+
 .nav-link-a:hover{
   color:#e72ebe;
   cursor:pointer;
@@ -315,7 +321,7 @@
     justify-content: flex-start;
     flex-direction: column;
     align-items: flex-start;
-    margin: 103px 0 0 128px;
+    margin: 100px 0 0 208px;
 }
 
 .stock-index h1{
@@ -341,18 +347,23 @@
   font-weight: 500;
   letter-spacing: 0.25px;
   line-height: 19px;
-  padding:5px 0;
+  padding-top:5px;
   display:flex;
   justify-content: space-between;
   border-bottom: 1px solid gray;
 }
 
 .stock-index-list-header li{
-  width:100px;
+  width:80px;
 }
 
 .stock-index-list-item li{
-  width:100px;
+  width:80px;
+  padding-top:10px;
+}
+
+.stock-index-list li:last-child{
+  padding-right:120px;
 }
 
 .stock-index-list-header:hover{
@@ -402,6 +413,12 @@
   font-size:20px;
 }
 
-.stock-index-price{
+.uparrow{
+  color: #00ea9c;
+  font-size: 9px;
+}
 
+.downarrow{
+  color: #e72ebe;
+  font-size: 9px;
 }

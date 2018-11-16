@@ -23,7 +23,7 @@ export const fetchStocksData = (symbols) => {
   const syms = symbols.map((arr)=>(arr[0])).join(",")
   return (
     $.ajax({
-      url: `https://min-api.cryptocompare.com/data/pricemulti?fsyms=${syms}&tsyms=USD`,
+      url: `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${syms}&tsyms=USD`,
       method: "GET"
     })
   )

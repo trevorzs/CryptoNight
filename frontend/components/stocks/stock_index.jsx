@@ -15,13 +15,21 @@ class StockIndex extends React.Component{
   }
 
   render(){
+    const parseChange = (change) => {
+      if (change>0){
+        return (<li><span className="uparrow">&#9650;</span> {change}%</li>)
+      }
+      if (change<0){
+        return (<li><span className="downarrow">&#9660;</span> {change.slice(1)}%</li>)
+      }
+    }
     const stocks = this.props.stocks.map(stock => (
     <Link key={stock.id}  to={`stocks/${stock.id}`}>
       <ul className="stock-index-list-item">
         <li>{stock.name}</li>
-        <li className="stock-index-price">{stock.price}</li>
-      <li></li>
-      <li></li>
+        <li>{stock.symbol}</li>
+      <li>{stock.price}</li>
+      {parseChange(stock.todayChange)}
     </ul>
     </Link>
     ))
@@ -45,9 +53,9 @@ class StockIndex extends React.Component{
           <div className="stock-index-list">
             <ul className="stock-index-list-header">
               <li>Name</li>
+              <li>Symbol</li>
               <li>Price</li>
-              <li></li>
-              <li></li>
+              <li>Today</li>
             </ul>
             {stocks}
           </div>

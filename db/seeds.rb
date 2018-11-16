@@ -52,7 +52,15 @@ stocks = Stock.create([{
     details: "The One"
     },
     {
-      name: "DashCoin",
+      name: "Dash",
       symbol: "DASH",
       details: "Fast"
-      }])
+      },
+    {
+      name: "BitcoinCash",
+      symbol: "BCH",
+      details: "Cash Money"
+      },
+      name: "Zcash",
+      symbol: "ZEC",
+      details: "ZZZZmoney"])
