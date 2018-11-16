@@ -94,4 +94,54 @@ stocks = Stock.create([{
         name: "Particl",
         symbol: "PART",
         details: "Particularly cool"
-        }])
+        },
+      {
+        name: "Cardano",
+        symbol: "ADA",
+        details: "Made in Hong Kong"
+        },
+      {
+        name: "TRON",
+        symbol: "TRX",
+        details: "Cyber"
+        },
+      {
+        name: "Binance Coin",
+        symbol: "BNB",
+        details: "Buy now"
+        },
+      {
+        name: "OX",
+        symbol: "ZRX",
+        details: "Moo"
+        },
+      {
+        name: "Ontology",
+        symbol: "ONT",
+        details: "Made in Hong Kong"
+        },
+        {
+          name: "Zilliqa",
+          symbol: "ZIL",
+          details: "Zillionaire"
+          },
+        {
+          name: "Aeternity",
+          symbol: "AE",
+          details: "Forever"
+          },
+          {
+            name: "Populous",
+            symbol: "PPT",
+            details: "Crowded"
+            },
+          {
+            name: "Waves",
+            symbol: "WAVES",
+            details: "Splash"
+            },
+            {
+              name: "Augur",
+              symbol: "REP",
+              details: "Made in Hong Kong"
+              }])
