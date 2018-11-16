@@ -17,7 +17,7 @@ class UserShowPage extends React.Component{
           </div>
         </div>
         <div className="user-show-navbar">
-          <img src="images/telescope.svg" className="logo"/>
+            <div className="logo"/>
             <div className="nav-links">
               <Link to="/" className="nav-link-a">Home</Link>
               <a className="nav-link-a">Notifications</a>

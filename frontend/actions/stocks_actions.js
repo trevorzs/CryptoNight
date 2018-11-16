@@ -31,10 +31,11 @@ export const receiveStocks = (stocks) => (
   }
 )
 
-export const receiveData = (data) => (
+export const receiveData = (data,symbols) => (
   {
     type: RECEIVE_DATA,
-    data
+    data,
+    symbols
   }
 )
 
@@ -47,13 +48,10 @@ export const fetchStock = (id) => dispatch => (
 export const fetchStocks = () => dispatch => (
   StocksApiUtil.fetchStocks().then(
     stocks => dispatch(receiveStocks(stocks))
-  )
+  ).then(response=>{
+    dispatch(fetchStocksData(Object.keys(response.stocks).map((id)=>([response.stocks[id].symbol,id]))))
+  })
 )
-
-// .then(response=>
-//   dispatch(Object.keys(response.stocks).map((id)=>(
-//   response.stocks[id].symbol)))
-// )
 
 export const fetchPrice = (sym,id) => dispatch => (
   StocksApiUtil.fetchPrice(sym).then(
@@ -61,11 +59,10 @@ export const fetchPrice = (sym,id) => dispatch => (
   )
 )
 
-// export const fetchStocksData = (symbols) => dispatch => {
-//   debugger
-//   return (
-//     StocksApiUtil.fetchStocksData(symbols).then(
-//       data => dispatch(receiveData(data))
-//     )
-//   )
-// }
+export const fetchStocksData = (symbols) => dispatch => {
+  return (
+    StocksApiUtil.fetchStocksData(symbols).then(
+      data => dispatch(receiveData(data,symbols))
+    )
+  )
+}

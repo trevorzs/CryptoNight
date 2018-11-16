@@ -14,6 +14,7 @@
  *= require_self
  //= depend_on_asset "login_image.png"
 //= depend_on_asset "splash.gif"
+//= depend_on_asset "cosmonaut2.png"
  */
  body, h1, div, ul{
    margin: 0;
@@ -184,6 +185,7 @@
   background-color: #030e21;
   z-index: 20;
   box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.01), 0 3px 24px rgba(48, 51, 51, 0.09);
+  border-bottom: 0.5px solid black;
 }
 .navlinks a{
   color:white;
@@ -274,7 +276,10 @@
   width:100%;
   background-color: #030e21;
   z-index: 20;
-    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.01), 0 3px 24px rgba(48, 51, 51, 0.09);
+    /* box-shadow: 0px 0px 30px 0.01px purple, 0 24px 20px rgba(48, 51, 51, 0.09); */
+    /* box-shadow: 0px 1px 30px 1px rgb(255,0,255, 0.2), 0px 1px 30px 1px rgb(255,255,255, 0.1); */
+    /* box-shadow: 0 0 30px 1px rgba(0, 0, 0, 0.01), 0 px 24px rgba(48, 51, 51, 0.09); */
+    /* border-bottom: 0.5px solid black; */
 }
 
 .user-show-main {
@@ -294,7 +299,13 @@
 }
 
 .logo{
-  margin-left:100px;
+  margin-left:60px;
+  margin-top:4px;
+  background-image:url('<%= asset_path("cosmonaut2.png") %>');
+  width:50px;
+  height:32px;
+  background-size:contain;
+  background-repeat:no-repeat;
 }
 
 
@@ -331,6 +342,16 @@
   letter-spacing: 0.25px;
   line-height: 19px;
   padding:5px 0;
+  display:flex;
+  justify-content: space-between;
+}
+
+.stock-index-list-header li{
+  width:100px;
+}
+
+.stock-index-list-item li{
+  width:100px;
 }
 
 .stock-index-list-header:hover{
@@ -349,6 +370,9 @@
   line-height: 22px;
   border-top: 1px solid gray;
   border-bottom: 1px solid gray;
+  display:flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .stock-index-list-item:hover{
@@ -375,4 +399,8 @@
 .user-show-tag{
   margin-top:20px;
   font-size:20px;
+}
+
+.stock-index-price{
+
 }
