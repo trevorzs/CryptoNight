@@ -42,7 +42,9 @@ export const receiveData = (data,symbols) => (
 export const fetchStock = (id) => dispatch => (
   StocksApiUtil.fetchStock(id).then(
     stock => dispatch(receiveStock(stock))
-  )
+  ).then(response=>{
+    dispatch(fetchPrice(response.stock.symbol,response.stock.id))
+  })
 )
 
 export const fetchStocks = () => dispatch => (

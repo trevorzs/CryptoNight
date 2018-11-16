@@ -16,7 +16,6 @@ const msp = (state, ownProps) => {
 const mdp = dispatch => (
   {
     fetchStock: id => dispatch(fetchStock(id)),
-    fetchPrice: (sym,id) => dispatch(fetchPrice(sym,id)),
     logout: () => dispatch(logout())
   }
 );

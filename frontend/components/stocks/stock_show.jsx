@@ -2,6 +2,8 @@ import React from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import {merge} from 'lodash';
 import {connect} from 'react-redux';
+import { LineChart, Line } from 'recharts';
+
 
 
 class StockShowPage extends React.Component{
@@ -13,9 +15,7 @@ class StockShowPage extends React.Component{
   }
 
   componentDidMount(){
-    this.props.fetchStock(this.props.match.params.stock_id).then((response)=>{
-      this.props.fetchPrice(response.stock.symbol,response.stock.id)
-    })
+    this.props.fetchStock(this.props.match.params.stock_id);
   }
 
   render(){
@@ -46,6 +46,9 @@ class StockShowPage extends React.Component{
         <div className="stock-show-main">
           <h1>{this.props.stock.name} - {this.props.stock.symbol}</h1>
           <h1>${this.props.stock.price}</h1>
+            <LineChart width={400} height={400} data={[this.props.stock]}>
+              <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+            </LineChart>
         </div>
 
       </div>
