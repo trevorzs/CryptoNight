@@ -61,6 +61,32 @@ stocks = Stock.create([{
       symbol: "BCH",
       details: "Cash Money"
       },
+      {
       name: "Zcash",
       symbol: "ZEC",
-      details: "ZZZZmoney"])
+      details: "ZZZZmoney"},
+      {
+        name: "Bitcoin Gold",
+        symbol: "BTG",
+        details: "Bagic the Gathering"
+        },
+      {
+        name: "Monero",
+        symbol: "XMR",
+        details: "Show me the monero"
+        },
+      {
+        name: "Ethereum Classic",
+        symbol: "ETC",
+        details: "Clasically ethereal"
+        },
+      {
+        name: "Qtum",
+        symbol: "QTUM",
+        details: "Quantum"
+      },
+      {
+        name: "Lisk",
+        symbol: "LSK",
+        details: "He talks with a lisk"
+        }])
