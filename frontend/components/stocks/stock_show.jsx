@@ -36,7 +36,7 @@ class StockShowPage extends React.Component{
           </div>
         </div>
         <div className="user-show-navbar">
-            <div className="logo"/>
+            <Link to="/"><div className="logo"/></Link>
             <div className="nav-links">
               <Link to="/" className="nav-link-a">Home</Link>
               <a className="nav-link-a">Notifications</a>
