@@ -89,4 +89,9 @@ stocks = Stock.create([{
         name: "Lisk",
         symbol: "LSK",
         details: "He talks with a lisk"
+        },
+      {
+        name: "Particl",
+        symbol: "PART",
+        details: "Particularly cool"
         }])

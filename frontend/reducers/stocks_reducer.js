@@ -4,11 +4,19 @@ import {merge} from 'lodash';
 const StocksReducer = (state = {}, action) => {
     Object.freeze(state);
     let newState;
+    let ids;
     switch (action.type) {
       case RECEIVE_STOCK:
         return merge({}, state, {[action.stock.id]:action.stock});
       case RECEIVE_STOCKS:
-        return merge({},action.stocks);
+        newState = merge({},state);
+        ids = Object.keys(action.stocks);
+        newState.symbols=[];
+        for (var i = 0; i < ids.length; i++) {
+          newState[ids[i]] = action.stocks[ids[i]];
+          newState.symbols.push([action.symbols[i],ids[i]])
+        }
+        return newState;
       case RECEIVE_PRICE:
         newState = merge({},state);
         newState[action.id].price = action.price;
@@ -16,7 +24,7 @@ const StocksReducer = (state = {}, action) => {
       case RECEIVE_DATA:
         newState = merge({},state);
         const syms = action.symbols.map((arr)=>(arr[0]));
-        const ids = action.symbols.map((arr)=>(arr[1]));
+        ids = action.symbols.map((arr)=>(arr[1]));
         let sym, priceVar, change;
         // roundedPrice, cutPrice;
         for (var i = 0; i < syms.length; i++) {

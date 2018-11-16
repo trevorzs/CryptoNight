@@ -11,7 +11,12 @@ class StockIndex extends React.Component{
   }
 
   componentDidMount(){
-    this.props.fetchStocks()
+    this.props.fetchStocks();
+    this.interval1 = setInterval(()=>(this.props.updateStocks(this.props.symbols)),10000);
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.interval1);
   }
 
   render(){
@@ -40,7 +45,7 @@ class StockIndex extends React.Component{
           </div>
         </div>
         <div className="user-show-navbar">
-          <div className="logo"/>
+          <Link to="/"><div className="logo"/></Link>
             <div className="nav-links">
               <Link to="/" className="nav-link-a">Home</Link>
               <a className="nav-link-a">Notifications</a>
@@ -49,7 +54,7 @@ class StockIndex extends React.Component{
         </div>
         <div className="stock-index">
           <h1>Cryptocurrencies</h1>
-          <p>{stocks.length} Cryptocurrencies</p>
+          <p>{stocks.length-1} Cryptocurrencies</p>
           <div className="stock-index-list">
             <ul className="stock-index-list-header">
               <li>Name</li>

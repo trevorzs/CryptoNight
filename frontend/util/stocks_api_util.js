@@ -28,3 +28,49 @@ export const fetchStocksData = (symbols) => {
     })
   )
 }
+
+export const fetchStockDaily = (sym) => {
+  return (
+    $.ajax({
+      url: `https://min-api.cryptocompare.com/data/histohour?f${sym}=BTC&tsym=USD&limit=24`,
+      method: "GET"
+    })
+  )
+}
+
+export const fetchStockWeekly = (sym) => {
+  return (
+    $.ajax({
+      url: `https://min-api.cryptocompare.com/data/histoday?fsym=${sym}&tsym=USD&limit=7`,
+      method: "GET"
+    })
+  )
+}
+
+export const fetchStockMonthly = (sym) => {
+  return (
+    $.ajax({
+      url: `https://min-api.cryptocompare.com/data/histoday?fsym=${sym}&tsym=USD&limit=31`,
+      method: "GET"
+    })
+  )
+}
+
+
+export const fetchStockYearly = (sym) => {
+  return (
+    $.ajax({
+      url: `https://min-api.cryptocompare.com/data/histoday?fsym=${sym}&tsym=USD&limit=365`,
+      method: "GET"
+    })
+  )
+}
+
+export const fetchStockFiveYearly = (sym) => {
+  return (
+    $.ajax({
+      url: `https://min-api.cryptocompare.com/data/histoday?fsym=${sym}&tsym=USD&limit=1825`,
+      method: "GET"
+    })
+  )
+}
