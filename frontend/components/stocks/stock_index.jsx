@@ -42,7 +42,9 @@ class StockIndex extends React.Component{
         </div>
       )
     }else{
-      const stocks = this.props.stocks.map(stock => (
+      const stocks = this.props.stocks.map(stock => {
+        if (typeof stock.id === "number"){
+      return (
       <Link key={stock.id}  to={`stocks/${stock.id}`}>
         <ul className="stock-index-list-item">
           <li>{stock.name}</li>
@@ -51,7 +53,7 @@ class StockIndex extends React.Component{
           {parseChange(stock.todayChange)}
       </ul>
       </Link>
-      ))
+    )}})
 
       return (
         <div className="overall fullsize">
