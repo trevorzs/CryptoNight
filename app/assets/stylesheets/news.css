@@ -3,7 +3,7 @@
   width:680px;
 }
 .news-header{
-  margin-top:100px;
+  margin-top:70px;
   margin-bottom:40px;
   width:100%;
   border-bottom: 1px solid lightgrey;
@@ -39,7 +39,15 @@
 .news-item-source{
   font-size:14px;
 }
-
+.news-item-date{
+  font-size:14px;
+  margin-left:5px;
+  color:darkgrey;
+}
+.news-item-source-info{
+  display:flex;
+  flex-direction: row;
+}
 .news-item-title{
   font-size:18px;
 }

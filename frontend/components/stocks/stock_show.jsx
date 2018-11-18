@@ -12,10 +12,16 @@ class StockShowPage extends React.Component{
     }
     this.timescale = this.props.data.daily;
     this.renderNews = this.renderNews.bind(this);
+    this.resetData = this.resetData.bind(this);
   }
 
   componentDidMount(){
     this.props.fetchStock(this.props.match.params.stock_id);
+    this.interval1 = setInterval(()=>(this.props.fetchStock(this.props.match.params.stock_id)),8000);
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.interval1);
   }
 
   round(number, places){
@@ -24,15 +30,30 @@ class StockShowPage extends React.Component{
 
   renderNews(){
     return this.props.data.news.map((obj,i)=>{
-      if (i >= 10){
+      if (i >= 50){
         return;
+      }
+      const newsDate = new Date(obj.published_on*1000);
+      const timediff = Date.now()-newsDate;
+      let newsDay;
+      if (timediff/1000/60 < 60){
+        newsDay = (timediff/1000/60).toFixed(0).toString() + "m";
+      }else{
+        if (timediff/1000/60/60 < 24){
+          newsDay = (timediff/1000/60/60).toFixed(0).toString() + "h";
+        }else{
+          newsDay = newsDate.toDateString().slice(4);
+        }
       }
       return(
         <a key={i} href={obj.url}>
           <div key={obj.id} className="news-item">
             <img src={obj.imageurl}/>
             <div className="news-item-info">
-              <h2 className="news-item-source">{obj.source_info.name}</h2>
+              <div className="news-item-source-info">
+                <h2 className="news-item-source">{obj.source_info.name}</h2>
+                <h2 className="news-item-date">{newsDay}</h2>
+              </div>
               <h2 className="news-item-title">{obj.title}</h2>
               <h2 className="news-item-body">{obj.body}</h2>
               <h2></h2>
@@ -50,8 +71,6 @@ class StockShowPage extends React.Component{
       const pctChange = e.payload[0].payload.pctchange.toFixed(2);
       const date = new Date(e.payload[0].payload.time*1000);
       const day = date.toDateString();
-      const month = date.getMonth()+1;
-      const year = date.getFullYear();
       document.getElementById("pricelabel").innerHTML = "$"+price;
 
       if (change < 0){
@@ -63,6 +82,29 @@ class StockShowPage extends React.Component{
         <div className="tooltip">{day.slice(4,-5)}, {day.slice(-5)}</div>
       )
     }
+  }
+
+  resetData(){
+      let initialPrice;
+      let change;
+      let initialChange;
+      let monthly;
+      let pctChange;
+      let news;
+        const monthData = this.props.data.monthly
+        pctChange = monthData[monthData.length-1].pctchange.toFixed(2);
+        initialChange = this.round(monthData[monthData.length-1].change,8);
+        if (initialChange < 0){
+          initialChange = `-$${initialChange.toString().slice(1)} (${pctChange}%)`;
+        }else{
+          initialChange = `+$${initialChange} (${pctChange}%)`;
+        }
+
+        initialChange = initialChange
+        initialPrice = "$" + monthData[monthData.length-1].close;
+        monthly = this.props.data.monthly.slice(1);
+        document.getElementById("pricelabel").innerHTML = initialPrice;
+        document.getElementById("pctChangeLabel").innerHTML = initialChange;
   }
 
   render(){
@@ -156,13 +198,13 @@ class StockShowPage extends React.Component{
             <h1 id="stockLabel">{this.props.stock.name}</h1>
             <h1 id="pricelabel">{initialPrice}</h1>
             <h2 id="pctChangeLabel">{initialChange}</h2>
-              <LineChart width={680} height={300}
-                margin={{ top: 50, right: 70, left: 0, bottom: 5 }}
+              <LineChart width={800} height={240}
+                margin={{ top: 30, right: 70, left: -30, bottom: 5 }} onMouseLeave={this.resetData}
                  data={monthly}>
                 <Line type="monotone" dataKey="close" stroke="white" dot={false}/>
                   <XAxis dataKey="time" hide={true} padding={{ left: 40, right: 40 }}/>
                   <YAxis type="number" domain={['dataMin', 'dataMax']} hide={true}/>
-                  <Tooltip isAnimationActive={false} position={{ y: 20 }} offset={-32} content={this.tooltipRender.bind(this)}/>
+                  <Tooltip isAnimationActive={false} position={{ y: 10 }} offset={-32} content={this.tooltipRender.bind(this)}/>
               </LineChart>
             <div className="news-div">
               <h1 className="news-header">News</h1>
