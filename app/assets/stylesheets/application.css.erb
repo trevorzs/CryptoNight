@@ -16,6 +16,10 @@
 //= depend_on_asset "splash.gif"
 //= depend_on_asset "cosmonaut3.png"
 //= depend_on_asset "cosmonaut5.png"
+//=depend_on_asset "idlewild-bold.ttf"
+//=depend_on_asset "idlewild-bold.woff"
+//=depend_on_asset "idlewild-thin.ttf"
+//=depend_on_asset "idlewild-thin.woff"
  */
 
  /*
@@ -29,14 +33,10 @@
    padding:0;
  }
 
- div{
-   overflow:scroll;
- }
 
  *:focus {
     outline: 0 !important;
 }
-
  a{
    text-decoration: none;
    margin:0;
@@ -215,9 +215,17 @@
       height:100%;
       width:100%;
       position:fixed;
-
      /* color: #cbcbcd; */
 }
+
+.scroll{
+  overflow:hidden;
+}
+
+.scroll:hover{
+  overflow-y:scroll;
+}
+
 .poo{
   position: fixed;
   bottom:0;
@@ -424,3 +432,41 @@
   color: #e72ebe;
   font-size: 9px;
 }
+
+.tooltip{
+  color:lightgrey;
+
+}
+
+@font-face {
+    font-family: IdlewildBold;
+    src: url('<%= asset_path("idlewild-bold.woff") %>') format("woff"), url('<%= asset_path("idlewild-bold.ttf") %>')  format("truetype");
+}
+
+@font-face {
+    font-family: IdlewildThin;
+    src: url('<%= asset_path("idlewild-thin.woff") %>') format("woff"), url('<%= asset_path("idlewild-thin.ttf") %>')  format("truetype");
+}
+
+#stockLabel{
+  font-family:IdlewildBold;
+  font-size:30px;
+}
+
+#pricelabel{
+  font-family:IdlewildThin;
+  font-size:26px;
+}
+
+.return-button{
+  color: #e72ebe;
+}
+
+
+/* ::-webkit-scrollbar {
+    width: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: darkgrey;
+} */

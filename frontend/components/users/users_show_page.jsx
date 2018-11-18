@@ -26,7 +26,7 @@ class UserShowPage extends React.Component{
         </div>
         <div className="user-show-main">
           <h1>Welcome to CryptoNight</h1>
-          <Link className="user-show-tag" to="/api/stocks">Cryptocurrencies</Link>
+          <Link className="user-show-tag" to="/stocks">Cryptocurrencies</Link>
         </div>
 
       </div>

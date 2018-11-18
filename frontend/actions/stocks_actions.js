@@ -118,11 +118,11 @@ export const fetchPrice = (sym,id) => dispatch => (
   )
 )
 
-export const fetchStocksData = (symbols) => dispatch => {
+export const fetchStocksData = (arr) => dispatch => {
   return (
-    StocksApiUtil.fetchStocksData(symbols).then(
+    StocksApiUtil.fetchStocksData(arr).then(
       data => {
-        dispatch(receiveData(data,symbols))
+        dispatch(receiveData(data,arr))
       }
     )
   )

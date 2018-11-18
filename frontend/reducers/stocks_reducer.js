@@ -1,4 +1,4 @@
-import {RECEIVE_STOCK, RECEIVE_STOCKS, RECEIVE_PRICE, RECEIVE_DATA, RECEIVE_STOCK_DATA} from '../actions/stocks_actions';
+import {RECEIVE_STOCK, RECEIVE_STOCKS, RECEIVE_PRICE, RECEIVE_DATA} from '../actions/stocks_actions';
 import {merge} from 'lodash';
 
 const StocksReducer = (state = {}, action) => {
@@ -13,10 +13,8 @@ const StocksReducer = (state = {}, action) => {
       case RECEIVE_STOCKS:
         newState = merge({},state);
         ids = Object.keys(action.stocks);
-        newState.symbols=[];
         for (var i = 0; i < ids.length; i++) {
           newState[ids[i]] = action.stocks[ids[i]];
-          newState.symbols.push([action.symbols[i],ids[i]])
         }
         return newState;
       case RECEIVE_PRICE:
@@ -35,10 +33,6 @@ const StocksReducer = (state = {}, action) => {
           newState[ids[i]].price = `${priceVar}`;
           newState[ids[i]].todayChange = `${change}`;
         }
-        return newState;
-      case RECEIVE_STOCK_DATA:
-        newState = merge({},state);
-        newState.data = action.data;
         return newState;
       default:
         return state;

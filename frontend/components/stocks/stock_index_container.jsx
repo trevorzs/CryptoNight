@@ -10,7 +10,8 @@ const msp = (state, ownProps) => {
     stocks: ids.map(id=>(
       state.entities.stocks[id]
     )),
-    symbols: ids.map(id=>[state.entities.stocks[id].symbol,id]).slice(0,-1)
+    symbols: ids.map(id=>[state.entities.stocks[id].symbol,id]).slice(0,-1),
+    data: state.entities.data
   })
 }
 

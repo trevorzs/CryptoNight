@@ -29,7 +29,7 @@ class StockIndex extends React.Component{
       }
     }
 
-    if (!this.props.stocks){
+    if (!this.props.data.symbols){
       return (
         <div className="overall fullsize">
           <div className="poo">
@@ -51,12 +51,12 @@ class StockIndex extends React.Component{
           <li>{stock.symbol}</li>
           <li>{stock.price}</li>
           {parseChange(stock.todayChange)}
-      </ul>
+        </ul>
       </Link>
     )}})
 
       return (
-        <div className="overall fullsize">
+        <div className="overall fullsize scroll">
           <div className="poo">
             <div className="oswego">
             </div>
@@ -71,7 +71,7 @@ class StockIndex extends React.Component{
           </div>
           <div className="stock-index">
             <h1>Cryptocurrencies</h1>
-            <p>{stocks.length-1} Cryptocurrencies</p>
+            <p>{stocks.length} Cryptocurrencies</p>
             <div className="stock-index-list">
               <ul className="stock-index-list-header">
                 <li>Name</li>

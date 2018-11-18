@@ -8,7 +8,7 @@ const msp = (state, ownProps) => {
   return (
     {
       stock: state.entities.stocks[ownProps.match.params.stock_id],
-      data: state.entities.stocks.data
+      data: state.entities.data
     }
   )
 }
