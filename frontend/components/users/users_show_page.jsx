@@ -12,8 +12,8 @@ class UserShowPage extends React.Component{
   render(){
     return (
       <div className="overall fullsize">
-        <div className="poo">
-          <div className="oswego">
+        <div className="displace">
+          <div className="gradient">
           </div>
         </div>
         <div className="user-show-navbar">

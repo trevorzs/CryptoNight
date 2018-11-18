@@ -38,6 +38,7 @@ const DataReducer = (state = {}, action) => {
         arr.push(merge(item,{change: sum, pctchange: (sum/item.open)*100 }));
       }
       newObj.yearly = arr;
+      newObj.symbols = [];
       return newObj;
     case RECEIVE_STOCKS:
       newState = merge({},state);

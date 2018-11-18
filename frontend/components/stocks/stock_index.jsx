@@ -32,8 +32,8 @@ class StockIndex extends React.Component{
     if (!this.props.data.symbols){
       return (
         <div className="overall fullsize">
-          <div className="poo">
-            <div className="oswego">
+          <div className="displace">
+            <div className="gradient">
             </div>
           </div>
           <div className="stock-show-main">
@@ -57,8 +57,8 @@ class StockIndex extends React.Component{
 
       return (
         <div className="overall fullsize scroll">
-          <div className="poo">
-            <div className="oswego">
+          <div className="displace">
+            <div className="gradient">
             </div>
           </div>
           <div className="user-show-navbar">

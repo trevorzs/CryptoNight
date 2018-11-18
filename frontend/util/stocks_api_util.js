@@ -74,3 +74,12 @@ export const fetchStockFiveYearly = (sym) => {
     })
   )
 }
+
+export const fetchNews = (sym) => {
+  return (
+    $.ajax({
+      url: `https://min-api.cryptocompare.com/data/v2/news/?categories=${sym}&excludeCategories=Sponsored`,
+      method: "GET"
+    })
+  )
+}
