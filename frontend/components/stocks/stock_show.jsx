@@ -233,7 +233,7 @@ class StockShowPage extends React.Component{
                   <YAxis type="number" domain={['dataMin', 'dataMax']} hide={true}/>
                   <Tooltip isAnimationActive={false} position={{ y: 10 }} offset={-32} content={this.tooltipRender.bind(this)}/>
               </LineChart>
-              <ul>
+              <ul className="timescale-btn-list">
                 <button id="tdaily" className="timescale-btn active-timescale" onClick={()=>{
                     this.timescale = "daily";
                     this.setState(this.state);
