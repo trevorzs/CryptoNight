@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import StockShow from './stock_show';
-import {fetchStock, fetchPrice, requestStocks} from '../../actions/stocks_actions';
+import {fetchStock, fetchPrice, queryStocks, clearSearch, clearData} from '../../actions/stocks_actions';
 import {logout} from '../../actions/session_actions';
 
 const msp = (state, ownProps) => {
@@ -9,7 +9,8 @@ const msp = (state, ownProps) => {
     {
       stock: state.entities.stocks[ownProps.match.params.stock_id],
       data: state.entities.data,
-      stocks: state.entities.stocks
+      search: state.ui.search,
+      query: state.ui.query
     }
   )
 }
@@ -18,7 +19,9 @@ const msp = (state, ownProps) => {
 const mdp = dispatch => (
   {
     fetchStock: id => dispatch(fetchStock(id)),
-    requestStocks: () => dispatch(requestStocks()),
+    queryStocks: (query) => dispatch(queryStocks(query)),
+    clearSearch: () => dispatch(clearSearch()),
+    clearData: ()=> dispatch(clearData()),
     logout: () => dispatch(logout())
   }
 );

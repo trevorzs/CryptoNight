@@ -426,7 +426,7 @@
   display:flex;
   justify-content: space-between;
   align-items: flex-start;
-  box-shadow: 0px 1px 20px 1px rgba(255,0,255, 0.07), 0px 1px 30px 1px rgba(255,255,255, 0.09);
+  box-shadow: 0px 1px 10px 0px rgba(255,0,255, 0.07), 0px 1px 20px 0px rgba(255,255,255, 0.09);
 }
 
 .stock-index-list-item:hover{
@@ -507,10 +507,12 @@
 
 .recharts-curve{
   stroke-width: 2;
+   -webkit-filter: drop-shadow(0px 0px 12px #f45531);
   filter: drop-shadow(0px 0px 12px #f45531);
 }
 
 .recharts-line{
+   -webkit-filter: drop-shadow(0px 0px 12px #f45531);
   filter: drop-shadow(0px 0px 12px #f45531);
 }
 
@@ -599,4 +601,56 @@
 
 .searchbar:focus::placeholder{
   color:white;
+}
+
+.search-results{
+  position:absolute;
+  top:50px;
+  margin-left:20px;
+  display:flex;
+  flex-direction:column;
+  background-color: #030e21;
+  box-shadow: 5px 5px 30px 1px rgba(0, 0, 0);
+}
+.search-result-header{
+  font-size:15px;
+  color:grey;
+  padding:10px 30px 10px 22px;
+  min-width:200px;
+  width: 40vw;
+  max-width:400px;
+  border-bottom:1px solid black;
+}
+.search-result-item{
+  padding:10px 30px 10px 20px;
+  min-width:200px;
+  width: 40vw;
+  max-width:400px;
+  display:flex;
+}
+.search-symbol{
+  width:50px;
+}
+
+.search-match{
+  color: #e72ebe;
+}
+
+.search-result-item:hover{
+  background-color: #261538;
+}
+.search-result-item:first-child{
+  padding-top:20px;
+}
+
+.searchbar-field + .search-results{
+  display:none;
+}
+
+.searchbar-field:focus + .search-results{
+  display: flex;
+}
+
+.search-results:hover{
+  display:flex;
 }

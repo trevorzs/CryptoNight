@@ -14,16 +14,26 @@ class StockShowPage extends React.Component{
     this.resetData = this.resetData.bind(this);
     this.tooltipRender = this.tooltipRender.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.renderSearch = this.renderSearch.bind(this);
   }
 
   componentDidMount(){
     this.props.fetchStock(this.props.match.params.stock_id);
-    this.props.requestStocks();
     this.interval1 = setInterval(()=>(this.props.fetchStock(this.props.match.params.stock_id)),12000);
+  }
+
+  componentDidUpdate(oldprops){
+    if (this.props.match.params !== oldprops.match.params){
+      this.props.fetchStock(this.props.match.params.stock_id);
+      this.props.clearSearch();
+      this.props.clearData();
+    }
   }
 
   componentWillUnmount(){
     clearInterval(this.interval1);
+    this.props.clearSearch();
+    this.props.clearData();
   }
 
   round(number, places){
@@ -31,7 +41,59 @@ class StockShowPage extends React.Component{
   }
 
   handleSearch(e){
+    if (e.target.value.length > 0){
+      this.props.queryStocks(e.target.value);
+    }else{
+      this.props.clearSearch();
+    }
+  }
 
+  renderSearch(){
+    if (this.props.search && this.props.search.length>0){
+      let string = "";
+      let query = this.props.query;
+      const items = this.props.search.map((object,i)=>{
+        let namestring = ""
+        for (var i = 0; i < query.length && i < object.name.length; i++) {
+          if (object.name[i].toLowerCase() === query[i].toLowerCase()){
+            namestring = namestring + object.name[i]
+          }else{
+            i = 100;
+          }
+        }
+        let symbolstring = ""
+        for (var i = 0; i < query.length && i < object.symbol.length; i++) {
+          if (object.symbol[i].toLowerCase() === query[i].toLowerCase()){
+            symbolstring = symbolstring + object.symbol[i]
+          }else{
+            if (i>symbolstring.length){
+              symbolstring = "";
+            }
+            i = 100;
+          }
+        }
+        if (namestring.length>symbolstring.length){
+          symbolstring = "";
+        }
+        if (symbolstring.length > namestring.length){
+          namestring = "";
+        }
+        return (
+          <Link to={`/stocks/${object.id}`} key={object.id} className="search-result-item">
+            <span className="search-symbol"><span className="search-match">{symbolstring}</span>
+              {object.symbol.slice(symbolstring.length)}</span>
+            <span className="search-name"><span className="search-match">{namestring}</span>
+              {object.name.slice(namestring.length)}</span>
+          </Link>
+        );
+      });
+      return (
+        <ul className="search-results">
+          <li className="search-result-header">Cryptocurrencies</li>
+          {items}
+        </ul>
+      )
+    }
   }
 
   renderNews(){
@@ -73,8 +135,12 @@ class StockShowPage extends React.Component{
   tooltipRender(e){
     if (e.payload && e.payload.length > 0){
       const price = e.payload[0].payload.close;
-      const change = this.round(e.payload[0].payload.change,8).toString();
-      const pctChange = e.payload[0].payload.pctchange.toFixed(2);
+      let change = this.round(e.payload[0].payload.change,8).toString();
+      let pctChange = e.payload[0].payload.pctchange.toFixed(2);
+      if (pctChange.toString().includes(Infinity)){
+        pctChange = "0";
+        change = "0";
+      }
       const date = new Date(e.payload[0].payload.time*1000);
       let hour, minutes, time;
       if (date.getMinutes() < 10){
@@ -97,7 +163,6 @@ class StockShowPage extends React.Component{
           time = `${hour}:${minutes} AM`
         }
       }
-
 
       const day = date.toDateString();
       document.getElementById("pricelabel").innerHTML = "$"+price;
@@ -126,7 +191,7 @@ class StockShowPage extends React.Component{
       let monthly;
       let pctChange;
       let news;
-        const monthData = this.props.data[this.state.timescale];
+        const monthData = this.props.data[this.state.timescale] || [];
         pctChange = monthData[monthData.length-1].pctchange.toFixed(2);
         initialChange = this.round(monthData[monthData.length-1].change,8);
         if (initialChange < 0){
@@ -242,7 +307,9 @@ class StockShowPage extends React.Component{
               <div className="searchbar">
                 <i className="fas fa-search search-icon"></i>
                 <input type="text" className="searchbar-field" placeholder="Search" onChange={this.handleSearch}></input>
+                {this.renderSearch()}
               </div>
+
             </div>
               <div className="nav-links">
                 <Link id="navlink" to="/" className="nav-link-a">Home</Link>
@@ -251,7 +318,7 @@ class StockShowPage extends React.Component{
               </div>
           </div>
           <div className="stock-show-main">
-            <Link to="/stocks"><h2 id="return-button" className="return-button">Cryptocurrencies</h2></Link>
+            <Link className="return-button" to="/stocks"><h2 id="return-button" className="return-button">Cryptocurrencies</h2></Link>
             <h1 id="stockLabel">{this.props.stock.name}</h1>
             <h1 id="pricelabel">{initialPrice}</h1>
             <h2 id="pctChangeLabel">{initialChange}</h2>
@@ -260,33 +327,34 @@ class StockShowPage extends React.Component{
                  data={monthly}>
                  <filter id="hello"></filter>
                 <Line type="monotone" dataKey="close" stroke="white" dot={false}/>
-                  <XAxis dataKey="time" hide={true} padding={{ left: 40, right: 40 }}/>
+                  <XAxis dataKey="time" hide={true} padding={{ left: 40, right: 40 }} />
                   <YAxis type="number" domain={['dataMin', 'dataMax']} hide={true}/>
                   <Tooltip isAnimationActive={false} position={{ y: 10 }} offset={-32} content={this.tooltipRender.bind(this)}/>
               </LineChart>
               <ul className="timescale-btn-list">
                 <button id="tdaily" className="timescale-btn active-timescale" onClick={()=>{
-                    this.setState({timescale:"daily"});
+                    this.setState(merge(this.state,{timescale:"daily"}));
                     this.clearTimescaleButtons();
                     document.getElementById("tdaily").classList.add("active-timescale");
                 }}>1 D</button>
               <button id="tweekly" className="timescale-btn" onClick={()=>{
-                    this.setState({timescale:"weekly"});
+                    this.setState(merge(this.state,{timescale:"weekly"}));
                     this.clearTimescaleButtons();
                     document.getElementById("tweekly").classList.add("active-timescale");
                 }}>1 W</button>
               <button id="tmonthly" className="timescale-btn" onClick={()=>{
-                    this.setState({timescale:"monthly"});
+                    this.setState(merge(this.state,{timescale:"monthly"}));
                     this.clearTimescaleButtons();
                     document.getElementById("tmonthly").classList.add("active-timescale");
                 }}>1 M</button>
               <button id="ttrimonthly" className="timescale-btn" onClick={()=>{
-                    this.setState({timescale:"trimonthly"});
+                    this.setState(merge(this.state,{timescale:"trimonthly"}));
                     this.clearTimescaleButtons();
                     document.getElementById("ttrimonthly").classList.add("active-timescale");
                 }}>3 M</button>
               <button id="tyearly" className="timescale-btn" onClick={()=>{
-                    this.setState({timescale:"yearly"});
+
+                    this.setState(merge(this.state,{timescale:"yearly"}));
                     this.clearTimescaleButtons();
                     document.getElementById("tyearly").classList.add("active-timescale");
                 }}>1 Y</button>

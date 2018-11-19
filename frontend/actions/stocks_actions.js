@@ -7,6 +7,21 @@ export const RECEIVE_DATA = "RECEIVE_DATA";
 export const RECEIVE_STOCK_DATA = "RECEIVE_STOCK_DATA";
 export const RECEIVE_SYMBOLS = "RECEIVE_SYMBOLS";
 export const RECEIVE_STOCKS_REQUEST = "RECEIVE_STOCKS_REQUEST";
+export const RECEIVE_QUERY = "RECEIVE_QUERY";
+export const CLEAR_SEARCH = "CLEAR_SEARCH";
+export const CLEAR_DATA = "CLEAR_DATA";
+
+export const clearSearch = () => {
+  return({
+    type: CLEAR_SEARCH
+  })
+}
+
+export const clearData = () => {
+  return({
+    type: CLEAR_DATA
+  })
+}
 
 export const receivePrice = (price,id) => {
   return (
@@ -72,6 +87,14 @@ export const receiveData = (data,symbols) => (
   }
 )
 
+export const receiveQuery = (stocks,query) => (
+  {
+    type: RECEIVE_QUERY,
+    stocks,
+    query
+  }
+)
+
 const historicFetches = (sym,id,dispatch) => {
   const obj = {};
   const check = () => {
@@ -112,6 +135,11 @@ const historicFetches = (sym,id,dispatch) => {
 
   return (obj);
 }
+export const queryStocks = (query) => dispatch => (
+  StocksApiUtil.queryStocks(query).then(
+    stocks => dispatch(receiveQuery(stocks,query))
+  )
+)
 
 export const fetchStock = (id) => dispatch => (
   StocksApiUtil.fetchStock(id).then(

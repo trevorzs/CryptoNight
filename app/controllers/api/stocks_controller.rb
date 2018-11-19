@@ -9,4 +9,8 @@ class Api::StocksController < ApplicationController
   def index
     @stocks = Stock.all
   end
+
+  def search
+    @stocks = Stock.find_by_query(params[:query])
+  end
 end

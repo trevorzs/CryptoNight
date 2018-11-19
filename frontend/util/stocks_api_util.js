@@ -5,6 +5,13 @@ export const fetchStocks = () => (
   })
 );
 
+export const queryStocks = (query) => (
+  $.ajax({
+    url: `api/stocks/search/${query}`,
+    method: "GET"
+  })
+)
+
 export const fetchStock = (id) => (
   $.ajax({
     url: `api/stocks/${id}`,
@@ -85,6 +92,9 @@ export const fetchStockFiveYearly = (sym) => {
 }
 
 export const fetchNews = (sym) => {
+  if (sym.length<3){
+    sym = "Blockchain"
+  }
   return (
     $.ajax({
       url: `https://min-api.cryptocompare.com/data/v2/news/?categories=${sym}&excludeCategories=Sponsored`,

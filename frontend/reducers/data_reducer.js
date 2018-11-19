@@ -1,4 +1,4 @@
-import {RECEIVE_STOCK_DATA, RECEIVE_STOCKS} from '../actions/stocks_actions';
+import {RECEIVE_STOCK_DATA, RECEIVE_STOCKS, CLEAR_DATA} from '../actions/stocks_actions';
 import {merge} from 'lodash';
 
 const DataReducer = (state = {}, action) => {
@@ -55,6 +55,8 @@ const DataReducer = (state = {}, action) => {
         newState.symbols.push([action.symbols[i],ids[i]])
       }
       return newState;
+    case CLEAR_DATA:
+      return {};
     default:
       return state;
   }
