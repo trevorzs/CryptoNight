@@ -8,12 +8,11 @@ class StockShowPage extends React.Component{
   constructor(props){
     super(props);
     this.state  = {
-      stock: ""
+      timescale: "daily"
     }
     this.renderNews = this.renderNews.bind(this);
     this.resetData = this.resetData.bind(this);
     this.tooltipRender = this.tooltipRender.bind(this);
-    this.timescale = "daily";
   }
 
   componentDidMount(){
@@ -103,7 +102,7 @@ class StockShowPage extends React.Component{
       }else{
         document.getElementById("pctChangeLabel").innerHTML = `+$${change} (${pctChange}%)`;
       }
-      if (this.timescale === "daily" || this.timescale === "weekly"){
+      if (this.state.timescale === "daily" || this.state.timescale === "weekly"){
         return(
           <div className="tooltip">{time} {day.slice(4,-5)}</div>
         )
@@ -122,7 +121,7 @@ class StockShowPage extends React.Component{
       let monthly;
       let pctChange;
       let news;
-        const monthData = this.props.data[this.timescale];
+        const monthData = this.props.data[this.state.timescale];
         pctChange = monthData[monthData.length-1].pctchange.toFixed(2);
         initialChange = this.round(monthData[monthData.length-1].change,8);
         if (initialChange < 0){
@@ -133,7 +132,7 @@ class StockShowPage extends React.Component{
 
         initialChange = initialChange
         initialPrice = "$" + monthData[monthData.length-1].close;
-        monthly = this.props.data[this.timescale].slice(1);
+        monthly = this.props.data[this.state.timescale].slice(1);
         document.getElementById("pricelabel").innerHTML = initialPrice;
         document.getElementById("pctChangeLabel").innerHTML = initialChange;
   }
@@ -178,8 +177,8 @@ class StockShowPage extends React.Component{
       let monthly;
       let pctChange;
       let news;
-      if (this.props.data[this.timescale]){
-        const monthData = this.props.data[this.timescale];
+      if (this.props.data[this.state.timescale]){
+        const monthData = this.props.data[this.state.timescale];
         pctChange = monthData[monthData.length-1].pctchange.toFixed(2);
         initialChange = this.round(monthData[monthData.length-1].change,8);
         const gradient = document.getElementById("gradient");
@@ -218,7 +217,7 @@ class StockShowPage extends React.Component{
 
         initialChange = initialChange
         initialPrice = "$" + monthData[monthData.length-1].close;
-        monthly = this.props.data[this.timescale].slice(1);
+        monthly = this.props.data[this.state.timescale].slice(1);
       }else{
         initialPrice = "Loading";
         change="Loading";
@@ -233,7 +232,13 @@ class StockShowPage extends React.Component{
             </div>
           </div>
           <div className="user-show-navbar">
+            <div className="navbar-left">
               <Link to="/"><div className="logo"/></Link>
+              <div classname="searchbar">
+                <div className="search-icon"></div>
+                <input type="text" className="searchbar-field" placeholder="Search"></input>
+              </div>
+            </div>
               <div className="nav-links">
                 <Link id="navlink" to="/" className="nav-link-a">Home</Link>
                 <a id="navlink" className="nav-link-a">Notifications</a>
@@ -248,6 +253,7 @@ class StockShowPage extends React.Component{
               <LineChart width={800} height={240}
                 margin={{ top: 30, right: 70, left: -30, bottom: 5 }} onMouseLeave={this.resetData}
                  data={monthly}>
+                 <filter id="hello"></filter>
                 <Line type="monotone" dataKey="close" stroke="white" dot={false}/>
                   <XAxis dataKey="time" hide={true} padding={{ left: 40, right: 40 }}/>
                   <YAxis type="number" domain={['dataMin', 'dataMax']} hide={true}/>
@@ -255,32 +261,27 @@ class StockShowPage extends React.Component{
               </LineChart>
               <ul className="timescale-btn-list">
                 <button id="tdaily" className="timescale-btn active-timescale" onClick={()=>{
-                    this.timescale = "daily";
-                    this.setState(this.state);
+                    this.setState({timescale:"daily"});
                     this.clearTimescaleButtons();
                     document.getElementById("tdaily").classList.add("active-timescale");
                 }}>1 D</button>
               <button id="tweekly" className="timescale-btn" onClick={()=>{
-                    this.timescale = "weekly";
-                    this.setState(this.state);
+                    this.setState({timescale:"weekly"});
                     this.clearTimescaleButtons();
                     document.getElementById("tweekly").classList.add("active-timescale");
                 }}>1 W</button>
               <button id="tmonthly" className="timescale-btn" onClick={()=>{
-                    this.timescale = "monthly";
-                    this.setState(this.state);
+                    this.setState({timescale:"monthly"});
                     this.clearTimescaleButtons();
                     document.getElementById("tmonthly").classList.add("active-timescale");
                 }}>1 M</button>
               <button id="ttrimonthly" className="timescale-btn" onClick={()=>{
-                    this.timescale = "trimonthly";
-                    this.setState(this.state);
+                    this.setState({timescale:"trimonthly"});
                     this.clearTimescaleButtons();
                     document.getElementById("ttrimonthly").classList.add("active-timescale");
                 }}>3 M</button>
               <button id="tyearly" className="timescale-btn" onClick={()=>{
-                    this.timescale = "yearly";
-                    this.setState(this.state);
+                    this.setState({timescale:"yearly"});
                     this.clearTimescaleButtons();
                     document.getElementById("tyearly").classList.add("active-timescale");
                 }}>1 Y</button>
