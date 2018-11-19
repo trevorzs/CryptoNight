@@ -19,9 +19,6 @@ class StockShowPage extends React.Component{
   componentDidMount(){
     this.props.fetchStock(this.props.match.params.stock_id);
     this.props.requestStocks();
-    this.setState = {
-      timescale:"daily",
-    }
     this.interval1 = setInterval(()=>(this.props.fetchStock(this.props.match.params.stock_id)),12000);
   }
 
