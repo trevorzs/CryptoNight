@@ -6,6 +6,7 @@ export const RECEIVE_PRICE = "RECEIVE_PRICE";
 export const RECEIVE_DATA = "RECEIVE_DATA";
 export const RECEIVE_STOCK_DATA = "RECEIVE_STOCK_DATA";
 export const RECEIVE_SYMBOLS = "RECEIVE_SYMBOLS";
+export const RECEIVE_STOCKS_REQUEST = "RECEIVE_STOCKS_REQUEST";
 
 export const receivePrice = (price,id) => {
   return (
@@ -31,6 +32,15 @@ export const receiveStockData = (data) => {
     {
       type:RECEIVE_STOCK_DATA,
       data
+    }
+  )
+}
+
+export const receiveStocksRequest = (stocks) => {
+  return (
+    {
+      type: RECEIVE_STOCKS_REQUEST,
+      stocks
     }
   )
 }
@@ -110,6 +120,12 @@ export const fetchStock = (id) => dispatch => (
     historicFetches(response.stock.symbol, response.stock.id, dispatch);
     // dispatch(receiveStockData(historicFetches(response.stock.symbol,response.stock.id)))
   })
+)
+
+export const requestStocks = () => dispatch => (
+  StocksApiUtil.fetchStocks().then(
+    stocks => dispatch(receiveStocks(stocks))
+  )
 )
 
 export const fetchStocks = () => dispatch => (

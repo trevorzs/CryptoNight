@@ -13,13 +13,17 @@ class StockShowPage extends React.Component{
     this.renderNews = this.renderNews.bind(this);
     this.resetData = this.resetData.bind(this);
     this.tooltipRender = this.tooltipRender.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   componentDidMount(){
     this.props.fetchStock(this.props.match.params.stock_id);
-    this.interval1 = setInterval(()=>(this.props.fetchStock(this.props.match.params.stock_id)),10000);
+    this.props.requestStocks();
+    this.setState = {
+      timescale:"daily",
+    }
+    this.interval1 = setInterval(()=>(this.props.fetchStock(this.props.match.params.stock_id)),12000);
   }
-
 
   componentWillUnmount(){
     clearInterval(this.interval1);
@@ -27,6 +31,10 @@ class StockShowPage extends React.Component{
 
   round(number, places){
     return +(Math.round(number + "e+" + places)  + "e-" + places);
+  }
+
+  handleSearch(e){
+
   }
 
   renderNews(){
@@ -234,9 +242,9 @@ class StockShowPage extends React.Component{
           <div className="user-show-navbar">
             <div className="navbar-left">
               <Link to="/"><div className="logo"/></Link>
-              <div classname="searchbar">
-                <div className="search-icon"></div>
-                <input type="text" className="searchbar-field" placeholder="Search"></input>
+              <div className="searchbar">
+                <i className="fas fa-search search-icon"></i>
+                <input type="text" className="searchbar-field" placeholder="Search" onChange={this.handleSearch}></input>
               </div>
             </div>
               <div className="nav-links">
