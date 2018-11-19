@@ -13,7 +13,7 @@ class StockShowPage extends React.Component{
     this.renderNews = this.renderNews.bind(this);
     this.resetData = this.resetData.bind(this);
     this.tooltipRender = this.tooltipRender.bind(this);
-    this.timescale = "monthly";
+    this.timescale = "daily";
   }
 
   componentDidMount(){
@@ -126,6 +126,13 @@ class StockShowPage extends React.Component{
         document.getElementById("pctChangeLabel").innerHTML = initialChange;
   }
 
+  clearTimescaleButtons(){
+    const buttons = document.querySelectorAll(".timescale-btn");
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].classList.remove("active-timescale");
+    }
+  }
+
   render(){
     if (!this.props.stock || !this.props.data || !document.getElementById("gradient")){
       return (
@@ -227,11 +234,36 @@ class StockShowPage extends React.Component{
                   <Tooltip isAnimationActive={false} position={{ y: 10 }} offset={-32} content={this.tooltipRender.bind(this)}/>
               </LineChart>
               <ul>
-                <button onClick={()=>{this.timescale = "daily";this.setState(this.state);}}>1D</button>
-                <button onClick={()=>{this.timescale = "weekly";this.setState(this.state);}}>1W</button>
-                <button onClick={()=>{this.timescale = "monthly";this.setState(this.state);}}>1M</button>
-                <button onClick={()=>{this.timescale = "trimonthly";this.setState(this.state);}}>3M</button>
-                <button onClick={()=>{this.timescale = "yearly";this.setState(this.state);}}>1Y</button>
+                <button id="tdaily" className="timescale-btn active-timescale" onClick={()=>{
+                    this.timescale = "daily";
+                    this.setState(this.state);
+                    this.clearTimescaleButtons();
+                    document.getElementById("tdaily").classList.add("active-timescale");
+                }}>1D</button>
+              <button id="tweekly" className="timescale-btn" onClick={()=>{
+                    this.timescale = "weekly";
+                    this.setState(this.state);
+                    this.clearTimescaleButtons();
+                    document.getElementById("tweekly").classList.add("active-timescale");
+                }}>1W</button>
+              <button id="tmonthly" className="timescale-btn" onClick={()=>{
+                    this.timescale = "monthly";
+                    this.setState(this.state);
+                    this.clearTimescaleButtons();
+                    document.getElementById("tmonthly").classList.add("active-timescale");
+                }}>1M</button>
+              <button id="ttrimonthly" className="timescale-btn" onClick={()=>{
+                    this.timescale = "trimonthly";
+                    this.setState(this.state);
+                    this.clearTimescaleButtons();
+                    document.getElementById("ttrimonthly").classList.add("active-timescale");
+                }}>3M</button>
+              <button id="tyearly" className="timescale-btn" onClick={()=>{
+                    this.timescale = "yearly";
+                    this.setState(this.state);
+                    this.clearTimescaleButtons();
+                    document.getElementById("tyearly").classList.add("active-timescale");
+                }}>1Y</button>
               </ul>
             <div className="news-div">
               <h1 className="news-header">News</h1>
