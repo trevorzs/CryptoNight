@@ -38,6 +38,13 @@ const DataReducer = (state = {}, action) => {
         arr.push(merge(item,{change: sum, pctchange: (sum/item.open)*100 }));
       }
       newObj.yearly = arr;
+      arr = [];
+      for (var i = 0; i < action.data.trimonthly.length; i++) {
+        item = action.data.trimonthly[i];
+        sum += (item.close - item.open);
+        arr.push(merge(item,{change: sum, pctchange: (sum/item.open)*100 }));
+      }
+      newObj.trimonthly = arr;
       newObj.symbols = [];
       return newObj;
     case RECEIVE_STOCKS:

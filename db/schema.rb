@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_15_144427) do
+ActiveRecord::Schema.define(version: 2018_11_19_005620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,22 @@ ActiveRecord::Schema.define(version: 2018_11_15_144427) do
     t.string "email", null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
+  end
+
+  create_table "watchlist_joins", force: :cascade do |t|
+    t.integer "watchlist_id", null: false
+    t.integer "stock_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stock_id"], name: "index_watchlist_joins_on_stock_id", unique: true
+    t.index ["watchlist_id"], name: "index_watchlist_joins_on_watchlist_id", unique: true
+  end
+
+  create_table "watchlists", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_watchlists_on_user_id", unique: true
   end
 
 end

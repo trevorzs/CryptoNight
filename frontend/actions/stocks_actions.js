@@ -65,7 +65,7 @@ export const receiveData = (data,symbols) => (
 const historicFetches = (sym,id,dispatch) => {
   const obj = {};
   const check = () => {
-    const completed = ((Boolean(obj.price) && Boolean(obj.daily) && Boolean(obj.weekly) && Boolean(obj.monthly) && Boolean(obj.yearly) && Boolean(obj.news)));
+    const completed = ((Boolean(obj.price) && Boolean(obj.daily) && Boolean(obj.weekly) && Boolean(obj.monthly) && Boolean(obj.yearly) && Boolean(obj.news) && Boolean(obj.trimonthly)));
     if (completed) {
       dispatch(receiveStockData(obj));
     }
@@ -85,6 +85,10 @@ const historicFetches = (sym,id,dispatch) => {
   });
   StocksApiUtil.fetchStockMonthly(sym,id).then(response=>{
       obj.monthly = response.Data;
+      check();
+  });
+  StocksApiUtil.fetchStockTriMonthly(sym,id).then(response=>{
+      obj.trimonthly = response.Data;
       check();
   });
   StocksApiUtil.fetchStockYearly(sym,id).then(response=>{

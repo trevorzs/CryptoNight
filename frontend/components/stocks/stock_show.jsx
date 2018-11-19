@@ -10,15 +10,17 @@ class StockShowPage extends React.Component{
     this.state  = {
       stock: ""
     }
-    this.timescale = this.props.data.daily;
     this.renderNews = this.renderNews.bind(this);
     this.resetData = this.resetData.bind(this);
+    this.tooltipRender = this.tooltipRender.bind(this);
+    this.timescale = "monthly";
   }
 
   componentDidMount(){
     this.props.fetchStock(this.props.match.params.stock_id);
-    this.interval1 = setInterval(()=>(this.props.fetchStock(this.props.match.params.stock_id)),8000);
+    this.interval1 = setInterval(()=>(this.props.fetchStock(this.props.match.params.stock_id)),12000);
   }
+
 
   componentWillUnmount(){
     clearInterval(this.interval1);
@@ -70,6 +72,17 @@ class StockShowPage extends React.Component{
       const change = this.round(e.payload[0].payload.change,8).toString();
       const pctChange = e.payload[0].payload.pctchange.toFixed(2);
       const date = new Date(e.payload[0].payload.time*1000);
+      let hour, minutes;
+      if (date.getHours() > 12){
+        hour = date.getHours()%12 || 12;
+      }else{
+        hour = date.getHours();
+      }
+      if (date.getMinutes() < 10){
+        minutes = "0" + date.getMinutes().toString();
+      }else{
+        minutes = date.getMinutes();
+      }
       const day = date.toDateString();
       document.getElementById("pricelabel").innerHTML = "$"+price;
 
@@ -78,9 +91,15 @@ class StockShowPage extends React.Component{
       }else{
         document.getElementById("pctChangeLabel").innerHTML = `+$${change} (${pctChange}%)`;
       }
-      return(
-        <div className="tooltip">{day.slice(4,-5)}, {day.slice(-5)}</div>
-      )
+      if (this.timescale === "daily" || this.timescale === "weekly"){
+        return(
+          <div className="tooltip">{hour}:{minutes} {day.slice(4,-5)}</div>
+        )
+      }else{
+        return(
+          <div className="tooltip">{day.slice(4,-5)}, {day.slice(-5)}</div>
+        )
+      }
     }
   }
 
@@ -91,7 +110,7 @@ class StockShowPage extends React.Component{
       let monthly;
       let pctChange;
       let news;
-        const monthData = this.props.data.monthly
+        const monthData = this.props.data[this.timescale];
         pctChange = monthData[monthData.length-1].pctchange.toFixed(2);
         initialChange = this.round(monthData[monthData.length-1].change,8);
         if (initialChange < 0){
@@ -102,7 +121,7 @@ class StockShowPage extends React.Component{
 
         initialChange = initialChange
         initialPrice = "$" + monthData[monthData.length-1].close;
-        monthly = this.props.data.monthly.slice(1);
+        monthly = this.props.data[this.timescale].slice(1);
         document.getElementById("pricelabel").innerHTML = initialPrice;
         document.getElementById("pctChangeLabel").innerHTML = initialChange;
   }
@@ -130,14 +149,15 @@ class StockShowPage extends React.Component{
         </div>
       )
     }else{
+
       let initialPrice;
       let change;
       let initialChange;
       let monthly;
       let pctChange;
       let news;
-      if (this.props.data.monthly){
-        const monthData = this.props.data.monthly
+      if (this.props.data[this.timescale]){
+        const monthData = this.props.data[this.timescale];
         pctChange = monthData[monthData.length-1].pctchange.toFixed(2);
         initialChange = this.round(monthData[monthData.length-1].change,8);
         const gradient = document.getElementById("gradient");
@@ -171,7 +191,7 @@ class StockShowPage extends React.Component{
 
         initialChange = initialChange
         initialPrice = "$" + monthData[monthData.length-1].close;
-        monthly = this.props.data.monthly.slice(1);
+        monthly = this.props.data[this.timescale].slice(1);
       }else{
         initialPrice = "Loading";
         change="Loading";
@@ -206,6 +226,13 @@ class StockShowPage extends React.Component{
                   <YAxis type="number" domain={['dataMin', 'dataMax']} hide={true}/>
                   <Tooltip isAnimationActive={false} position={{ y: 10 }} offset={-32} content={this.tooltipRender.bind(this)}/>
               </LineChart>
+              <ul>
+                <button onClick={()=>{this.timescale = "daily";this.setState(this.state);}}>1D</button>
+                <button onClick={()=>{this.timescale = "weekly";this.setState(this.state);}}>1W</button>
+                <button onClick={()=>{this.timescale = "monthly";this.setState(this.state);}}>1M</button>
+                <button onClick={()=>{this.timescale = "trimonthly";this.setState(this.state);}}>3M</button>
+                <button onClick={()=>{this.timescale = "yearly";this.setState(this.state);}}>1Y</button>
+              </ul>
             <div className="news-div">
               <h1 className="news-header">News</h1>
               {news}
