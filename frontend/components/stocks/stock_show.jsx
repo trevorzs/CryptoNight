@@ -130,6 +130,8 @@ class StockShowPage extends React.Component{
     const buttons = document.querySelectorAll(".timescale-btn");
     for (var i = 0; i < buttons.length; i++) {
       buttons[i].classList.remove("active-timescale");
+      buttons[i].classList.remove("active-timescale-down");
+      buttons[i].classList.remove("active-timescale-up");
     }
   }
 
@@ -170,12 +172,15 @@ class StockShowPage extends React.Component{
         const gradient = document.getElementById("gradient");
         const returnbtn = document.getElementById("return-button");
         const navlink = document.querySelectorAll("#navlink");
+        const active = document.querySelector(".active-timescale");
         news = this.renderNews();
         if (initialChange > 0){
           gradient.classList.remove("gradient");
           gradient.classList.add("gradient-up");
           returnbtn.classList.remove("return-button");
           returnbtn.classList.add("return-button-up");
+          active.classList.remove("active-timescale-down");
+          active.classList.add("active-timescale-up");
           for (var i = 0; i < navlink.length; i++) {
             navlink[i].classList.remove("nav-link-a");
             navlink[i].classList.add("nav-link-a-up");
@@ -185,6 +190,8 @@ class StockShowPage extends React.Component{
           gradient.classList.remove("gradient-up");
           returnbtn.classList.add("return-button");
           returnbtn.classList.remove("return-button-up");
+          active.classList.add("active-timescale-down");
+          active.classList.remove("active-timescale-up");
           for (var i = 0; i < navlink.length; i++) {
             navlink[i].classList.add("nav-link-a");
             navlink[i].classList.remove("nav-link-a-up");
@@ -233,37 +240,37 @@ class StockShowPage extends React.Component{
                   <YAxis type="number" domain={['dataMin', 'dataMax']} hide={true}/>
                   <Tooltip isAnimationActive={false} position={{ y: 10 }} offset={-32} content={this.tooltipRender.bind(this)}/>
               </LineChart>
-              <ul>
+              <ul className="timescale-btn-list">
                 <button id="tdaily" className="timescale-btn active-timescale" onClick={()=>{
                     this.timescale = "daily";
                     this.setState(this.state);
                     this.clearTimescaleButtons();
                     document.getElementById("tdaily").classList.add("active-timescale");
-                }}>1D</button>
+                }}>1 D</button>
               <button id="tweekly" className="timescale-btn" onClick={()=>{
                     this.timescale = "weekly";
                     this.setState(this.state);
                     this.clearTimescaleButtons();
                     document.getElementById("tweekly").classList.add("active-timescale");
-                }}>1W</button>
+                }}>1 W</button>
               <button id="tmonthly" className="timescale-btn" onClick={()=>{
                     this.timescale = "monthly";
                     this.setState(this.state);
                     this.clearTimescaleButtons();
                     document.getElementById("tmonthly").classList.add("active-timescale");
-                }}>1M</button>
+                }}>1 M</button>
               <button id="ttrimonthly" className="timescale-btn" onClick={()=>{
                     this.timescale = "trimonthly";
                     this.setState(this.state);
                     this.clearTimescaleButtons();
                     document.getElementById("ttrimonthly").classList.add("active-timescale");
-                }}>3M</button>
+                }}>3 M</button>
               <button id="tyearly" className="timescale-btn" onClick={()=>{
                     this.timescale = "yearly";
                     this.setState(this.state);
                     this.clearTimescaleButtons();
                     document.getElementById("tyearly").classList.add("active-timescale");
-                }}>1Y</button>
+                }}>1 Y</button>
               </ul>
             <div className="news-div">
               <h1 className="news-header">News</h1>
