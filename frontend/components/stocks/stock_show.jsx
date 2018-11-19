@@ -18,7 +18,7 @@ class StockShowPage extends React.Component{
 
   componentDidMount(){
     this.props.fetchStock(this.props.match.params.stock_id);
-    this.interval1 = setInterval(()=>(this.props.fetchStock(this.props.match.params.stock_id)),12000);
+    this.interval1 = setInterval(()=>(this.props.fetchStock(this.props.match.params.stock_id)),10000);
   }
 
 
@@ -72,17 +72,29 @@ class StockShowPage extends React.Component{
       const change = this.round(e.payload[0].payload.change,8).toString();
       const pctChange = e.payload[0].payload.pctchange.toFixed(2);
       const date = new Date(e.payload[0].payload.time*1000);
-      let hour, minutes;
-      if (date.getHours() > 12){
-        hour = date.getHours()%12 || 12;
-      }else{
-        hour = date.getHours();
-      }
+      let hour, minutes, time;
       if (date.getMinutes() < 10){
         minutes = "0" + date.getMinutes().toString();
       }else{
         minutes = date.getMinutes();
       }
+      if (date.getHours() > 12){
+        hour = date.getHours()%12;
+        if (hour === 0){
+          time = `12:00 AM`
+        }else{
+          time = `${hour}:${minutes} PM`
+        }
+      }else{
+        hour = date.getHours()%12;
+        if (hour === 0){
+          time = `12:00 PM`
+        }else{
+          time = `${hour}:${minutes} AM`
+        }
+      }
+
+
       const day = date.toDateString();
       document.getElementById("pricelabel").innerHTML = "$"+price;
 
@@ -93,7 +105,7 @@ class StockShowPage extends React.Component{
       }
       if (this.timescale === "daily" || this.timescale === "weekly"){
         return(
-          <div className="tooltip">{hour}:{minutes} {day.slice(4,-5)}</div>
+          <div className="tooltip">{time} {day.slice(4,-5)}</div>
         )
       }else{
         return(
@@ -154,6 +166,7 @@ class StockShowPage extends React.Component{
           </div>
           <div className="stock-show-main">
             <h1>LOADING</h1>
+            <ul className="active-timescale"></ul>
           </div>
         </div>
       )
