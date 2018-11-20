@@ -1,4 +1,5 @@
 import * as StocksApiUtil from '../util/stocks_api_util';
+import {doneLoading} from './ui_actions';
 
 export const RECEIVE_STOCKS = "RECEIVE_STOCKS";
 export const RECEIVE_STOCK = "RECEIVE_STOCK";

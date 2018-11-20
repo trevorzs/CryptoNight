@@ -15,6 +15,8 @@ const StocksReducer = (state = {}, action) => {
         ids = Object.keys(action.stocks);
         for (var i = 0; i < ids.length; i++) {
           newState[ids[i]] = action.stocks[ids[i]];
+          newState[ids[i]].price = "loading";
+          newState[ids[i]].todayChange = "loading";
         }
         return newState;
       case CLEAR_DATA:

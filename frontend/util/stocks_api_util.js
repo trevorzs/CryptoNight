@@ -39,7 +39,7 @@ export const fetchStocksData = (symbols) => {
 export const fetchStockDaily = (sym) => {
   return (
     $.ajax({
-      url: `https://min-api.cryptocompare.com/data/histohour?fsym=${sym}&tsym=USD&limit=25`,
+      url: `https://min-api.cryptocompare.com/data/histominute?fsym=${sym}&tsym=USD&limit=1441`,
       method: "GET"
     })
   )

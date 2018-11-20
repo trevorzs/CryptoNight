@@ -19,7 +19,7 @@ Stock.destroy_all
 stocks = Stock.create([{
     name: "Bitcoin",
     symbol: "BTC",
-    details: "Bitcoin is bestcoin"
+    details: "Bitcoin is bestcoin",
   },
   {
     name: "Dogecoin",

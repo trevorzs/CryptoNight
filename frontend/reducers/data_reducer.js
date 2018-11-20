@@ -10,39 +10,48 @@ const DataReducer = (state = {}, action) => {
       let sum = 0;
       let newObj = merge({},action.data);
       let arr = [];
-      let item;
+      let item, initial;
+      initial = action.data.monthly[0].open;
       for (var i = 0; i < action.data.monthly.length; i++) {
         item = action.data.monthly[i];
         sum += (item.close - item.open);
-        arr.push(merge(item,{change: sum, pctchange: (sum/item.open)*100 }));
+        arr.push(merge(item,{change: sum, pctchange: (sum/initial)*100 }));
       }
       newObj.monthly = arr;
+      initial = action.data.daily[0].open;
       arr = [];
+      sum = 0;
       for (var i = 0; i < action.data.daily.length; i++) {
         item = action.data.daily[i];
         sum += (item.close - item.open);
-        arr.push(merge(item,{change: sum, pctchange: (sum/item.open)*100 }));
+        arr.push(merge(item,{change: sum, pctchange: (sum/initial)*100 }));
       }
       newObj.daily = arr;
+      initial = action.data.weekly[0].open;
       arr = [];
+      sum = 0;
       for (var i = 0; i < action.data.weekly.length; i++) {
         item = action.data.weekly[i];
         sum += (item.close - item.open);
-        arr.push(merge(item,{change: sum, pctchange: (sum/item.open)*100 }));
+        arr.push(merge(item,{change: sum, pctchange: (sum/initial)*100 }));
       }
       newObj.weekly = arr;
+      initial = action.data.yearly[0].open;
       arr = [];
+      sum = 0;
       for (var i = 0; i < action.data.yearly.length; i++) {
         item = action.data.yearly[i];
         sum += (item.close - item.open);
-        arr.push(merge(item,{change: sum, pctchange: (sum/item.open)*100 }));
+        arr.push(merge(item,{change: sum, pctchange: (sum/initial)*100 }));
       }
       newObj.yearly = arr;
+      initial = action.data.trimonthly[0].open;
       arr = [];
+      sum = 0;
       for (var i = 0; i < action.data.trimonthly.length; i++) {
         item = action.data.trimonthly[i];
         sum += (item.close - item.open);
-        arr.push(merge(item,{change: sum, pctchange: (sum/item.open)*100 }));
+        arr.push(merge(item,{change: sum, pctchange: (sum/initial)*100 }));
       }
       newObj.trimonthly = arr;
       newObj.symbols = [];
