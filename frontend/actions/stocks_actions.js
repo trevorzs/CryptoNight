@@ -99,7 +99,7 @@ export const receiveQuery = (stocks,query) => (
 const historicFetches = (sym,id,dispatch) => {
   const obj = {};
   const check = () => {
-    const completed = ((Boolean(obj.price) && Boolean(obj.daily) && Boolean(obj.weekly) && Boolean(obj.monthly) && Boolean(obj.yearly) && Boolean(obj.news) && Boolean(obj.trimonthly)));
+    const completed = ((Boolean(obj.price) && Boolean(obj.daily) && Boolean(obj.weekly) && Boolean(obj.monthly) && Boolean(obj.yearly) && Boolean(obj.news) && Boolean(obj.trimonthly) && Boolean(obj.fiveyearly)));
     if (completed) {
       dispatch(receiveStockData(obj));
     }
@@ -127,6 +127,10 @@ const historicFetches = (sym,id,dispatch) => {
   });
   StocksApiUtil.fetchStockYearly(sym,id).then(response=>{
       obj.yearly = response.Data;
+      check();
+  });
+  StocksApiUtil.fetchStockFiveYearly(sym,id).then(response=>{
+      obj.fiveyearly = response.Data;
       check();
   });
   StocksApiUtil.fetchNews(sym,id).then(response=>{

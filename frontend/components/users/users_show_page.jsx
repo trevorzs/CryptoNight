@@ -2,6 +2,7 @@ import React from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import {merge} from 'lodash';
 import {connect} from 'react-redux';
+import NavbarContainer from '../navbar/navbar_container';
 
 
 class UserShowPage extends React.Component{
@@ -16,14 +17,7 @@ class UserShowPage extends React.Component{
           <div className="gradient">
           </div>
         </div>
-        <div className="user-show-navbar">
-            <Link to="/"><div className="logo"/></Link>
-            <div className="nav-links">
-              <Link to="/" className="nav-link-a">Home</Link>
-              <a className="nav-link-a">Notifications</a>
-              <button className="nav-link-a" onClick={this.props.logout}>Log Out</button>
-            </div>
-        </div>
+        <NavbarContainer />
         <div className="user-show-main">
           <h1>Welcome to CryptoNight</h1>
           <Link className="user-show-tag" to="/stocks">Cryptocurrencies</Link>

@@ -43,9 +43,8 @@ class StockShowPage extends React.Component{
     if (e.payload && e.payload.length > 0){
       const price = e.payload[0].payload.close;
       let change = this.round(e.payload[0].payload.change,8).toString();
-      debugger
       let pctChange = e.payload[0].payload.pctchange.toFixed(2);
-      if (pctChange.toString().includes(Infinity)){
+      if (pctChange.toString().includes("Infinity") || pctChange.toString().includes("NaN")){
         pctChange = "0";
         change = "0";
       }
@@ -244,6 +243,11 @@ class StockShowPage extends React.Component{
                     this.clearTimescaleButtons();
                     document.getElementById("tyearly").classList.add("active-timescale");
                 }}>1 Y</button>
+              <button id="tfiveyearly" className="timescale-btn" onClick={()=>{
+                      this.setState(merge(this.state,{timescale:"fiveyearly"}));
+                      this.clearTimescaleButtons();
+                      document.getElementById("tfiveyearly").classList.add("active-timescale");
+                  }}>5 Y</button>
               </ul>
             <div className="news-div">
               <h1 className="news-header">News</h1>

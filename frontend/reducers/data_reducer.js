@@ -54,6 +54,18 @@ const DataReducer = (state = {}, action) => {
         arr.push(merge(item,{change: sum, pctchange: (sum/initial)*100 }));
       }
       newObj.trimonthly = arr;
+      initial = action.data.fiveyearly[0].open;
+      arr = [];
+      sum = 0;
+      for (var i = 0; i < action.data.fiveyearly.length; i++) {
+        if (initial === 0){
+          initial = action.data.fiveyearly[i].open;
+        }
+        item = action.data.fiveyearly[i];
+        sum += (item.close - item.open);
+        arr.push(merge(item,{change: sum, pctchange: (sum/initial)*100 }));
+      }
+      newObj.fiveyearly = arr;
       newObj.symbols = [];
       return newObj;
     case RECEIVE_STOCKS:

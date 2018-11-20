@@ -3,7 +3,7 @@ import {Link, Redirect} from 'react-router-dom';
 import {merge} from 'lodash';
 import {connect} from 'react-redux';
 import Loading from '../loading/loading';
-import NavbarContainer from '../navbar/navbar';
+import NavbarContainer from '../navbar/navbar_container';
 
 class StockIndex extends React.Component{
   constructor(props){
@@ -57,7 +57,7 @@ class StockIndex extends React.Component{
           <div className="gradient">
           </div>
         </div>
-        <NavbarContainer/>
+        <NavbarContainer />
         <div className="stock-index">
           <h1>Cryptocurrencies</h1>
           <p>{stocks.length} Cryptocurrencies</p>
