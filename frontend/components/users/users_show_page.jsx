@@ -14,11 +14,15 @@ class UserShowPage extends React.Component{
 
   componentDidMount(){
     this.props.needsLoading();
-    if (this.props.watchlist.stocks.length > 0){
-      const syms = this.props.watchlist.stocks.map((stock)=>(
-        stock.symbol
-      ));
-      this.props.watchlistDataFetch(syms).then(response=>this.props.doneLoading());
+    if (this.props.watchlist && this.props.watchlist.stocks){
+      if (this.props.watchlist.stocks.length > 0){
+        const syms = this.props.watchlist.stocks.map((stock)=>(
+          stock.symbol
+        ));
+        this.props.watchlistDataFetch(syms).then(response=>this.props.doneLoading());
+      }else{
+        this.props.doneLoading();
+      }
     }
   }
 
@@ -26,8 +30,23 @@ class UserShowPage extends React.Component{
     this.props.clearData();
   }
 
+  componentDidUpdate(oldprops){
+    if (this.props.match.params !== oldprops.match.params){
+      this.props.needsLoading();
+      if (this.props.watchlist.stocks.length > 0){
+        const syms = this.props.watchlist.stocks.map((stock)=>(
+          stock.symbol
+        ));
+        this.props.watchlistDataFetch(syms).then(response=>this.props.doneLoading());
+      }else{
+        this.props.doneLoading();
+      }
+    }
+  }
+
   render(){
     if (this.props.loading){
+
       return (
         <Loading />
       )
@@ -36,7 +55,7 @@ class UserShowPage extends React.Component{
     let watchlistitems;
     let chart;
     let graphClass;
-    if (this.props.watchlist.stocks.length > 0){
+    if (this.props.watchlist && this.props.watchlist.stocks.length){
       watchlistitems = this.props.watchlist.stocks.map((stock)=>{
         if (!stock.USD){
           stock.USD = {CHANGEPCT24HOUR: "loading"}

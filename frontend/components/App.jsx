@@ -5,6 +5,7 @@ import SignupFormContainer from './session_form/signup_form_container';
 import LoginFormContainer from './session_form/login_form_container';
 import StockIndexContainer from './stocks/stock_index_container';
 import StockShowContainer from './stocks/stock_show_container';
+import UserShowContainer from './users/users_show_container';
 
 const App = () => (
   <div className="main fullsize">

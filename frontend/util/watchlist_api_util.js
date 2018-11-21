@@ -8,11 +8,11 @@ export const addToWatchlist = (watchlistJoin) => {
   )
 }
 
-export const removeWatchlist = (id) => {
+export const removeFromWatchlist = (id) => {
   return(
     $.ajax({
       url: `api/watchlist_joins/${id}`,
-      method: "DELETE"
+      method: "DELETE",
     })
   )
 }

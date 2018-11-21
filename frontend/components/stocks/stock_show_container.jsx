@@ -4,7 +4,7 @@ import StockShow from './stock_show';
 import {fetchStock, fetchPrice, queryStocks, clearSearch, clearData} from '../../actions/stocks_actions';
 import {logout} from '../../actions/session_actions';
 import {doneLoading, needsLoading} from '../../actions/ui_actions';
-import {addToWatchlist} from '../../actions/watchlist_actions';
+import {addToWatchlist, removeFromWatchlist} from '../../actions/watchlist_actions';
 
 const msp = (state, ownProps) => {
   return (
@@ -29,7 +29,8 @@ const mdp = dispatch => (
     logout: () => dispatch(logout()),
     doneLoading: () => dispatch(doneLoading()),
     needsLoading: () => dispatch(needsLoading()),
-    addToWatchlist: (watchlistJoin) => dispatch(addToWatchlist(watchlistJoin))
+    addToWatchlist: (watchlistJoin) => dispatch(addToWatchlist(watchlistJoin)),
+    removeFromWatchlist: (id) => dispatch(removeFromWatchlist(id))
   }
 );
 

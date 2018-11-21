@@ -145,12 +145,17 @@ class StockShowPage extends React.Component{
 
       if (!addedStocks.includes(this.props.stock.symbol)){
         button = (
-          <button className="add-to-watchlist-btn" onClick={()=>{
+          <button className="watchlist-button" onClick={()=>{
                   this.props.addToWatchlist({
                     watchlist_id: this.props.watchlist.id,
                     stock_id: this.props.stock.id
                   })
+                  this.setState(this.state);
                 }}>Add to Watchlist</button>
+            );
+      }else{
+        button = (
+          <button className="watchlist-button">Remove from Watchlist</button>
             );
       }
 

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :stocks, only: [:index, :show, :create]
     get 'stocks/search/:query', :to => 'stocks#search'
     resources :watchlists, only: [:show, :update]
-    resources :watchlist_joins, only: [:create, :destroy]
+    resources :watchlist_joins, only: [:create]
+    delete 'watchlist_joins', :to => 'watchlist_joins#destroy'
   end
 end

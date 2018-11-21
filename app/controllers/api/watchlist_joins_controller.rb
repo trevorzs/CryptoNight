@@ -1,8 +1,21 @@
 class Api::WatchlistJoinsController < ApplicationController
+
+
+
   def create
     @watchlistJoin = WatchlistJoin.new(watchlist_params)
     if @watchlistJoin.save
       render "api/watchlistjoins/create"
+    end
+  end
+
+  def destroy
+    @watchlistJoin = WatchlistJoin.find_by(watchlist_params)
+    if @watchlistJoin
+      @watchlistJoin.delete
+      render "api/watchlistjoins/delete"
+    else
+      render json: ["Stock not on watchlist"], status: 404
     end
   end
 

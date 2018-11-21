@@ -4,7 +4,6 @@ import Watchlist from './watchlist';
 import {logout} from '../../actions/session_actions';
 
 const msp = state => {
-  debugger
   return (
     {
       loggedIn: Boolean(state.session.id),

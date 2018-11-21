@@ -8,4 +8,4 @@
 #   end
 # end
 
-json.extract! watchlist, :user_id, :id, :stocks
+json.extract! watchlist, :user_id, :id, :stocks, :watchlistJoins

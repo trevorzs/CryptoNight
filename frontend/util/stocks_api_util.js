@@ -100,6 +100,23 @@ export const fetchStockFiveYearly = (sym) => {
   )
 }
 
+export const fetchAllNews = (syms) => {
+  let symbols = syms.map((sym) => {
+    if (sym.length < 3){
+      return "Blockchain"
+    }else{
+      return sym
+    }
+  })
+  symbols = symbols.join(",");
+  return (
+    $.ajax({
+      url: `https://min-api.cryptocompare.com/data/v2/news/?categories=${symbols}&excludeCategories=Sponsored`,
+      method: "GET"
+    })
+  )
+}
+
 export const fetchNews = (sym) => {
   if (sym.length<3){
     sym = "Blockchain"
