@@ -5,10 +5,11 @@ export const REMOVE_USER = "REMOVE_USER";
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 
-export const receiveUser = (user) => (
+export const receiveUser = ({user, watchlist}) => (
   {
     type: RECEIVE_USER,
-    user
+    user,
+    watchlist
   }
 );
 
@@ -32,8 +33,8 @@ export const clearErrors = () => (
 )
 
 export const login = (user) => dispatch => (
-  SessionApiUtil.login(user).then(user => (
-    dispatch(receiveUser(user))
+  SessionApiUtil.login(user).then(payload => (
+    dispatch(receiveUser(payload))
   ), err => (
     dispatch(receiveErrors(err.responseJSON))
   ))

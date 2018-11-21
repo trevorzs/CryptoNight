@@ -450,9 +450,14 @@
   line-height: 42px;
 }
 
-.user-show-tag{
-  margin-top:20px;
+.user-show-button{
+  margin: 50px 50px;
   font-size:20px;
+  width:150px;
+}
+
+.user-show-button:hover{
+  color: #e72ebe;
 }
 
 .uparrow{
@@ -649,4 +654,58 @@
 
 .search-results:hover{
   display:flex;
+}
+
+.watchlist{
+  display:flex;
+  width:300px;
+  height:400px;
+  justify-content: flex-start;
+  text-align: center;
+  flex-direction: column;
+  background-color: #030e21;
+  position:absolute;
+  top:10px;
+  left:600px;
+  box-shadow: 0 0 20px 2px rgb(0, 0, 0);
+}
+
+.watchlist-header{
+  border-bottom: 1px solid gray;
+}
+
+.watchlist::-webkit-scrollbar{
+  display:none;
+}
+
+.watchlist-header{
+  font-size:20px;
+}
+
+.watchlist li{
+  padding:20px 40px;
+}
+
+.watchlist a{
+  width:100%;
+}
+
+.watchlist a:hover{
+  color:#e72ebe;
+  background-color:white;
+}
+
+.watchlist-item{
+  width:100%;
+  height:50px;
+  display:flex;
+  justify-content: space-between;
+}
+
+.watchlist-graph-up path{
+  stroke: #00ea9c;
+}
+
+.watchlist-graph-down path{
+  stroke: #e72ebe;
 }

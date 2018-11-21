@@ -5,6 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Watchlist.destroy_all
+WatchlistJoin.destroy_all
 User.destroy_all
 users = User.create([{
   username:"Potential_Cryptonaut",
@@ -14,6 +16,7 @@ users = User.create([{
     last_name:"Cryptonaut"
   }
   ])
+
 
 Stock.destroy_all
 stocks = Stock.create([{

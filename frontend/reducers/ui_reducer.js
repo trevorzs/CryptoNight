@@ -1,4 +1,4 @@
-import {RECEIVE_DONE_LOADING} from '../actions/ui_actions';
+import {RECEIVE_DONE_LOADING, RECEIVE_NEEDS_LOADING} from '../actions/ui_actions';
 import {RECEIVE_QUERY, CLEAR_SEARCH} from '../actions/stocks_actions';
 import {merge} from 'lodash';
 
@@ -8,6 +8,8 @@ const UiReducer = (state = {loading: true}, action) => {
   switch (action.type) {
     case RECEIVE_DONE_LOADING:
       return merge({},state,{loading:false});
+    case RECEIVE_NEEDS_LOADING:
+      return merge({},state,{loading:true});
     case RECEIVE_QUERY:
       const ids = Object.keys(action.stocks);
       newState = merge({},state);

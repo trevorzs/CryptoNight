@@ -10,10 +10,10 @@ class Navbar extends React.Component{
     super(props);
     this.handleSearch = this.handleSearch.bind(this);
     this.renderSearch = this.renderSearch.bind(this);
-    if (!this.props.navlink){
-      this.navlink = "nav-link-a";
-    }else{
-      this.navlink = "nav-link-a-up";
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.state = {
+      enter: false,
+      link: ""
     }
   }
 
@@ -22,6 +22,17 @@ class Navbar extends React.Component{
       this.props.queryStocks(e.target.value);
     }else{
       this.props.clearSearch();
+    }
+  }
+
+  handleKeyPress(e){
+    if (this.props.search && this.props.search.length > 0){
+      if (e.key === "Enter"){
+        this.setState({
+          enter: true,
+          link : `/stocks/${this.props.search[0].id}`
+        })
+      }
     }
   }
 
@@ -74,13 +85,23 @@ class Navbar extends React.Component{
   }
 
   render(){
+    if (this.props.navlink){
+      this.navlink = this.props.navlink;
+    }else{
+      this.navlink = "nav-link-a";
+    }
+    if (this.state.enter){
+      return(
+        <Redirect to={this.state.link}/>
+      )
+    }
     return(
       <div className="user-show-navbar">
         <div className="navbar-left">
           <Link to="/"><div className="logo"/></Link>
           <div className="searchbar">
             <i className="fas fa-search search-icon"></i>
-            <input type="text" className="searchbar-field" placeholder="Search" onChange={this.handleSearch}></input>
+            <input type="text" className="searchbar-field" placeholder="Search" onKeyPress={this.handleKeyPress} onChange={this.handleSearch}></input>
             {this.renderSearch()}
           </div>
 

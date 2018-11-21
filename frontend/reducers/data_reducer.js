@@ -21,9 +21,9 @@ const DataReducer = (state = {}, action) => {
       initial = action.data.daily[0].open;
       arr = [];
       sum = 0;
-      for (var i = 0; i < action.data.daily.length; i++) {
+      for (var i = 1; i < action.data.daily.length; i++) {
         item = action.data.daily[i];
-        sum += (item.close - item.open);
+        sum += (item.close - action.data.daily[i-1].close);
         arr.push(merge(item,{change: sum, pctchange: (sum/initial)*100 }));
       }
       newObj.daily = arr;

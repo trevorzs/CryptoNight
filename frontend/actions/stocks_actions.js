@@ -11,6 +11,14 @@ export const RECEIVE_STOCKS_REQUEST = "RECEIVE_STOCKS_REQUEST";
 export const RECEIVE_QUERY = "RECEIVE_QUERY";
 export const CLEAR_SEARCH = "CLEAR_SEARCH";
 export const CLEAR_DATA = "CLEAR_DATA";
+export const RECEIVE_WATCHLIST_DATA = "RECEIVE_WATCHLIST_DATA";
+
+export const receiveWatchlistData = (obj) => {
+  return({
+    type: RECEIVE_WATCHLIST_DATA,
+    obj
+  })
+}
 
 export const clearSearch = () => {
   return({
@@ -96,6 +104,32 @@ export const receiveQuery = (stocks,query) => (
   }
 )
 
+export const watchlistDataFetch = (syms) => dispatch => {
+  const modsym = syms.map((sym)=>[sym,0])
+  return(
+    StocksApiUtil.fetchStocksData(modsym).then(response=>{
+      watchlistDailyFetch(response,dispatch)
+    }
+  ))
+}
+
+const watchlistDailyFetch = (response,dispatch) => {
+  let done = 0;
+  const obj = {stocks: response.RAW }
+  let symbols = Object.keys(response.RAW);
+  for (let i = 0; i < symbols.length; i++) {
+    StocksApiUtil.altFetchStockDaily(symbols[i]).then(
+      response => {
+        obj.stocks[symbols[i]].daily = response.Data;
+        done++;
+        if (done >= symbols.length){
+          dispatch(receiveWatchlistData(obj))
+        }
+      }
+    )
+  }
+}
+
 const historicFetches = (sym,id,dispatch) => {
   const obj = {};
   const check = () => {
@@ -140,6 +174,8 @@ const historicFetches = (sym,id,dispatch) => {
 
   return (obj);
 }
+
+
 export const queryStocks = (query) => dispatch => (
   StocksApiUtil.queryStocks(query).then(
     stocks => dispatch(receiveQuery(stocks,query))
@@ -181,6 +217,6 @@ export const fetchStocksData = (arr) => dispatch => {
       data => {
         dispatch(receiveData(data,arr))
       }
-    )
+    ).then(response=>dispatch(doneLoading()))
   )
 }

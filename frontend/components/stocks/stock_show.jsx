@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import NavbarContainer from '../navbar/navbar_container';
 import NewsContainer from '../news/news_container';
+import Loading from '../loading/loading';
 
 class StockShowPage extends React.Component{
   constructor(props){
@@ -17,7 +18,7 @@ class StockShowPage extends React.Component{
   }
 
   componentDidMount(){
-    this.props.fetchStock(this.props.match.params.stock_id).then(()=>this.props.doneLoading());
+    this.props.fetchStock(this.props.match.params.stock_id);
     this.interval1 = setInterval(()=>(this.props.fetchStock(this.props.match.params.stock_id)),12000);
   }
 
@@ -106,7 +107,6 @@ class StockShowPage extends React.Component{
         }else{
           initialChange = `+$${initialChange} (${pctChange}%)`;
         }
-
         initialChange = initialChange
         initialPrice = "$" + monthData[monthData.length-1].close;
         monthly = this.props.data[this.state.timescale].slice(1);
@@ -126,20 +126,9 @@ class StockShowPage extends React.Component{
   render(){
     if (!this.props.stock || !this.props.data || !document.getElementById("gradient")){
       return (
-        <div className="overall fullsize">
-          <div className="displace">
-            <div id="gradient" className="gradient">
-              <div id="return-button"></div>
-            </div>
-          </div>
-          <div className="stock-show-main">
-            <h1>LOADING</h1>
-            <ul className="active-timescale"></ul>
-          </div>
-        </div>
+        <Loading />
       )
     }
-
       let initialPrice;
       let change;
       let initialChange;
@@ -147,29 +136,37 @@ class StockShowPage extends React.Component{
       let pctChange;
       let news;
       let rb, gd, at, nv;
+      let addedStocks;
+      let button;
+
+      addedStocks = Object.keys(this.props.watchlist.stocks).map((id)=>{
+        return(this.props.watchlist.stocks[id].symbol)
+      })
+
+      if (!addedStocks.includes(this.props.stock.symbol)){
+        button = (
+          <button className="add-to-watchlist-btn" onClick={()=>{
+                  this.props.addToWatchlist({
+                    watchlist_id: this.props.watchlist.id,
+                    stock_id: this.props.stock.id
+                  })
+                }}>Add to Watchlist</button>
+            );
+      }
+
       if (this.props.data[this.state.timescale]){
         const monthData = this.props.data[this.state.timescale];
         pctChange = monthData[monthData.length-1].pctchange.toFixed(2);
         initialChange = this.round(monthData[monthData.length-1].change,8);
-        const gradient = document.getElementById("gradient");
-        const returnbtn = document.getElementById("return-button");
-        const navlink = document.querySelectorAll("#navlink");
+
         const active = document.querySelector(".active-timescale");
         news = (<NewsContainer />);
         if (initialChange > 0){
           active.classList.remove("active-timescale-down");
           active.classList.add("active-timescale-up");
-          // for (var i = 0; i < navlink.length; i++) {
-          //   navlink[i].classList.remove("nav-link-a");
-          //   navlink[i].classList.add("nav-link-a-up");
-          // }
         }else{
           active.classList.add("active-timescale-down");
           active.classList.remove("active-timescale-up");
-          // for (var i = 0; i < navlink.length; i++) {
-          //   navlink[i].classList.add("nav-link-a");
-          //   navlink[i].classList.remove("nav-link-a-up");
-          // }
         }
         if (initialChange < 0){
           nv = "nav-link-a";
@@ -249,6 +246,7 @@ class StockShowPage extends React.Component{
                       document.getElementById("tfiveyearly").classList.add("active-timescale");
                   }}>5 Y</button>
               </ul>
+              {button}
             <div className="news-div">
               <h1 className="news-header">News</h1>
               {news}

@@ -45,6 +45,15 @@ export const fetchStockDaily = (sym) => {
   )
 }
 
+export const altFetchStockDaily = (sym) => {
+  return (
+    $.ajax({
+      url: `https://min-api.cryptocompare.com/data/histohour?fsym=${sym}&tsym=USD&limit=25`,
+      method: "GET"
+    })
+  )
+}
+
 export const fetchStockWeekly = (sym) => {
   return (
     $.ajax({

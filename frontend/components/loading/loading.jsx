@@ -12,7 +12,7 @@ class Loading extends React.Component{
     return(
       <div className="overall fullsize">
         <div className="displace">
-          <div className="gradient">
+          <div id="gradient" className="gradient">
           </div>
         </div>
         <NavbarContainer/>

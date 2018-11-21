@@ -20,7 +20,12 @@ class User < ApplicationRecord
     class_name: 'Watchlist'
 
   after_initialize :ensure_session_token
+  after_create :assign_watchlist
   attr_reader :password
+
+  def assign_watchlist
+    self.create_watchlist
+  end
 
   def password=(password)
     @password = password
