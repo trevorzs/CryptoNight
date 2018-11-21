@@ -143,8 +143,108 @@ stocks = Stock.create([{
             symbol: "WAVES",
             details: "Splash"
             },
+          {
+            name: "Augur",
+            symbol: "REP",
+            details: "Made in Hong Kong"
+            },
+          {
+            name: "Teher",
+            symbol: "USDT",
+            details: "Tethered together"
+            },
             {
-              name: "Augur",
-              symbol: "REP",
-              details: "Made in Hong Kong"
-              }])
+              name: "True USD",
+              symbol: "TUSD",
+              details: "Truly American"
+              },
+            {
+              name: "Golem Network Token",
+              symbol: "GNT",
+              details: "My precious"
+              },
+            {
+              name: "Bitcoin Cash Satoshi's Vision",
+              symbol: "BCHSV",
+              details: "All hail satoshi"
+              },
+            {
+              name: "Bitshares",
+              symbol: "BTS",
+              details: "Bite sized shares"
+              },
+            {
+              name: "Crypto.com",
+              symbol: "MCO",
+              details: "Dot com"
+              },
+            {
+              name: "Hshare",
+              symbol: "HSR",
+              details: "The letter H"
+              },
+              {
+                name: "Okex",
+                symbol: "OKB",
+                details: "Ok rolex"
+                },
+              {
+                name: "Paxos Standard",
+                symbol: "PAX",
+                details: "pax"
+                },
+              {
+                name: "GXChain",
+                symbol: "GXS",
+                details: "Spectacular"
+                },
+              {
+                name: "IOTA",
+                symbol: "IOT",
+                details: "Tiny"
+                },
+                {
+                  name: "Huobi Token",
+                  symbol: "HT",
+                  details: "Mr. Huobi"
+                  },
+                {
+                  name: "KubosCoin",
+                  symbol: "KUBO",
+                  details: "and the two strings"
+                  },
+                {
+                  name: "GIFTO",
+                  symbol: "GTO",
+                  details: "Present"
+                  },
+                {
+                  name: "Nuls",
+                  symbol: "NULS",
+                  details: "and void"
+                  },
+                {
+                  name: "Infinity Economics",
+                  symbol: "XIN",
+                  details: "and beyond"
+                  },
+                {
+                  name: "Mithril",
+                  symbol: "MITH",
+                  details: "Stronger than steel"
+                  },
+                {
+                  name: "Decred",
+                  symbol: "DCR",
+                  details: "creed"
+                  },
+                {
+                  name: "Factoids",
+                  symbol: "FCT",
+                  details: "fax"
+                  },
+                {
+                  name: "Elastos",
+                  symbol: "ELA",
+                  details: "Elastica"
+                  }])

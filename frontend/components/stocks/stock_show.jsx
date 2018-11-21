@@ -205,59 +205,61 @@ class StockShowPage extends React.Component{
             </div>
           </div>
           <NavbarContainer navlink={nv}/>
-          <div className="stock-show-main">
-            <Link to="/stocks"><h2 id="return-button" className={rb}>Cryptocurrencies</h2></Link>
-            <h1 id="stockLabel">{this.props.stock.name}</h1>
-            <h1 id="pricelabel">{initialPrice}</h1>
-            <h2 id="pctChangeLabel">{initialChange}</h2>
-              <LineChart width={800} height={240}
-                margin={{ top: 30, right: 70, left: -30, bottom: 5 }} onMouseLeave={this.resetData}
-                 data={monthly}>
-                 <filter id="hello"></filter>
-                <Line type="monotone" dataKey="close" stroke="white" dot={false}/>
-                  <XAxis dataKey="time" hide={true} padding={{ left: 40, right: 40 }} />
-                  <YAxis type="number" domain={['dataMin', 'dataMax']} hide={true}/>
-                  <Tooltip isAnimationActive={false} position={{ y: 10 }} offset={-32} content={this.tooltipRender.bind(this)}/>
-              </LineChart>
-              <ul className="timescale-btn-list">
-                <button id="tdaily" className="timescale-btn active-timescale" onClick={()=>{
-                    this.setState(merge(this.state,{timescale:"daily"}));
-                    this.clearTimescaleButtons();
-                    document.getElementById("tdaily").classList.add("active-timescale");
-                }}>1 D</button>
-              <button id="tweekly" className="timescale-btn" onClick={()=>{
-                    this.setState(merge(this.state,{timescale:"weekly"}));
-                    this.clearTimescaleButtons();
-                    document.getElementById("tweekly").classList.add("active-timescale");
-                }}>1 W</button>
-              <button id="tmonthly" className="timescale-btn" onClick={()=>{
-                    this.setState(merge(this.state,{timescale:"monthly"}));
-                    this.clearTimescaleButtons();
-                    document.getElementById("tmonthly").classList.add("active-timescale");
-                }}>1 M</button>
-              <button id="ttrimonthly" className="timescale-btn" onClick={()=>{
-                    this.setState(merge(this.state,{timescale:"trimonthly"}));
-                    this.clearTimescaleButtons();
-                    document.getElementById("ttrimonthly").classList.add("active-timescale");
-                }}>3 M</button>
-              <button id="tyearly" className="timescale-btn" onClick={()=>{
-                    this.setState(merge(this.state,{timescale:"yearly"}));
-                    this.clearTimescaleButtons();
-                    document.getElementById("tyearly").classList.add("active-timescale");
-                }}>1 Y</button>
-              <button id="tfiveyearly" className="timescale-btn" onClick={()=>{
-                      this.setState(merge(this.state,{timescale:"fiveyearly"}));
+          <div className="main-wrapper">
+            <div className="stock-show-main">
+              <Link to="/stocks"><h2 id="return-button" className={rb}>Cryptocurrencies</h2></Link>
+              <h1 id="stockLabel">{this.props.stock.name}</h1>
+              <h1 id="pricelabel">{initialPrice}</h1>
+              <h2 id="pctChangeLabel">{initialChange}</h2>
+                <LineChart width={800} height={240}
+                  margin={{ top: 30, right: 70, left: -30, bottom: 5 }} onMouseLeave={this.resetData}
+                   data={monthly}>
+                   <filter id="hello"></filter>
+                  <Line type="monotone" dataKey="close" stroke="white" dot={false}/>
+                    <XAxis dataKey="time" hide={true} padding={{ left: 40, right: 40 }} />
+                    <YAxis type="number" domain={['dataMin', 'dataMax']} hide={true}/>
+                    <Tooltip isAnimationActive={false} position={{ y: 10 }} offset={-32} content={this.tooltipRender.bind(this)}/>
+                </LineChart>
+                <ul className="timescale-btn-list">
+                  <button id="tdaily" className="timescale-btn active-timescale" onClick={()=>{
+                      this.setState(merge(this.state,{timescale:"daily"}));
                       this.clearTimescaleButtons();
-                      document.getElementById("tfiveyearly").classList.add("active-timescale");
-                  }}>5 Y</button>
-              </ul>
-              {button}
-            <div className="news-div">
-              <h1 className="news-header">News</h1>
-              {news}
+                      document.getElementById("tdaily").classList.add("active-timescale");
+                  }}>1 D</button>
+                <button id="tweekly" className="timescale-btn" onClick={()=>{
+                      this.setState(merge(this.state,{timescale:"weekly"}));
+                      this.clearTimescaleButtons();
+                      document.getElementById("tweekly").classList.add("active-timescale");
+                  }}>1 W</button>
+                <button id="tmonthly" className="timescale-btn" onClick={()=>{
+                      this.setState(merge(this.state,{timescale:"monthly"}));
+                      this.clearTimescaleButtons();
+                      document.getElementById("tmonthly").classList.add("active-timescale");
+                  }}>1 M</button>
+                <button id="ttrimonthly" className="timescale-btn" onClick={()=>{
+                      this.setState(merge(this.state,{timescale:"trimonthly"}));
+                      this.clearTimescaleButtons();
+                      document.getElementById("ttrimonthly").classList.add("active-timescale");
+                  }}>3 M</button>
+                <button id="tyearly" className="timescale-btn" onClick={()=>{
+                      this.setState(merge(this.state,{timescale:"yearly"}));
+                      this.clearTimescaleButtons();
+                      document.getElementById("tyearly").classList.add("active-timescale");
+                  }}>1 Y</button>
+                <button id="tfiveyearly" className="timescale-btn" onClick={()=>{
+                        this.setState(merge(this.state,{timescale:"fiveyearly"}));
+                        this.clearTimescaleButtons();
+                        document.getElementById("tfiveyearly").classList.add("active-timescale");
+                    }}>5 Y</button>
+                </ul>
+                {button}
+              <div className="news-div">
+                <h1 className="news-header">News</h1>
+                {news}
+              </div>
             </div>
-          </div>
         </div>
+      </div>
       )
 
   }

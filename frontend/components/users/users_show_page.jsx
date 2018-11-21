@@ -107,13 +107,17 @@ class UserShowPage extends React.Component{
           </div>
         </div>
         <NavbarContainer />
-        <div className="user-show-main">
-          <h1>Welcome to CryptoNight</h1>
-          <Link className="user-show-button" to="/stocks">Cryptocurrencies</Link>
-          <ul className="watchlist scroll">
-            <li className="watchlist-header">Watchlist</li>
-            {watchlistitems}
-          </ul>
+        <div className="main-wrapper">
+          <div className="user-show-main">
+            <h1>Welcome to CryptoNight</h1>
+            <Link className="user-show-button" to="/stocks">Cryptocurrencies</Link>
+          </div>
+          <div className="user-show-watchlist">
+            <ul className="watchlist scroll">
+              <li className="watchlist-header">Watchlist</li>
+              {watchlistitems}
+            </ul>
+          </div>
         </div>
 
       </div>

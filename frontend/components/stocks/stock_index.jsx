@@ -59,20 +59,21 @@ class StockIndex extends React.Component{
           </div>
         </div>
         <NavbarContainer />
-        <div className="stock-index">
-          <h1>Cryptocurrencies</h1>
-          <p>{stocks.length} Cryptocurrencies</p>
-          <div className="stock-index-list">
-            <ul className="stock-index-list-header">
-              <li>Name</li>
-              <li>Symbol</li>
-              <li>Price</li>
-              <li>Today</li>
-            </ul>
-            {stocks}
+        <div className="main-wrapper">
+          <div className="stock-index">
+            <h1>Cryptocurrencies</h1>
+            <p>{stocks.length} Cryptocurrencies</p>
+            <div className="stock-index-list">
+              <ul className="stock-index-list-header">
+                <li>Name</li>
+                <li>Symbol</li>
+                <li>Price</li>
+                <li>Today</li>
+              </ul>
+              {stocks}
+            </div>
           </div>
         </div>
-
       </div>
     )
   }
