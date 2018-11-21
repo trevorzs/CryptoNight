@@ -28,9 +28,6 @@ class UserShowPage extends React.Component{
     }
   }
 
-  componentWillUnmount(){
-  }
-
   componentDidUpdate(oldprops){
     if (this.props.match.params !== oldprops.match.params){
       this.props.needsLoading();
