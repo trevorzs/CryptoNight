@@ -16,8 +16,10 @@ class Loading extends React.Component{
           </div>
         </div>
         <NavbarContainer/>
-        <div className="stock-show-main">
-          <h1>LOADING</h1>
+        <div className="main-wrapper">
+          <div className="stock-show-main">
+            <h1>LOADING</h1>
+          </div>
         </div>
       </div>
     )
