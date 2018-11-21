@@ -1,5 +1,5 @@
 import {RECEIVE_USER} from '../actions/session_actions';
-import {RECEIVE_WATCHLIST_JOIN} from '../actions/watchlist_actions';
+import {RECEIVE_WATCHLIST_JOIN, REMOVE_WATCHLIST_JOIN} from '../actions/watchlist_actions';
 import {RECEIVE_WATCHLIST_DATA} from '../actions/stocks_actions';
 import {merge} from 'lodash';
 
@@ -17,6 +17,9 @@ const WatchlistsReducer = (state = [], action) => {
         return newState;
       case RECEIVE_WATCHLIST_DATA:
         return action.ids;
+      case REMOVE_WATCHLIST_JOIN:
+        newState = state.slice();
+        return   newState.filter(id => id !== action.watchlistJoin.stock_id);
       default:
         return state;
     }

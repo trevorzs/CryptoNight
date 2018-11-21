@@ -76,7 +76,7 @@ class UserShowPage extends React.Component{
           }else{
             graphClass = "watchlist-graph-down"
           }
-          price = "$" +this.round(stock.USD.PRICE,8).toString();
+          price = "$" +this.round(stock.USD.PRICE,5).toString();
           chart = (
             <LineChart className={graphClass} width={50} height={40}
               margin={{ top: 25, right: 0, left: 0, bottom: 0 }} onMouseLeave={this.resetData}
