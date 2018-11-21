@@ -14,34 +14,43 @@ class UserShowPage extends React.Component{
 
   componentDidMount(){
     this.props.needsLoading();
-    if (this.props.watchlist && this.props.watchlist.stocks){
-      if (this.props.watchlist.stocks.length > 0){
-        const syms = this.props.watchlist.stocks.map((stock)=>(
-          stock.symbol
-        ));
-        this.props.watchlistDataFetch(syms).then(response=>this.props.doneLoading());
-      }else{
-        this.props.doneLoading();
-      }
+    if (this.props.watchlist){
+        this.props.altFetchStocks().then(response=>{
+          const arrs = this.props.watchlist.map((stockid)=>{
+            return(
+              [response.stocks[stockid].symbol,stockid]
+            )
+          });
+          this.props.watchlistDataFetch(arrs);
+        })
+    }else{
+      this.props.doneLoading();
     }
   }
 
   componentWillUnmount(){
-    this.props.clearData();
   }
 
   componentDidUpdate(oldprops){
     if (this.props.match.params !== oldprops.match.params){
       this.props.needsLoading();
-      if (this.props.watchlist.stocks.length > 0){
-        const syms = this.props.watchlist.stocks.map((stock)=>(
-          stock.symbol
-        ));
-        this.props.watchlistDataFetch(syms).then(response=>this.props.doneLoading());
+      if (this.props.watchlist){
+          this.props.altFetchStocks().then(response=>{
+            const arrs = this.props.watchlist.map((stockid)=>{
+              return(
+                [response.stocks[stockid].symbol,stockid]
+              )
+            });
+            this.props.watchlistDataFetch(arrs);
+          })
       }else{
         this.props.doneLoading();
       }
     }
+  }
+
+  round(number, places){
+    return +(Math.round(number + "e+" + places)  + "e-" + places);
   }
 
   render(){
@@ -55,19 +64,22 @@ class UserShowPage extends React.Component{
     let watchlistitems;
     let chart;
     let graphClass;
-    if (this.props.watchlist && this.props.watchlist.stocks.length){
-      watchlistitems = this.props.watchlist.stocks.map((stock)=>{
+    if (this.props.watchlist){
+
+      let stock;
+      let price;
+      watchlistitems = this.props.watchlist.map((id)=>{
+        stock = this.props.stocks[id]
         if (!stock.USD){
-          stock.USD = {CHANGEPCT24HOUR: "loading"}
+          stock.USD = {CHANGEPCT24HOUR: "loading",
+                        PRICE: "loading"}
         }else{
           if (stock.USD.CHANGEPCT24HOUR > 0){
             graphClass = "watchlist-graph-up";
           }else{
             graphClass = "watchlist-graph-down"
           }
-          if (typeof stock.USD.CHANGEPCT24HOUR !== "string"){
-            stock.USD.CHANGEPCT24HOUR = stock.USD.CHANGEPCT24HOUR.toFixed(2).toString() +"%";
-          }
+          price = "$" +this.round(stock.USD.PRICE,8).toString();
           chart = (
             <LineChart className={graphClass} width={50} height={40}
               margin={{ top: 25, right: 0, left: 0, bottom: 0 }} onMouseLeave={this.resetData}
@@ -82,9 +94,9 @@ class UserShowPage extends React.Component{
         return(
           <Link to={`/stocks/${stock.id}`} key={stock.id}>
             <ul className="watchlist-item">
-              <li>{stock.symbol}</li>
+              <li>{stock.USD.FROMSYMBOL}</li>
               {chart}
-              <li>{stock.USD.CHANGEPCT24HOUR}</li>
+              <li>{price}</li>
             </ul>
           </Link>
         )

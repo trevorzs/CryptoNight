@@ -19,7 +19,7 @@ class StockShowPage extends React.Component{
 
   componentDidMount(){
     this.props.fetchStock(this.props.match.params.stock_id);
-    this.interval1 = setInterval(()=>(this.props.fetchStock(this.props.match.params.stock_id)),12000);
+    this.interval1 = setInterval(()=>(this.props.fetchStock(this.props.match.params.stock_id)),50000);
   }
 
   componentDidUpdate(oldprops){
@@ -139,15 +139,11 @@ class StockShowPage extends React.Component{
       let addedStocks;
       let button;
 
-      addedStocks = Object.keys(this.props.watchlist.stocks).map((id)=>{
-        return(this.props.watchlist.stocks[id].symbol)
-      })
-
-      if (!addedStocks.includes(this.props.stock.symbol)){
+      if (!this.props.watchlist.includes(this.props.stock.id)){
         button = (
           <button className="watchlist-button" onClick={()=>{
                   this.props.addToWatchlist({
-                    watchlist_id: this.props.watchlist.id,
+                    watchlist_id: currentUserWatchlist.id,
                     stock_id: this.props.stock.id
                   })
                   this.setState(this.state);

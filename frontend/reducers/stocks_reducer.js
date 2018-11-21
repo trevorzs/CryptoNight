@@ -1,4 +1,11 @@
-import {RECEIVE_STOCK, RECEIVE_STOCKS, RECEIVE_PRICE, RECEIVE_DATA, RECEIVE_QUERY, CLEAR_DATA} from '../actions/stocks_actions';
+import {RECEIVE_STOCK,
+        RECEIVE_STOCKS,
+        RECEIVE_PRICE,
+        RECEIVE_DATA,
+         RECEIVE_QUERY,
+        CLEAR_DATA,
+        RECEIVE_WATCHLIST_DATA
+        } from '../actions/stocks_actions';
 import {merge} from 'lodash';
 
 const StocksReducer = (state = {}, action) => {
@@ -37,6 +44,15 @@ const StocksReducer = (state = {}, action) => {
           newState[ids[i]].price = `${priceVar}`;
           newState[ids[i]].todayChange = `${change}`;
         }
+        return newState;
+      case RECEIVE_WATCHLIST_DATA:
+        newState = merge({},state);
+        let stock;
+        for (var i = 0; i < action.ids.length; i++) {
+          stock = newState[action.ids[i]];
+          newState[action.ids[i]] = action.obj.stocks[stock.symbol]
+        }
+
         return newState;
       default:
         return state;

@@ -11,7 +11,7 @@ const msp = (state, ownProps) => {
     {
       stock: state.entities.stocks[ownProps.match.params.stock_id],
       currentUser: state.entities.users[state.session.id],
-      watchlist: state.entities.watchlist[state.session.id],
+      watchlist: state.entities.watchlist,
       data: state.entities.data,
       search: state.ui.search,
       query: state.ui.query,

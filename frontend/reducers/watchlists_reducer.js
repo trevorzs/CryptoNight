@@ -9,18 +9,15 @@ const WatchlistsReducer = (state = {}, action) => {
     switch (action.type) {
       case RECEIVE_USER:
         newState = merge({},state);
-        newState[action.watchlist.user_id] = action.watchlist;
-        return newState;
+        return action.watchlist.stocks.map((stock)=>(
+          stock.id
+        ));
+      case RECEIVE_WATCHLIST_JOIN:
+
+
+        return state;
       case RECEIVE_WATCHLIST_DATA:
-        newState = merge({},state);
-        const arr = Object.keys(action.obj.stocks).map((sym,i)=>{
-          newState.news = action.obj.news;
-          return(
-            merge(state[currentUserWatchlist.id].stocks[i],action.obj.stocks[sym])
-          )
-          });
-        newState[currentUserWatchlist.id].stocks = arr;
-        return newState;
+        return action.ids;
       default:
         return state;
     }

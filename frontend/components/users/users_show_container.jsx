@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import UserShowPage from './users_show_page';
 import {logout} from '../../actions/session_actions';
-import {watchlistDataFetch, clearData} from '../../actions/stocks_actions';
+import {watchlistDataFetch, clearData, altFetchStocks} from '../../actions/stocks_actions';
 import {doneLoading, needsLoading} from '../../actions/ui_actions';
 
 const msp = state => {
@@ -10,8 +10,9 @@ const msp = state => {
     {
       loggedIn: Boolean(state.session.id),
       currentUser: state.entities.users[state.session.id],
-      watchlist: state.entities.watchlist[state.session.id],
-      loading: state.ui.loading
+      watchlist: state.entities.watchlist,
+      loading: state.ui.loading,
+      stocks : state.entities.stocks
     }
   )
 };
@@ -21,6 +22,7 @@ const mdp = dispatch => (
     logout: () => dispatch(logout()),
     watchlistDataFetch: (syms) => dispatch(watchlistDataFetch(syms)),
     doneLoading: () => dispatch(doneLoading()),
+    altFetchStocks: () => dispatch(altFetchStocks()),
     needsLoading: () => dispatch(needsLoading()),
     clearData: ()=> dispatch(clearData()),
   }

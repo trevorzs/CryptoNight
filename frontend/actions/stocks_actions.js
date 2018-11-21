@@ -13,10 +13,12 @@ export const CLEAR_SEARCH = "CLEAR_SEARCH";
 export const CLEAR_DATA = "CLEAR_DATA";
 export const RECEIVE_WATCHLIST_DATA = "RECEIVE_WATCHLIST_DATA";
 
-export const receiveWatchlistData = (obj) => {
+export const receiveWatchlistData = (obj,ids) => {
+
   return({
     type: RECEIVE_WATCHLIST_DATA,
-    obj
+    obj,
+    ids
   })
 }
 
@@ -105,25 +107,31 @@ export const receiveQuery = (stocks,query) => (
 )
 
 export const watchlistDataFetch = (syms) => dispatch => {
-  const modsym = syms.map((sym)=>[sym,0])
+
   return(
-    StocksApiUtil.fetchStocksData(modsym).then(response=>{
-      watchlistDailyFetch(response,dispatch)
+    StocksApiUtil.fetchStocksData(syms).then(response=>{
+
+      watchlistDailyFetch(syms,response,dispatch)
     }
   ))
 }
 
-const watchlistDailyFetch = (response,dispatch) => {
+const watchlistDailyFetch = (syms,response,dispatch) => {
+
   let done = 0;
   const obj = {stocks: response.RAW }
-  let symbols = Object.keys(response.RAW);
+  let symbols = syms.map((arr)=>(arr[0]));
+  let ids = syms.map((arr)=>(arr[1]));
   for (let i = 0; i < symbols.length; i++) {
     StocksApiUtil.altFetchStockDaily(symbols[i]).then(
       response => {
+
+        obj.stocks[symbols[i]].id = ids[i];
         obj.stocks[symbols[i]].daily = response.Data;
         done++;
         if (done >= symbols.length){
-          dispatch(receiveWatchlistData(obj))
+          dispatch(receiveWatchlistData(obj,ids));
+          dispatch(doneLoading());
         }
       }
     )
@@ -197,6 +205,12 @@ export const requestStocks = () => dispatch => (
   )
 )
 
+export const altFetchStocks = () => dispatch => (
+  StocksApiUtil.fetchStocks().then(
+    stocks => dispatch(receiveStocks(stocks))
+  )
+)
+
 export const fetchStocks = () => dispatch => (
   StocksApiUtil.fetchStocks().then(
     stocks => dispatch(receiveStocks(stocks))
@@ -212,6 +226,7 @@ export const fetchPrice = (sym,id) => dispatch => (
 )
 
 export const fetchStocksData = (arr) => dispatch => {
+
   return (
     StocksApiUtil.fetchStocksData(arr).then(
       data => {

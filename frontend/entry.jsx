@@ -9,7 +9,9 @@ document.addEventListener("DOMContentLoaded",()=>{
     const preloadedState = {
       entities: {
         users: { [window.currentUser.id]: window.currentUser },
-        watchlist: {[window.currentUserWatchlist.user_id]: window.currentUserWatchlist}
+        watchlist: window.currentUserWatchlist.stocks.map((stock)=>{
+          return(stock.id)
+        })
       },
       session: { id: window.currentUser.id }
     };
