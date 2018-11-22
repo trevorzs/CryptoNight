@@ -115,26 +115,20 @@ export const receiveQuery = (stocks,query) => (
   }
 )
 
-export const receiveAltStocksData = (data,syms) =>(
-  {
-    type: RECEIVE_ALT_STOCKS_DATA,
-    data,
-    syms
-  }
-)
-
-export const watchlistDataFetch = (syms) => dispatch => {
-
+export const receiveAltStocksData = (data,syms) =>{
   return(
-    StocksApiUtil.fetchStocksData(syms).then(response=>{
-
-      watchlistDailyFetch(syms,response,dispatch)
+    {
+      type: RECEIVE_ALT_STOCKS_DATA,
+      data,
+      syms
     }
-  ))
+  )
 }
 
-const watchlistDailyFetch = (syms,response,dispatch) => {
 
+
+
+const watchlistDailyFetch = (syms,response,dispatch) => {
   let done = 0;
   const obj = {stocks: response.RAW }
   let symbols = syms.map((arr)=>(arr[0]));
@@ -154,6 +148,46 @@ const watchlistDailyFetch = (syms,response,dispatch) => {
     )
   }
 }
+
+const watchlistDataFetch = (syms) => {
+  return (dispatch) => {
+    return(StocksApiUtil.fetchStocksData(syms).then(response=>{
+      watchlistDailyFetch(syms,response,dispatch)
+    }
+    ))
+  }
+}
+
+const moreData = (stocks,dispatch,watchlist) => {
+  const obj = {};
+  const syms = Object.keys(stocks).map(id=>(
+    [stocks[id].symbol,id]
+  ));
+  StocksApiUtil.altFetchStocksData(syms).then(
+    response => {
+      const data = Object.assign({},stocks);
+      const arr = [];
+      for (var i = 0; i < syms.length; i++) {
+        data[syms[i][1]].USD = response.RAW[syms[i][0]].USD;
+        if (watchlist.includes(parseInt(syms[i][1]))){
+          arr.push(syms[i]);
+        }
+      }
+      const symbols = arr.map((subarr)=>(subarr[0]));
+      dispatch(fetchAllNews(syms));
+      dispatch(watchlistDataFetch(arr));
+      dispatch(receiveAltStocksData(data,symbols));
+    }
+  )
+}
+
+export const altFetchStocks = (watchlist) => dispatch => (
+  StocksApiUtil.fetchStocks().then(
+    stocks => {
+      moreData(stocks,dispatch,watchlist)
+    }
+  )
+)
 
 const historicFetches = (sym,id,dispatch) => {
   const obj = {};
@@ -222,11 +256,7 @@ export const requestStocks = () => dispatch => (
   )
 )
 
-export const altFetchStocks = () => dispatch => (
-  StocksApiUtil.fetchStocks().then(
-    stocks => dispatch(receiveStocks(stocks))
-  )
-)
+
 
 export const fetchStocks = () => dispatch => (
   StocksApiUtil.fetchStocks().then(

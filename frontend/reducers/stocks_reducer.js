@@ -55,13 +55,14 @@ const StocksReducer = (state = {}, action) => {
         }
         return newState;
       case RECEIVE_ALT_STOCKS_DATA:
-        newState = merge({},state);
-        ids = action.syms.map((arr)=>(arr[1]));
-        symbols = action.syms.map((arr)=>(arr[0]));
-        for (var i = 0; i < ids.length; i++) {
-          newState[ids[i]].USD = action.data.RAW[symbols[i]].USD;
-        }
-        return newState;
+        // newState = merge({},state);
+        // ids = action.syms.map((arr)=>(arr[1]));
+        // symbols = action.syms.map((arr)=>(arr[0]));
+        // for (var i = 0; i < ids.length; i++) {
+        //   newState[ids[i]].USD = action.data[ids[i]].USD;
+        // }
+        // return newState;
+        return action.data;
       default:
         return state;
     }

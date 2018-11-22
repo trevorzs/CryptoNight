@@ -17,22 +17,7 @@ class UserShowPage extends React.Component{
   componentDidMount(){
     this.props.needsLoading();
     if (this.props.watchlist.length > 0){
-        this.props.altFetchStocks().then(response=>{
-          const arrs = this.props.watchlist.map((stockid)=>{
-            return(
-              [response.stocks[stockid].symbol,stockid]
-            )
-          });
-          const syms = arrs.map((arr)=>(arr[0]));
-          const altSyms = Object.keys(response.stocks).map(stockid=>{
-            return(
-              [response.stocks[stockid].symbol,stockid]
-            )
-          });
-          this.props.watchlistDataFetch(arrs);
-          this.props.fetchAllNews(syms);
-          this.props.altFetchStocksData(altSyms);
-        })
+      this.props.altFetchStocks(this.props.watchlist);
     }else{
       this.props.doneLoading();
     }
@@ -56,7 +41,6 @@ class UserShowPage extends React.Component{
             });
             this.props.watchlistDataFetch(arrs);
             this.props.fetchAllNews(syms);
-            this.props.altFetchStocksData(altSyms);
           })
       }else{
         this.props.doneLoading();
@@ -93,11 +77,11 @@ class UserShowPage extends React.Component{
             <h1 className="news-header">Top Movers</h1>
             <MoversContainer />
           </div>
-        )
+        );
       }
       watchlistitems = this.props.watchlist.map((id)=>{
         stock = this.props.stocks[id];
-        if (stock && stock.USD){
+        if (stock && stock.USD && stock.USD.CHANGEPCT24HOUR){
           if (stock.USD.CHANGEPCT24HOUR > 0){
             graphClass = "watchlist-graph-up";
           }else{

@@ -23,7 +23,7 @@ const mdp = dispatch => (
     logout: () => dispatch(logout()),
     watchlistDataFetch: (syms) => dispatch(watchlistDataFetch(syms)),
     doneLoading: () => dispatch(doneLoading()),
-    altFetchStocks: () => dispatch(altFetchStocks()),
+    altFetchStocks: (watchlist) => dispatch(altFetchStocks(watchlist)),
     needsLoading: () => dispatch(needsLoading()),
     clearData: ()=> dispatch(clearData()),
     fetchAllNews: (syms) => dispatch(fetchAllNews(syms)),

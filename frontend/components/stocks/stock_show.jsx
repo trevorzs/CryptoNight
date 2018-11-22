@@ -174,7 +174,7 @@ class StockShowPage extends React.Component{
           button = (
             <button className={watchlistbutton} onClick={()=>{
                     this.props.addToWatchlist({
-                      watchlist_id: currentUserWatchlist.id,
+                      watchlist_id: currentUser.watchlist_id,
                       stock_id: this.props.stock.id
                     })
                   }}>Add to Watchlist</button>
@@ -183,7 +183,7 @@ class StockShowPage extends React.Component{
           button = (
             <button className={watchlistbutton} onClick={()=>{
                     this.props.removeFromWatchlist({
-                      watchlist_id: currentUserWatchlist.id,
+                      watchlist_id: currentUser.watchlist_id,
                       stock_id: this.props.stock.id
                     })
                   }}>Remove from Watchlist</button>
