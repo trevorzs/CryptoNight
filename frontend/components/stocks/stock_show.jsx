@@ -138,26 +138,7 @@ class StockShowPage extends React.Component{
       let rb, gd, at, nv;
       let addedStocks;
       let button;
-
-      if (!this.props.watchlist.includes(this.props.stock.id)){
-        button = (
-          <button className="watchlist-button" onClick={()=>{
-                  this.props.addToWatchlist({
-                    watchlist_id: currentUserWatchlist.id,
-                    stock_id: this.props.stock.id
-                  })
-                }}>Add to Watchlist</button>
-            );
-      }else{
-        button = (
-          <button className="watchlist-button" onClick={()=>{
-                  this.props.removeFromWatchlist({
-                    watchlist_id: currentUserWatchlist.id,
-                    stock_id: this.props.stock.id
-                  })
-                }}>Remove from Watchlist</button>
-            );
-      }
+      let watchlistbutton;
 
       if (this.props.data[this.state.timescale]){
         const monthData = this.props.data[this.state.timescale];
@@ -178,13 +159,35 @@ class StockShowPage extends React.Component{
           at = "active-timescale-down";
           rb = "return-button";
           gd = "gradient";
+          watchlistbutton = "watchlist-button-down";
           initialChange = `-$${initialChange.toString().slice(1)} (${pctChange}%)`;
         }else{
           nv = "nav-link-a-up";
           at = "active-timescale-up";
           rb = "return-button-up";
           gd = "gradient-up";
+          watchlistbutton = "watchlist-button-up";
           initialChange = `+$${initialChange} (${pctChange}%)`;
+        }
+
+        if (!this.props.watchlist.includes(this.props.stock.id)){
+          button = (
+            <button className={watchlistbutton} onClick={()=>{
+                    this.props.addToWatchlist({
+                      watchlist_id: currentUserWatchlist.id,
+                      stock_id: this.props.stock.id
+                    })
+                  }}>Add to Watchlist</button>
+              );
+        }else{
+          button = (
+            <button className={watchlistbutton} onClick={()=>{
+                    this.props.removeFromWatchlist({
+                      watchlist_id: currentUserWatchlist.id,
+                      stock_id: this.props.stock.id
+                    })
+                  }}>Remove from Watchlist</button>
+              );
         }
 
         initialChange = initialChange
@@ -197,6 +200,7 @@ class StockShowPage extends React.Component{
         pctChange = "Loading";
         initialChange = "Loading";
         news = "Loading";
+        button = <button className="watchlist-button-down">Loading</button>
       }
       return (
         <div className="overall fullsize scroll">
@@ -252,11 +256,13 @@ class StockShowPage extends React.Component{
                         document.getElementById("tfiveyearly").classList.add("active-timescale");
                     }}>5 Y</button>
                 </ul>
-                {button}
               <div className="news-div">
                 <h1 className="news-header">News</h1>
                 {news}
               </div>
+            </div>
+            <div className="stock-action-menu">
+              {button}
             </div>
         </div>
       </div>

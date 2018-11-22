@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 class News extends React.Component{
 
   render(){
-    return this.props.data.news.map((obj,i)=>{
+    return this.props.data.map((obj,i)=>{
       if (i >= 50){
         return;
       }

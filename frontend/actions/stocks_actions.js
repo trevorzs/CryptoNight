@@ -12,6 +12,14 @@ export const RECEIVE_QUERY = "RECEIVE_QUERY";
 export const CLEAR_SEARCH = "CLEAR_SEARCH";
 export const CLEAR_DATA = "CLEAR_DATA";
 export const RECEIVE_WATCHLIST_DATA = "RECEIVE_WATCHLIST_DATA";
+export const RECEIVE_NEWS = "RECEIVE_NEWS";
+
+export const receiveNews = (news) => {
+  return({
+    type: RECEIVE_NEWS,
+    news
+  })
+}
 
 export const receiveWatchlistData = (obj,ids) => {
 
@@ -233,5 +241,13 @@ export const fetchStocksData = (arr) => dispatch => {
         dispatch(receiveData(data,arr))
       }
     ).then(response=>dispatch(doneLoading()))
+  )
+}
+
+export const fetchAllNews = (syms) => dispatch => {
+  return(
+    StocksApiUtil.fetchAllNews(syms).then(
+      response => dispatch(receiveNews(response))
+    )
   )
 }

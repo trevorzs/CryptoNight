@@ -7,6 +7,5 @@ class WatchlistJoin < ApplicationRecord
     foreign_key: :stock_id,
     class_name: 'Stock'
 
-  validates :stock_id, presence: true, uniqueness: true
-  validates :watchlist_id, presence: true
+  validates :stock_id, uniqueness: {scope: :watchlist_id}
 end

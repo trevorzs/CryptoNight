@@ -5,7 +5,7 @@ import News from './news';
 const msp = (state, ownProps) => {
   return (
     {
-      data: state.entities.data,
+      data: state.entities.news,
     }
   )
 }

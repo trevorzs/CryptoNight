@@ -3,6 +3,7 @@ import {Link, Redirect} from 'react-router-dom';
 import {merge} from 'lodash';
 import {connect} from 'react-redux';
 import NavbarContainer from '../navbar/navbar_container';
+import NewsContainer from '../news/news_container';
 import Loading from '../loading/loading';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
@@ -14,14 +15,16 @@ class UserShowPage extends React.Component{
 
   componentDidMount(){
     this.props.needsLoading();
-    if (this.props.watchlist){
+    if (this.props.watchlist.length > 0){
         this.props.altFetchStocks().then(response=>{
           const arrs = this.props.watchlist.map((stockid)=>{
             return(
               [response.stocks[stockid].symbol,stockid]
             )
           });
+          const syms = arrs.map((arr)=>(arr[0]));
           this.props.watchlistDataFetch(arrs);
+          this.props.fetchAllNews(syms);
         })
     }else{
       this.props.doneLoading();
@@ -31,7 +34,7 @@ class UserShowPage extends React.Component{
   componentDidUpdate(oldprops){
     if (this.props.match.params !== oldprops.match.params){
       this.props.needsLoading();
-      if (this.props.watchlist){
+      if (this.props.watchlist.length > 0){
           this.props.altFetchStocks().then(response=>{
             const arrs = this.props.watchlist.map((stockid)=>{
               return(
@@ -61,21 +64,28 @@ class UserShowPage extends React.Component{
     let watchlistitems;
     let chart;
     let graphClass;
+    let news;
     if (this.props.watchlist){
-
       let stock;
       let price;
+      let symbol;
+      if (this.props.news.length > 0){
+        news = (
+          <div className="news-div">
+            <h1 className="news-header">Curated News</h1>
+            <NewsContainer />
+          </div>
+        );
+      }
       watchlistitems = this.props.watchlist.map((id)=>{
-        stock = this.props.stocks[id]
-        if (!stock.USD){
-          stock.USD = {CHANGEPCT24HOUR: "loading",
-                        PRICE: "loading"}
-        }else{
+        stock = this.props.stocks[id];
+        if (stock && stock.USD){
           if (stock.USD.CHANGEPCT24HOUR > 0){
             graphClass = "watchlist-graph-up";
           }else{
             graphClass = "watchlist-graph-down"
           }
+          symbol = stock.USD.FROMSYMBOL;
           price = "$" +this.round(stock.USD.PRICE,5).toString();
           chart = (
             <LineChart className={graphClass} width={50} height={40}
@@ -87,21 +97,21 @@ class UserShowPage extends React.Component{
                 <YAxis type="number" domain={['dataMin', 'dataMax']} hide={true}/>
             </LineChart>
           )
+          return(
+            <Link to={`/stocks/${stock.id}`} key={stock.id}>
+              <ul className="watchlist-item">
+                <li>{symbol}</li>
+                {chart}
+                <li>{price}</li>
+              </ul>
+            </Link>
+          )
         }
-        return(
-          <Link to={`/stocks/${stock.id}`} key={stock.id}>
-            <ul className="watchlist-item">
-              <li>{stock.USD.FROMSYMBOL}</li>
-              {chart}
-              <li>{price}</li>
-            </ul>
-          </Link>
-        )
       })
     }
 
     return (
-      <div className="overall fullsize">
+      <div className="overall fullsize scroll">
         <div className="displace">
           <div className="gradient">
           </div>
@@ -110,11 +120,15 @@ class UserShowPage extends React.Component{
         <div className="main-wrapper">
           <div className="user-show-main">
             <h1>Welcome to CryptoNight</h1>
+            <h2 className="user-show-name">{this.props.currentUser.first_name} {this.props.currentUser.last_name}{"'s"} Dashboard</h2>
             <Link className="user-show-button" to="/stocks">Cryptocurrencies</Link>
+            <div className="filler"></div>
+            {news}
           </div>
           <div className="user-show-watchlist">
             <ul className="watchlist scroll">
               <li className="watchlist-header">Watchlist</li>
+            <Link to="/stocks"><li className="watchlist-sub-header">Cryptocurrencies</li></Link>
               {watchlistitems}
             </ul>
           </div>

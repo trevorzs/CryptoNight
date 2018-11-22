@@ -8,7 +8,7 @@ const DataReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_STOCK_DATA:
       let sum = 0;
-      let newObj = merge({},action.data);
+      let newObj = {};
       let arr = [];
       let item, initial;
       initial = action.data.monthly[0].open;

@@ -149,7 +149,7 @@ stocks = Stock.create([{
             details: "Made in Hong Kong"
             },
           {
-            name: "Teher",
+            name: "Tether",
             symbol: "USDT",
             details: "Tethered together"
             },
@@ -209,11 +209,6 @@ stocks = Stock.create([{
                   details: "Mr. Huobi"
                   },
                 {
-                  name: "KubosCoin",
-                  symbol: "KUBO",
-                  details: "and the two strings"
-                  },
-                {
                   name: "GIFTO",
                   symbol: "GTO",
                   details: "Present"
@@ -247,4 +242,9 @@ stocks = Stock.create([{
                   name: "Elastos",
                   symbol: "ELA",
                   details: "Elastica"
+                  },
+                {
+                  name: "Tezos",
+                  symbol: "XTZ",
+                  details: "Ecstatic"
                   }])
