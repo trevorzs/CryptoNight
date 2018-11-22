@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import UserShowPage from './users_show_page';
 import {logout} from '../../actions/session_actions';
-import {watchlistDataFetch, clearData, altFetchStocks, fetchAllNews} from '../../actions/stocks_actions';
+import {watchlistDataFetch, clearData, altFetchStocks, fetchAllNews, altFetchStocksData} from '../../actions/stocks_actions';
 import {doneLoading, needsLoading} from '../../actions/ui_actions';
 
 const msp = state => {
@@ -26,7 +26,8 @@ const mdp = dispatch => (
     altFetchStocks: () => dispatch(altFetchStocks()),
     needsLoading: () => dispatch(needsLoading()),
     clearData: ()=> dispatch(clearData()),
-    fetchAllNews: (syms) => dispatch(fetchAllNews(syms))
+    fetchAllNews: (syms) => dispatch(fetchAllNews(syms)),
+    altFetchStocksData: (syms) => dispatch(altFetchStocksData(syms))
   }
 );
 

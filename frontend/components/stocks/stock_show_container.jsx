@@ -30,7 +30,8 @@ const mdp = dispatch => (
     doneLoading: () => dispatch(doneLoading()),
     needsLoading: () => dispatch(needsLoading()),
     addToWatchlist: (watchlistJoin) => dispatch(addToWatchlist(watchlistJoin)),
-    removeFromWatchlist: (watchlistJoin) => dispatch(removeFromWatchlist(watchlistJoin))
+    removeFromWatchlist: (watchlistJoin) => dispatch(removeFromWatchlist(watchlistJoin)),
+
   }
 );
 

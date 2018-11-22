@@ -1,13 +1,10 @@
 class Api::WatchlistJoinsController < ApplicationController
 
-
-
   def create
     @watchlistJoin = WatchlistJoin.new(watchlist_params)
     if @watchlistJoin.save
       render "api/watchlistjoins/create"
     else
-      debugger
       render json: @user.errors.full_messages, status: 422
     end
   end

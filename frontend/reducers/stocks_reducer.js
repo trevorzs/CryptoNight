@@ -4,14 +4,15 @@ import {RECEIVE_STOCK,
         RECEIVE_DATA,
          RECEIVE_QUERY,
         CLEAR_DATA,
-        RECEIVE_WATCHLIST_DATA
+        RECEIVE_WATCHLIST_DATA,
+        RECEIVE_ALT_STOCKS_DATA
         } from '../actions/stocks_actions';
 import {merge} from 'lodash';
 
 const StocksReducer = (state = {}, action) => {
     Object.freeze(state);
     let newState;
-    let ids;
+    let ids, symbols;
     switch (action.type) {
       case RECEIVE_STOCK:
         newState = merge({},state);
@@ -52,7 +53,14 @@ const StocksReducer = (state = {}, action) => {
           stock = newState[action.ids[i]];
           newState[action.ids[i]] = action.obj.stocks[stock.symbol]
         }
-
+        return newState;
+      case RECEIVE_ALT_STOCKS_DATA:
+        newState = merge({},state);
+        ids = action.syms.map((arr)=>(arr[1]));
+        symbols = action.syms.map((arr)=>(arr[0]));
+        for (var i = 0; i < ids.length; i++) {
+          newState[ids[i]].USD = action.data.RAW[symbols[i]].USD;
+        }
         return newState;
       default:
         return state;

@@ -4,6 +4,7 @@ import {merge} from 'lodash';
 import {connect} from 'react-redux';
 import NavbarContainer from '../navbar/navbar_container';
 import NewsContainer from '../news/news_container';
+import MoversContainer from '../movers/movers_container';
 import Loading from '../loading/loading';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
@@ -23,8 +24,14 @@ class UserShowPage extends React.Component{
             )
           });
           const syms = arrs.map((arr)=>(arr[0]));
+          const altSyms = Object.keys(response.stocks).map(stockid=>{
+            return(
+              [response.stocks[stockid].symbol,stockid]
+            )
+          });
           this.props.watchlistDataFetch(arrs);
           this.props.fetchAllNews(syms);
+          this.props.altFetchStocksData(altSyms);
         })
     }else{
       this.props.doneLoading();
@@ -60,15 +67,12 @@ class UserShowPage extends React.Component{
         <Loading />
       )
     }
-
     let watchlistitems;
     let chart;
     let graphClass;
-    let news;
+    let news, movers;
     if (this.props.watchlist){
-      let stock;
-      let price;
-      let symbol;
+      let stock, price, symbol;
       if (this.props.news.length > 0){
         news = (
           <div className="news-div">
@@ -76,6 +80,12 @@ class UserShowPage extends React.Component{
             <NewsContainer />
           </div>
         );
+        movers = (
+          <div className="news-div">
+            <h1 className="news-header">Top Movers</h1>
+            <MoversContainer />
+          </div>
+        )
       }
       watchlistitems = this.props.watchlist.map((id)=>{
         stock = this.props.stocks[id];
@@ -123,6 +133,7 @@ class UserShowPage extends React.Component{
             <h2 className="user-show-name">{this.props.currentUser.first_name} {this.props.currentUser.last_name}{"'s"} Dashboard</h2>
             <Link className="user-show-button" to="/stocks">Cryptocurrencies</Link>
             <div className="filler"></div>
+            {movers}
             {news}
           </div>
           <div className="user-show-watchlist">

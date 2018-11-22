@@ -13,6 +13,7 @@ export const CLEAR_SEARCH = "CLEAR_SEARCH";
 export const CLEAR_DATA = "CLEAR_DATA";
 export const RECEIVE_WATCHLIST_DATA = "RECEIVE_WATCHLIST_DATA";
 export const RECEIVE_NEWS = "RECEIVE_NEWS";
+export const RECEIVE_ALT_STOCKS_DATA = "RECEIVE_ALT_STOCKS_DATA";
 
 export const receiveNews = (news) => {
   return({
@@ -111,6 +112,14 @@ export const receiveQuery = (stocks,query) => (
     type: RECEIVE_QUERY,
     stocks,
     query
+  }
+)
+
+export const receiveAltStocksData = (data,syms) =>(
+  {
+    type: RECEIVE_ALT_STOCKS_DATA,
+    data,
+    syms
   }
 )
 
@@ -248,6 +257,14 @@ export const fetchAllNews = (syms) => dispatch => {
   return(
     StocksApiUtil.fetchAllNews(syms).then(
       response => dispatch(receiveNews(response))
+    )
+  )
+}
+
+export const altFetchStocksData = (syms) => dispatch => {
+  return(
+    StocksApiUtil.altFetchStocksData(syms).then(
+      response => dispatch(receiveAltStocksData(response,syms))
     )
   )
 }

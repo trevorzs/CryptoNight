@@ -27,6 +27,16 @@ export const fetchPrice = (sym) => (
   })
 )
 
+export const altFetchStocksData = (symbols) => {
+  const syms = symbols.map((arr)=>(arr[0])).join(",");
+  return (
+    $.ajax({
+      url: `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${syms}&tsyms=USD`,
+      method: "GET",
+    })
+  )
+}
+
 export const fetchStocksData = (symbols) => {
   const syms = symbols.map((arr)=>(arr[0])).join(",");
 

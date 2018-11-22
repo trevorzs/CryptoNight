@@ -235,7 +235,7 @@
 } */
 
 .scroll:hover{
-  overflow-y:scroll;
+  overflow:scroll;
 }
 
 .displace{
@@ -780,7 +780,7 @@
 
 .filler{
   width:100%;
-  height:200px;
+  height:150px;
 }
 
 .user-show-watchlist{
@@ -791,4 +791,62 @@
   margin-left:20px;
   margin-top:10px;
   letter-spacing:1.5px;
+}
+
+.movers-div{
+  width:660px;
+  height:150px;
+  display:flex;
+  overflow-x:scroll;
+}
+
+.movers-link{
+  margin:0 20px;
+}
+
+.movers-list-item{
+  display:flex;
+  flex-direction: column;
+  width:140px;
+  height:100px;
+  padding:20px;
+  background-color:#030e21;
+  border: 1px solid gray;
+}
+
+.movers-list-item:hover{
+  background-color: #020a18;
+}
+
+.movers-list-item li{
+  width:120px;
+}
+
+.movers-list-item::-webkit-scrollbar{
+  display:none;
+}
+
+.movers-list-symbol{
+  font-size:20px;
+  font-weight:bold;
+  padding-bottom:5px;
+}
+.movers-change-up{
+  color:#00ea9c;
+}
+.movers-change-down{
+  color:#e72ebe;
+}
+.movers-list-high{
+  font-size:14px;
+  width:50px;
+}
+
+.movers-list-price{
+  margin-top:20px;
+  font-size:26px;
+}
+
+.movers-list-change{
+  margin-left:6px;
 }
