@@ -48,7 +48,15 @@ class UserShowPage extends React.Component{
                 [response.stocks[stockid].symbol,stockid]
               )
             });
+            const syms = arrs.map((arr)=>(arr[0]));
+            const altSyms = Object.keys(response.stocks).map(stockid=>{
+              return(
+                [response.stocks[stockid].symbol,stockid]
+              )
+            });
             this.props.watchlistDataFetch(arrs);
+            this.props.fetchAllNews(syms);
+            this.props.altFetchStocksData(altSyms);
           })
       }else{
         this.props.doneLoading();
