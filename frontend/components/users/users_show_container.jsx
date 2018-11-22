@@ -21,7 +21,6 @@ const msp = state => {
 const mdp = dispatch => (
   {
     logout: () => dispatch(logout()),
-    watchlistDataFetch: (syms) => dispatch(watchlistDataFetch(syms)),
     doneLoading: () => dispatch(doneLoading()),
     altFetchStocks: (watchlist) => dispatch(altFetchStocks(watchlist)),
     needsLoading: () => dispatch(needsLoading()),

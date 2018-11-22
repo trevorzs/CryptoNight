@@ -126,8 +126,6 @@ export const receiveAltStocksData = (data,syms) =>{
 }
 
 
-
-
 const watchlistDailyFetch = (syms,response,dispatch) => {
   let done = 0;
   const obj = {stocks: response.RAW }

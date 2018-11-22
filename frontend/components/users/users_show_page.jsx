@@ -25,23 +25,10 @@ class UserShowPage extends React.Component{
 
   componentDidUpdate(oldprops){
     if (this.props.match.params !== oldprops.match.params){
+      debugger
       this.props.needsLoading();
       if (this.props.watchlist.length > 0){
-          this.props.altFetchStocks().then(response=>{
-            const arrs = this.props.watchlist.map((stockid)=>{
-              return(
-                [response.stocks[stockid].symbol,stockid]
-              )
-            });
-            const syms = arrs.map((arr)=>(arr[0]));
-            const altSyms = Object.keys(response.stocks).map(stockid=>{
-              return(
-                [response.stocks[stockid].symbol,stockid]
-              )
-            });
-            this.props.watchlistDataFetch(arrs);
-            this.props.fetchAllNews(syms);
-          })
+        this.props.altFetchStocks(this.props.watchlist);
       }else{
         this.props.doneLoading();
       }

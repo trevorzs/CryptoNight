@@ -1,7 +1,7 @@
 <% if logged_in? %>
   <script type="text/javascript">
     window.currentUser = <%= render("api/users/user.json.jbuilder", user: current_user).html_safe %>
-    window.currentUserWatchlist = <%= render("api/watchlists/watchlist.json.jbuilder", watchlist: current_user.watchlist).html_safe %>
+    window.currentUserWatchlist = <%= current_user.watchlist.stocks.ids %>
   </script>
 <%  end %>
 
