@@ -59,6 +59,8 @@ class UserShowPage extends React.Component{
             <NewsContainer />
           </div>
         );
+      }
+      if (Object.keys(this.props.stocks).length > 1){
         movers = (
           <div className="news-div">
             <h1 className="news-header">Top Movers</h1>
