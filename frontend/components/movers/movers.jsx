@@ -23,7 +23,6 @@ class Movers extends React.Component{
   }
 
   render(){
-      debugger
       const sorted = this.props.stocks.sort(this.sortCallback);
       const topTen = sorted.slice(0,10);
       const result = topTen.map(stock=>{

@@ -25,7 +25,6 @@ class UserShowPage extends React.Component{
 
   componentDidUpdate(oldprops){
     if (this.props.match.params !== oldprops.match.params){
-      debugger
       this.props.needsLoading();
       if (this.props.watchlist.length > 0){
         this.props.altFetchStocks(this.props.watchlist);
@@ -45,6 +44,7 @@ class UserShowPage extends React.Component{
       return (
         <Loading />
       )
+    }else{
     }
     let watchlistitems;
     let chart;
@@ -52,19 +52,20 @@ class UserShowPage extends React.Component{
     let news, movers;
     if (this.props.watchlist){
       let stock, price, symbol;
+      let keys = Object.keys(this.props.stocks);
+      if (keys.length > 1 && this.props.stocks[keys[0]].USD){
+        movers = (
+          <div className="news-div">
+            <h1 className="news-header">Top Movers</h1>
+            <MoversContainer />
+          </div>
+        );
+      }
       if (this.props.news.length > 0){
         news = (
           <div className="news-div">
             <h1 className="news-header">Curated News</h1>
             <NewsContainer />
-          </div>
-        );
-      }
-      if (Object.keys(this.props.stocks).length > 1){
-        movers = (
-          <div className="news-div">
-            <h1 className="news-header">Top Movers</h1>
-            <MoversContainer />
           </div>
         );
       }
