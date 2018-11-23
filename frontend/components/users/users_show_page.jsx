@@ -22,6 +22,7 @@ class UserShowPage extends React.Component{
     }else{
       this.props.doneLoading();
     }
+    
   }
 
   componentDidUpdate(oldprops){
@@ -51,6 +52,7 @@ class UserShowPage extends React.Component{
     let graphClass;
     let news, movers;
     let sharelist, ownedShares,  stockslist, shareheader;
+          let shareworth = 0.0;
     const shareArr = Object.keys(this.props.shares);
     if (this.props.watchlist){
       let stock, price, symbol;
@@ -76,6 +78,11 @@ class UserShowPage extends React.Component{
           )
           let stockslist = this.props.stocks;
           sharelist = this.props.shares;
+          for (var i = 0; i < Object.keys(sharelist).length; i++) {
+            if (this.props.stocks[Object.keys(sharelist)[i]].USD.PRICE*sharelist[Object.keys(sharelist)[i]]){
+              shareworth += this.props.stocks[Object.keys(sharelist)[i]].USD.PRICE*sharelist[Object.keys(sharelist)[i]]
+            }
+          }
          ownedShares = shareArr.map((stockId)=>{
            if (stockslist[stockId] && stockslist[stockId].USD && stockslist[stockId].USD.CHANGEPCT24HOUR > 0){
              graphClass = "watchlist-graph-up";
@@ -141,6 +148,7 @@ class UserShowPage extends React.Component{
             <h1>Welcome to CryptoNight</h1>
             <h2 className="user-show-name">{this.props.currentUser.first_name} {this.props.currentUser.last_name}{"'s"} Dashboard</h2>
             <h2 className="user-show-name">Buying Power: ${this.round(this.props.currentUser.funds,4)}</h2>
+            <h2 className="user-show-name">Account Value: ${this.round((shareworth + this.props.currentUser.funds),4)}</h2>
             <Link className="user-show-button" to="/stocks">Cryptocurrencies</Link>
             <div className="filler"></div>
             {movers}
