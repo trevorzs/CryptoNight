@@ -9,7 +9,7 @@ Watchlist.destroy_all
 WatchlistJoin.destroy_all
 Transaction.destroy_all
 User.destroy_all
-users = User.create([{
+users = User.create!([{
   username:"Potential_Cryptonaut",
     password:"starwars",
     email:"cryptonaut@gmail.com",
@@ -20,7 +20,7 @@ users = User.create([{
   ])
 
 Stock.destroy_all
-stocks = Stock.create([{
+stocks = Stock.create!([{
     name: "Bitcoin",
     symbol: "BTC",
     details: "Bitcoin is bestcoin",
@@ -249,7 +249,13 @@ stocks = Stock.create([{
                   symbol: "XTZ",
                   details: "Ecstatic"
                   }])
-  WatchlistJoin.create([{
-      watchlist_id: User.find_by(username: "Potential_Cryptonaut").watchlist.id,
-      stock_id: Stock.find_by(symbol: "BTC").id
+  Transaction.create!([{
+      user_id: User.find_by(username: "Potential_Cryptonaut").id,
+      stock_id: Stock.find_by(symbol: "BTC").id,
+      price: 4444,
+      amount:1
     }])
+    WatchlistJoin.create!([{
+        watchlist_id: User.find_by(username: "Potential_Cryptonaut").watchlist.id,
+        stock_id: Stock.find_by(symbol: "BTC").id,
+      }])

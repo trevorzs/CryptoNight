@@ -15,7 +15,7 @@ const msp = (state, ownProps) => {
 
 const mdp = dispatch => (
   {
-    addTransaction: (transaction) => dispatch(addTransaction(transaction)),
+    addTransaction: (transaction,user) => dispatch(addTransaction(transaction,user)),
     fetchPrice: (sym,id) => dispatch(fetchPrice(sym,id)),
     findShares: (user_id,stock_id) => dispatch(findShares(user_id,stock_id))
   }

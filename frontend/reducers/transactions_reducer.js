@@ -1,4 +1,5 @@
 import {RECEIVE_TRANSACTION, RECEIVE_ALL_SHARES, RECEIVE_SHARES} from '../actions/transaction_actions';
+import {RECEIVE_USER} from '../actions/session_actions';
 import {merge} from 'lodash';
 
 const TransactionReducer = (state = {}, action) => {
@@ -13,11 +14,17 @@ const TransactionReducer = (state = {}, action) => {
       else{
           newState[action.transaction.stock_id] = action.transaction.amount;
       }
+      if (newState[action.transaction.stock_id] <= 0){
+        debugger
+        delete newState[action.transaction.stock_id]
+      }
       return newState;
       case RECEIVE_ALL_SHARES:
         return merge({},state,action.shares);
       case RECEIVE_SHARES:
         return merge({},state,action.shares);
+      case RECEIVE_USER:
+        return {};
       default:
         return state;
     }

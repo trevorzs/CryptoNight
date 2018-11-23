@@ -13,7 +13,7 @@ class StockIndex extends React.Component{
   componentDidMount(){
     this.props.needsLoading();
     this.props.fetchStocks();
-    this.interval1 = setInterval(()=>(this.props.updateStocks(this.props.symbols)),50000);
+    this.interval1 = setInterval(()=>(this.props.updateStocks(this.props.symbols)),10000);
   }
 
   componentWillUnmount(){

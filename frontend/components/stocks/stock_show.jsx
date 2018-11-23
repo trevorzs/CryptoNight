@@ -20,7 +20,7 @@ class StockShowPage extends React.Component{
 
   componentDidMount(){
     this.props.fetchStock(this.props.match.params.stock_id);
-    this.interval1 = setInterval(()=>(this.props.fetchStock(this.props.match.params.stock_id)),50000);
+    this.interval1 = setInterval(()=>(this.props.fetchStock(this.props.match.params.stock_id)),10000);
   }
 
   componentDidUpdate(oldprops){

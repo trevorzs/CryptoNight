@@ -35,16 +35,22 @@ class TransactionForm extends React.Component{
     if (this.state.sell === true){
       transaction.amount = (-1 * transaction.amount);
       if ((this.props.share[this.props.stock.id] + transaction.amount)>=0){
-        this.props.addTransaction(transaction);
+        this.props.addTransaction(transaction,this.props.currentUser);
+        if (this.props.share[this.props.stock.id]){
+          this.setState({sell:false});
+        }
       }
     }else{
-      this.props.addTransaction(transaction);
+      if (this.props.currentUser.funds > transaction.amount*transaction.price){
+        this.props.addTransaction(transaction,this.props.currentUser);
+      }
     }
     this.setState({
       user_id: this.props.currentUser.id,
       stock_id: this.props.stock.id,
       price: "",
-      amount: ""
+      amount: "",
+      funds: this.props.currentUser.funds
     });
   }
 
@@ -56,7 +62,7 @@ class TransactionForm extends React.Component{
   update(field){
     return (e) => this.setState({
       [field]: e.target.value,
-      cost: `$${this.round((e.target.value*this.props.data.price),4)}`
+      cost: `$${this.round((e.target.value*this.props.data.daily[this.props.data.daily.length-1].close),4)}`
     });
   }
 
@@ -78,28 +84,38 @@ class TransactionForm extends React.Component{
       activeclass = "transaction-active";
       inputfield = "transaction-input-field";
     }
-    if (this.props.data.price){
-      price = this.props.data.price;
+    if (this.props.data.daily){
+      price = this.props.data.daily[this.props.data.daily.length-1].close;
     }else{
       price = "loading";
     }
     if (this.state.sell === false){
       buttonval = "Buy";
       bb = activeclass;
+      shares = (
+        <h2 className="transaction-ownership-detail">${this.props.currentUser.funds} Buying Power Available</h2>
+      )
     }else{
       buttonval = "Sell";
       sb = activeclass;
+      if (this.props.share[this.props.stock.id] > 1){
+        shares = (
+          <h2 className="transaction-ownership-detail">{this.props.share[this.props.stock.id]} Shares Available</h2>
+        )
+      }else{
+        shares = (
+          <h2 className="transaction-ownership-detail">{this.props.share[this.props.stock.id]} Share Available</h2>
+        )
+      }
+
     }
     if (this.props.share[this.props.stock.id]){
-      shares = (
-        <h2 className="transaction-ownership-detail">Shares: {this.props.share[this.props.stock.id]}</h2>
-      )
       sb = (
         <h2 className={sb} onClick={()=>this.setState({sell: true})}>Sell</h2>
       )
     }else{
-      shares = (
-        <h2 className="transaction-ownership-detail">Shares: 0</h2>
+      sb = (
+        <h2></h2>
       )
     }
     return(

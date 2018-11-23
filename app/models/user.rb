@@ -35,6 +35,11 @@ class User < ApplicationRecord
     self.create_watchlist
   end
 
+  # def assign_bitcoin
+  #   debugger
+  #   Transaction.create(self.id)
+  # end
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
@@ -67,7 +72,7 @@ class User < ApplicationRecord
   end
 
   def self.find_all_shares(userId)
-    Transaction.where("user_id = ?",userId).group(:stock_id).sum(:amount)
+    am = Transaction.where("user_id = ?",userId).group(:stock_id).having("sum(amount) > 0").sum(:amount)
   end
 
 end
