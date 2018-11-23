@@ -148,12 +148,14 @@ class StockShowPage extends React.Component{
 
         const active = document.querySelector(".active-timescale");
         news = (<NewsContainer />);
-        if (active && initialChange > 0 ){
-          active.classList.remove("active-timescale-down");
-          active.classList.add("active-timescale-up");
-        }else{
-          active.classList.add("active-timescale-down");
-          active.classList.remove("active-timescale-up");
+        if (active){
+          if(initialChange > 0 ){
+            active.classList.remove("active-timescale-down");
+            active.classList.add("active-timescale-up");
+          }else{
+            active.classList.add("active-timescale-down");
+            active.classList.remove("active-timescale-up");
+          }
         }
         if (initialChange < 0){
           nv = "nav-link-a";
