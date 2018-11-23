@@ -75,7 +75,7 @@ class TransactionForm extends React.Component{
       }
     }else{
       transactionFormButton = "transaction-form-btn-down";
-      activeclass = "transaction-active-up";
+      activeclass = "transaction-active";
       inputfield = "transaction-input-field";
     }
     if (this.props.data.price){
