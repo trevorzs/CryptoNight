@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import NavbarContainer from '../navbar/navbar_container';
 import NewsContainer from '../news/news_container';
+import TransactionFormContainer from '../transaction/transaction_form_container';
 import Loading from '../loading/loading';
 
 class StockShowPage extends React.Component{
@@ -138,7 +139,7 @@ class StockShowPage extends React.Component{
       let rb, gd, at, nv;
       let addedStocks;
       let button;
-      let watchlistbutton;
+      let watchlistbutton, transactionbutton;
 
       if (this.props.data[this.state.timescale]){
         const monthData = this.props.data[this.state.timescale];
@@ -160,6 +161,7 @@ class StockShowPage extends React.Component{
           rb = "return-button";
           gd = "gradient";
           watchlistbutton = "watchlist-button-down";
+          transactionbutton = "transaction-form-btn-down";
           initialChange = `-$${initialChange.toString().slice(1)} (${pctChange}%)`;
         }else{
           nv = "nav-link-a-up";
@@ -167,6 +169,7 @@ class StockShowPage extends React.Component{
           rb = "return-button-up";
           gd = "gradient-up";
           watchlistbutton = "watchlist-button-up";
+          transactionbutton = "transaction-form-btn-up";
           initialChange = `+$${initialChange} (${pctChange}%)`;
         }
 
@@ -262,6 +265,7 @@ class StockShowPage extends React.Component{
               </div>
             </div>
             <div className="stock-action-menu">
+              <TransactionFormContainer button={transactionbutton} stock={this.props.stock}/>
               {button}
             </div>
         </div>

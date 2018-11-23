@@ -1,4 +1,4 @@
-import {RECEIVE_STOCK_DATA, RECEIVE_STOCKS, CLEAR_DATA} from '../actions/stocks_actions';
+import {RECEIVE_STOCK_DATA, RECEIVE_STOCKS, CLEAR_DATA, RECEIVE_PRICE} from '../actions/stocks_actions';
 import {merge} from 'lodash';
 
 const DataReducer = (state = {}, action) => {
@@ -8,7 +8,7 @@ const DataReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_STOCK_DATA:
       let sum = 0;
-      let newObj = {};
+      let newObj = merge({},state);
       let arr = [];
       let item, initial;
       initial = action.data.monthly[0].open;
@@ -75,6 +75,10 @@ const DataReducer = (state = {}, action) => {
       for (var i = 0; i < ids.length; i++) {
         newState.symbols.push([action.symbols[i],ids[i]])
       }
+      return newState;
+    case RECEIVE_PRICE:
+      newState = merge({},state);
+      newState.price = action.price;
       return newState;
     case CLEAR_DATA:
       return {};

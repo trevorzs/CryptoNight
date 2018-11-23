@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 2018_11_23_074308) do
     t.index ["tag_id"], name: "index_stocks_on_tag_id", unique: true
   end
 
+  create_table "transactions", force: :cascade do |t|
+    t.integer "stock_id", null: false
+    t.integer "user_id", null: false
+    t.integer "price", null: false
+    t.integer "amount", null: false
+    t.datetime "created_at", null: false
+    t.index ["stock_id"], name: "index_transactions_on_stock_id"
+    t.index ["user_id"], name: "index_transactions_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username", null: false
     t.string "password_digest", null: false

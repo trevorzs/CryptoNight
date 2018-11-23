@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 Watchlist.destroy_all
 WatchlistJoin.destroy_all
+Transaction.destroy_all
 User.destroy_all
 users = User.create([{
   username:"Potential_Cryptonaut",

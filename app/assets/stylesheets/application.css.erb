@@ -734,45 +734,6 @@
   stroke: #e72ebe;
 }
 
-.watchlist-button-down {
-  width: 200px;
-  padding:15px 20px;
-  background-color: transparent;
-  color: #e72ebe;
-  border: 1px solid #e72ebe;
-  border-radius:5px;
-  position:relative;
-}
-
-.watchlist-button-up {
-  width: 200px;
-  padding: 15px 20px;
-  background-color: transparent;
-  color: #00ea9c;
-  border: 1px solid #00ea9c;
-  border-radius:5px;
-  position:relative;
-}
-
-.stock-action-menu{
-  display:flex;
-  justify-content: flex-start;
-  flex-direction: column;
-  margin-top:200px;
-}
-
-.watchlist-button-up:hover {
-  border: 1px solid  #a3f5c9;
-  color:  #a3f5c9;
-  cursor:pointer;
-}
-
-.watchlist-button-down:hover {
-  border: 1px solid #f788e2;
-  color: #f788e2;
-  cursor:pointer;
-}
-
 .main-wrapper{
   display:flex;
   justify-content: center;
@@ -849,4 +810,192 @@
 
 .movers-list-change{
   margin-left:6px;
+}
+
+.transaction-form-btn-down{
+  background-color:#e72ebe;
+  position:relative;
+  color:white;
+  font-family: 'Ropa Sans', sans-serif;
+  min-width:120px;
+  padding:0 48px;
+  height:48px;
+  border:none;
+  border-radius:4px;
+  font-size:14.5px;
+  margin-top:10px;
+  margin-bottom:20px;
+  letter-spacing: 0.65px;
+}
+
+.transaction-form-btn-up{
+  background-color:#00ea9c;
+  position:relative;
+  color:white;
+  font-family: 'Ropa Sans', sans-serif;
+  min-width:120px;
+  padding:0 48px;
+  height:48px;
+  border:none;
+  border-radius:4px;
+  font-size:14.5px;
+  margin-top:10px;
+  margin-bottom:20px;
+  letter-spacing: 0.65px;
+}
+
+.transaction-form-btn-down:hover{
+  background-color:#ff57e4;
+  cursor:pointer;
+}
+
+.transaction-form-btn-up:hover{
+  background-color:#a3f5c9;
+  cursor:pointer;
+}
+
+.transaction-input-field{
+  background-color:	#414142;
+  position:relative;
+  padding: 15px 20px;
+  border-radius:4px;
+  border: 1px solid transparent;
+  color:white;
+  width:50px;
+  margin: 10px 0;
+  transition: all .4s ease-out
+}
+
+.transaction-input-field-up{
+  background-color:	#414142;
+  position:relative;
+  padding: 15px 20px;
+  border-radius:4px;
+  border: 1px solid transparent;
+  color:white;
+  width:50px;
+  margin: 10px 0;
+  transition: all .4s ease-out
+}
+
+.transaction-input-field:hover{
+  background-color:#6e6d6e;
+  border:1px solid grey;
+}
+
+.transaction-input-field-up:hover{
+  background-color:#6e6d6e;
+  border:1px solid grey;
+}
+
+.transaction-input-field:focus{
+  outline: none !important;
+  background-color:#6e6d6e;
+  border:1px solid #e72ebe;
+}
+
+.transaction-input-field-up:focus{
+  outline: none !important;
+  background-color:#6e6d6e;
+  border:1px solid #00ea9c;
+}
+
+.stock-action-menu{
+  display:flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin-top:110px;
+}
+
+.transaction-form{
+  position:relative;
+  background-color:black;
+  display:flex;
+  flex-direction:column;
+  width:230px;
+  padding:30px 20px 50px 20px;
+}
+
+.transaction-input{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.watchlist-button-down {
+  margin-top:20px;
+  margin-left:38px;
+  width: 200px;
+  padding:15px 20px;
+  background-color: transparent;
+  color: #e72ebe;
+  border: 1px solid #e72ebe;
+  border-radius:5px;
+  position:relative;
+}
+
+.watchlist-button-up {
+  margin-left:38px;
+  margin-top:20px;
+  width: 200px;
+  padding: 15px 20px;
+  background-color: transparent;
+  color: #00ea9c;
+  border: 1px solid #00ea9c;
+  border-radius:5px;
+  position:relative;
+}
+
+.watchlist-button-up:hover {
+  border: 1px solid  #a3f5c9;
+  color:  #a3f5c9;
+  cursor:pointer;
+}
+
+.watchlist-button-down:hover {
+  border: 1px solid #f788e2;
+  color: #f788e2;
+  cursor:pointer;
+}
+
+.transaction-detail{
+  padding:20px 0;
+}
+
+.transaction-ownership{
+  display:flex;
+  justify-content: center;
+}
+
+.transaction-ownership-detail{
+  position:relative;
+  top:20px;
+}
+
+.share-item{
+  border-top: 1px solid white;
+  margin-top:20px;
+}
+
+.transaction-options{
+  display:flex;
+  padding-bottom:10px;
+  border-bottom:1px solid gray;
+}
+
+.transaction-options h2{
+  padding:0 20px 0 0;
+  font-size:20px;
+}
+
+.transaction-options h2:hover{
+  cursor:pointer;
+}
+
+.transaction-active{
+  color: #e72ebe;
+}
+
+.transaction-active-up{
+  color: #00ea9c;
 }

@@ -19,6 +19,14 @@ class User < ApplicationRecord
     foreign_key: :user_id,
     class_name: 'Watchlist'
 
+  has_many :transactions,
+    foreign_key: :user_id,
+    class_name: 'Transaction'
+
+  has_many :shares,
+    through: :transactions,
+    source: :stock
+
   after_initialize :ensure_session_token
   after_create :assign_watchlist
   attr_reader :password
@@ -53,4 +61,13 @@ class User < ApplicationRecord
   def ensure_session_token
     self.session_token ||= SecureRandom::urlsafe_base64
   end
+
+  def self.find_shares(userId,stockId)
+    Transaction.where("user_id = ? and stock_id = ?",userId, stockId).group(:stock_id).sum(:amount)
+  end
+
+  def self.find_all_shares(userId)
+    Transaction.where("user_id = ?",userId).group(:stock_id).sum(:amount)
+  end
+
 end

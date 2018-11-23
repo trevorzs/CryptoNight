@@ -5,7 +5,7 @@ class Api::WatchlistJoinsController < ApplicationController
     if @watchlistJoin.save
       render "api/watchlistjoins/create"
     else
-      render json: @user.errors.full_messages, status: 422
+      render json: @watchlistJoin.errors.full_messages, status: 422
     end
   end
 

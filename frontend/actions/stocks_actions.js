@@ -134,7 +134,6 @@ const watchlistDailyFetch = (syms,response,dispatch) => {
   for (let i = 0; i < symbols.length; i++) {
     StocksApiUtil.altFetchStockDaily(symbols[i]).then(
       response => {
-
         obj.stocks[symbols[i]].id = ids[i];
         obj.stocks[symbols[i]].daily = response.Data;
         done++;

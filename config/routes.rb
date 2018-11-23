@@ -9,5 +9,8 @@ Rails.application.routes.draw do
     resources :watchlists, only: [:show, :update]
     resources :watchlist_joins, only: [:create]
     delete 'watchlist_joins', :to => 'watchlist_joins#destroy'
+    resources :transactions, only: [:create, :show]
+    get 'shares', :to => 'transactions#shares'
+    get 'allshares', :to=> 'transactions#allshares'
   end
 end

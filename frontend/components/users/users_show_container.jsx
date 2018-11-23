@@ -4,6 +4,7 @@ import UserShowPage from './users_show_page';
 import {logout} from '../../actions/session_actions';
 import {watchlistDataFetch, clearData, altFetchStocks, fetchAllNews, altFetchStocksData} from '../../actions/stocks_actions';
 import {doneLoading, needsLoading} from '../../actions/ui_actions';
+import {findAllShares} from '../../actions/transaction_actions';
 
 const msp = state => {
   return (
@@ -13,7 +14,8 @@ const msp = state => {
       watchlist: state.entities.watchlist,
       loading: state.ui.loading,
       stocks: state.entities.stocks,
-      news: state.entities.news
+      news: state.entities.news,
+      shares: state.entities.shares
     }
   )
 };
@@ -26,7 +28,8 @@ const mdp = dispatch => (
     needsLoading: () => dispatch(needsLoading()),
     clearData: ()=> dispatch(clearData()),
     fetchAllNews: (syms) => dispatch(fetchAllNews(syms)),
-    altFetchStocksData: (syms) => dispatch(altFetchStocksData(syms))
+    altFetchStocksData: (syms) => dispatch(altFetchStocksData(syms)),
+    findAllShares: (id) => dispatch(findAllShares(id))
   }
 );
 
