@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_22_030132) do
+ActiveRecord::Schema.define(version: 2018_11_23_074308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2018_11_22_030132) do
     t.string "email", null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
+    t.float "funds", null: false
   end
 
   create_table "watchlist_joins", force: :cascade do |t|

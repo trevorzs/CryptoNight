@@ -13,10 +13,10 @@ users = User.create([{
     password:"starwars",
     email:"cryptonaut@gmail.com",
     first_name:"Potential",
-    last_name:"Cryptonaut"
+    last_name:"Cryptonaut",
+    funds: 0
   }
   ])
-
 
 Stock.destroy_all
 stocks = Stock.create([{
@@ -248,3 +248,7 @@ stocks = Stock.create([{
                   symbol: "XTZ",
                   details: "Ecstatic"
                   }])
+  WatchlistJoin.create([{
+      watchlist_id: User.find_by(username: "Potential_Cryptonaut").watchlist.id,
+      stock_id: Stock.find_by(symbol: "BTC").id
+    }])
