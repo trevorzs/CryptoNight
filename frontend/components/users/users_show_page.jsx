@@ -16,6 +16,7 @@ class UserShowPage extends React.Component{
 
   componentDidMount(){
     this.props.needsLoading();
+    this.props.findAllShares(this.props.currentUser.id);
     if (this.props.watchlist.length > 0){
       this.props.altFetchStocks(this.props.watchlist);
     }else{
@@ -44,12 +45,13 @@ class UserShowPage extends React.Component{
       return (
         <Loading />
       )
-    }else{
     }
     let watchlistitems;
     let chart;
     let graphClass;
     let news, movers;
+    let sharelist, ownedShares,  stockslist, shareheader;
+    const shareArr = Object.keys(this.props.shares);
     if (this.props.watchlist){
       let stock, price, symbol;
       let keys = Object.keys(this.props.stocks);
@@ -68,7 +70,30 @@ class UserShowPage extends React.Component{
             <NewsContainer />
           </div>
         );
+        if (shareArr.length > 0){
+          shareheader = (
+            <li className="watchlist-sub-header">Shares</li>
+          )
+          let stockslist = this.props.stocks;
+          sharelist = this.props.shares;
+         ownedShares = shareArr.map((stockId)=>{
+           if (stockslist[stockId].USD.CHANGEPCT24HOUR > 0){
+             graphClass = "watchlist-graph-up";
+           }else{
+             graphClass = "watchlist-graph-down"
+           }
+           return(
+            <Link to={`/stocks/${stockId}`} key={stockId}>
+              <ul className="watchlist-item">
+                <li>{stockslist[stockId].symbol}</li>
+                <li>{sharelist[stockId]} shares</li>
+              </ul>
+            </Link>
+          )});
+
+          }
       }
+
       watchlistitems = this.props.watchlist.map((id)=>{
         stock = this.props.stocks[id];
         if (stock && stock.USD && stock.USD.CHANGEPCT24HOUR){
@@ -121,7 +146,9 @@ class UserShowPage extends React.Component{
           <div className="user-show-watchlist">
             <ul className="watchlist scroll">
               <li className="watchlist-header">Watchlist</li>
-            <Link to="/stocks"><li className="watchlist-sub-header">Cryptocurrencies</li></Link>
+                {shareheader}
+                {ownedShares}
+            <Link to="/stocks"><li className="watchlist-sub-header share-item">Cryptocurrencies</li></Link>
               {watchlistitems}
             </ul>
           </div>

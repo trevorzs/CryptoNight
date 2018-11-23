@@ -2,7 +2,7 @@ import {RECEIVE_DONE_LOADING, RECEIVE_NEEDS_LOADING} from '../actions/ui_actions
 import {RECEIVE_QUERY, CLEAR_SEARCH} from '../actions/stocks_actions';
 import {merge} from 'lodash';
 
-const UiReducer = (state = {loading: true}, action) => {
+const UiReducer = (state = {loading: true, shares: false}, action) => {
   Object.freeze(state);
   let newState;
   switch (action.type) {

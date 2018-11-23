@@ -51,17 +51,11 @@ const StocksReducer = (state = {}, action) => {
         let stock;
         for (var i = 0; i < action.ids.length; i++) {
           stock = newState[action.ids[i]];
-          newState[action.ids[i]] = action.obj.stocks[stock.symbol]
+          newState[action.ids[i]].USD = action.obj.stocks[stock.symbol].USD;
+          newState[action.ids[i]].daily = action.obj.stocks[stock.symbol].daily;
         }
         return newState;
       case RECEIVE_ALT_STOCKS_DATA:
-        // newState = merge({},state);
-        // ids = action.syms.map((arr)=>(arr[1]));
-        // symbols = action.syms.map((arr)=>(arr[0]));
-        // for (var i = 0; i < ids.length; i++) {
-        //   newState[ids[i]].USD = action.data[ids[i]].USD;
-        // }
-        // return newState;
         return action.data;
       default:
         return state;

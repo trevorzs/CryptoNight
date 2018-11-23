@@ -8,10 +8,10 @@ import {connect} from 'react-redux';
 class Movers extends React.Component{
 
   sortCallback(el1,el2){
-    if (el1.USD.TOTALVOLUME24HTO > el2.USD.TOTALVOLUME24HTO){
+    if (el1.USD.CHANGEPCT24HOUR > el2.USD.CHANGEPCT24HOUR){
         return -1;
       }
-    if (el1.USD.TOTALVOLUME24HTO < el2.USD.TOTALVOLUME24HTO){
+    if (el1.USD.CHANGEPCT24HOUR < el2.USD.CHANGEPCT24HOUR){
       return 1;
     }else{
       return 0;
