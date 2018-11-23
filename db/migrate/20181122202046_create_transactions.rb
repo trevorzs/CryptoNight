@@ -8,6 +8,5 @@ class CreateTransactions < ActiveRecord::Migration[5.2]
     end
     add_index :transactions, :stock_id, unique: false
     add_index :transactions, :user_id, unique: false
-    drop_table :shares
   end
 end
