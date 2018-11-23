@@ -15,7 +15,6 @@ const TransactionReducer = (state = {}, action) => {
           newState[action.transaction.stock_id] = action.transaction.amount;
       }
       if (newState[action.transaction.stock_id] <= 0){
-        debugger
         delete newState[action.transaction.stock_id]
       }
       return newState;

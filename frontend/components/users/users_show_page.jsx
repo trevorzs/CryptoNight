@@ -77,20 +77,22 @@ class UserShowPage extends React.Component{
           let stockslist = this.props.stocks;
           sharelist = this.props.shares;
          ownedShares = shareArr.map((stockId)=>{
-           if (stockslist[stockId].USD.CHANGEPCT24HOUR > 0){
+           if (stockslist[stockId] && stockslist[stockId].USD && stockslist[stockId].USD.CHANGEPCT24HOUR > 0){
              graphClass = "watchlist-graph-up";
            }else{
              graphClass = "watchlist-graph-down"
            }
-           return(
-            <Link to={`/stocks/${stockId}`} key={stockId}>
-              <ul className="watchlist-item">
-                <li>{stockslist[stockId].symbol}</li>
-                <li>{sharelist[stockId]} shares</li>
-              </ul>
-            </Link>
-          )});
-
+           if (stockslist[stockId]){
+             return(
+              <Link to={`/stocks/${stockId}`} key={stockId}>
+                <ul className="watchlist-item">
+                  <li>{stockslist[stockId].symbol}</li>
+                  <li>{sharelist[stockId]} shares</li>
+                </ul>
+              </Link>
+            )}
+           }
+         )
           }
       }
 

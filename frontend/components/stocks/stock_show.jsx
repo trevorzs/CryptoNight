@@ -148,7 +148,7 @@ class StockShowPage extends React.Component{
 
         const active = document.querySelector(".active-timescale");
         news = (<NewsContainer />);
-        if (initialChange > 0){
+        if (active && initialChange > 0 ){
           active.classList.remove("active-timescale-down");
           active.classList.add("active-timescale-up");
         }else{
