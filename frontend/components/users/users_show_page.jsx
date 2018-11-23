@@ -72,7 +72,7 @@ class UserShowPage extends React.Component{
         );
         if (shareArr.length > 0){
           shareheader = (
-            <li className="watchlist-sub-header">Shares</li>
+            <li className="watchlist-sub-header share-item">Shares</li>
           )
           let stockslist = this.props.stocks;
           sharelist = this.props.shares;
@@ -146,10 +146,10 @@ class UserShowPage extends React.Component{
           <div className="user-show-watchlist">
             <ul className="watchlist scroll">
               <li className="watchlist-header">Watchlist</li>
-                {shareheader}
-                {ownedShares}
-            <Link to="/stocks"><li className="watchlist-sub-header share-item">Cryptocurrencies</li></Link>
+            <Link to="/stocks"><li className="watchlist-sub-header">Cryptocurrencies</li></Link>
               {watchlistitems}
+              {shareheader}
+              {ownedShares}
             </ul>
           </div>
         </div>
