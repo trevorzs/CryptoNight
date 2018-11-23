@@ -93,7 +93,7 @@ class TransactionForm extends React.Component{
       buttonval = "Buy";
       bb = activeclass;
       shares = (
-        <h2 className="transaction-ownership-detail">${this.props.currentUser.funds} Buying Power Available</h2>
+        <h2 className="transaction-ownership-detail">${this.round(this.props.currentUser.funds,4)} Buying Power Available</h2>
       )
     }else{
       buttonval = "Sell";

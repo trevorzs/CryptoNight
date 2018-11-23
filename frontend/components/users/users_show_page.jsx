@@ -140,7 +140,7 @@ class UserShowPage extends React.Component{
           <div className="user-show-main">
             <h1>Welcome to CryptoNight</h1>
             <h2 className="user-show-name">{this.props.currentUser.first_name} {this.props.currentUser.last_name}{"'s"} Dashboard</h2>
-            <h2 className="user-show-name">Buying Power: ${this.props.currentUser.funds}</h2>
+            <h2 className="user-show-name">Buying Power: ${this.round(this.props.currentUser.funds,4)}</h2>
             <Link className="user-show-button" to="/stocks">Cryptocurrencies</Link>
             <div className="filler"></div>
             {movers}
