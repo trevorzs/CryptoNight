@@ -22,7 +22,7 @@ class UserShowPage extends React.Component{
     }else{
       this.props.doneLoading();
     }
-    
+
   }
 
   componentDidUpdate(oldprops){
@@ -79,8 +79,10 @@ class UserShowPage extends React.Component{
           let stockslist = this.props.stocks;
           sharelist = this.props.shares;
           for (var i = 0; i < Object.keys(sharelist).length; i++) {
-            if (this.props.stocks[Object.keys(sharelist)[i]].USD.PRICE*sharelist[Object.keys(sharelist)[i]]){
-              shareworth += this.props.stocks[Object.keys(sharelist)[i]].USD.PRICE*sharelist[Object.keys(sharelist)[i]]
+            const stockId = Object.keys(sharelist)[i];
+            const shareAmount = sharelist[stockId];
+            if (this.props.stocks[stockId].USD && this.props.stocks[stockId].USD.PRICE*shareAmount){
+              shareworth += this.props.stocks[stockId].USD.PRICE*shareAmount;
             }
           }
          ownedShares = shareArr.map((stockId)=>{

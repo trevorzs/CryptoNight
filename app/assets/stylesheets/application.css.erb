@@ -756,9 +756,20 @@
 
 .movers-div{
   width:660px;
-  height:150px;
+  height:160px;
   display:flex;
   overflow-x:scroll;
+}
+.movers-div::-webkit-scrollbar{
+}
+
+.movers-div:hover::-webkit-scrollbar{
+    background-color:#030e21;
+}
+
+.movers-div:hover::-webkit-scrollbar-thumb{
+  background-color:black;
+  box-shadow: 0 0 65px 10px #e72ebe;
 }
 
 .movers-link{
