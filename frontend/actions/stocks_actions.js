@@ -14,11 +14,19 @@ export const CLEAR_DATA = "CLEAR_DATA";
 export const RECEIVE_WATCHLIST_DATA = "RECEIVE_WATCHLIST_DATA";
 export const RECEIVE_NEWS = "RECEIVE_NEWS";
 export const RECEIVE_ALT_STOCKS_DATA = "RECEIVE_ALT_STOCKS_DATA";
+export const RECEIVE_SORTED_STOCKS = "RECEIVE_SORTED_STOCKS";
 
 export const receiveNews = (news) => {
   return({
     type: RECEIVE_NEWS,
     news
+  })
+}
+
+export const receiveSortedStocks = (stocks) => {
+  return({
+    type: RECEIVE_SORTED_STOCKS,
+    stocks
   })
 }
 

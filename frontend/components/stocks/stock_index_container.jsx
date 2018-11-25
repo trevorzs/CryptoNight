@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import StockIndex from './stock_index';
-import {fetchStocks, fetchStocksData, clearData} from '../../actions/stocks_actions';
+import {fetchStocks, fetchStocksData, clearData, receiveSortedStocks} from '../../actions/stocks_actions';
 import {doneLoading, needsLoading} from '../../actions/ui_actions';
 import {logout} from '../../actions/session_actions';
 
@@ -24,7 +24,8 @@ const mdp = dispatch => (
     clearData: () => dispatch(clearData()),
     logout: () => dispatch(logout()),
     doneLoading: () => dispatch(doneLoading()),
-    needsLoading: () => dispatch(needsLoading())
+    needsLoading: () => dispatch(needsLoading()),
+    receiveSortedStocks: (stocks) => dispatch(receiveSortedStocks(stocks))
   }
 );
 
