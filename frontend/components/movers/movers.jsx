@@ -36,7 +36,7 @@ class Movers extends React.Component{
           <Link key={stock.id} className="movers-link" to={`/stocks/${stock.id}`}>
             <ul className="movers-list-item">
               <li className="movers-list-symbol">{stock.USD.FROMSYMBOL}</li>
-              <li className="movers-list-high">Today's High: {stock.USD.HIGH24HOUR.toFixed(2)}</li>
+              <li className="movers-list-high">Today's High: ${stock.USD.HIGH24HOUR.toFixed(2)}</li>
               <li className={`${changeClass} movers-list-price`}>${stock.USD.PRICE.toFixed(2)}</li>
               <li className={`${changeClass} movers-list-change`}>{stock.USD.CHANGEPCT24HOUR.toFixed(2)}%</li>
             </ul>

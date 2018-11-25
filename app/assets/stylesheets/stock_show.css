@@ -1,0 +1,66 @@
+
+#stockLabel{
+  font-family:IdlewildBold;
+  font-size:30px;
+}
+
+#pricelabel{
+  font-family:IdlewildThin;
+  font-weight:bold;
+  font-size:26px;
+}
+
+#pctChangeLabel{
+  letter-spacing: 1.5px;
+}
+
+.return-button{
+  color: #e72ebe;
+  width:110px;
+}
+
+.return-button-up{
+  color: #00ea9c;
+}
+
+.recharts-curve{
+  stroke-width: 2;
+   -webkit-filter: drop-shadow(0px 0px 12px #f45531);
+  filter: drop-shadow(0px 0px 12px #f45531);
+}
+
+.recharts-line{
+   -webkit-filter: drop-shadow(0px 0px 12px #f45531);
+  filter: drop-shadow(0px 0px 12px #f45531);
+}
+
+.timescale-btn{
+  background: none;
+	color: white;
+	border: none;
+	padding: 0 2px 10px 2px;
+  margin:10px 10px 0px 10px;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+.timescale-btn-list{
+  border-bottom:1px solid grey;
+  width: 680px;
+}
+
+.active-timescale-down{
+  color: #e72ebe;
+  border-bottom: 3px solid #e72ebe;
+}
+
+.active-timescale-up{
+  color: #00ea9c;
+  border-bottom: 3px solid  #00ea9c;
+}
+
+.timescale-btn-list{
+  width:680px;
+  border-bottom: 1px solid gray;
+}

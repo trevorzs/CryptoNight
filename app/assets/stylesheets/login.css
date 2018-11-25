@@ -1,0 +1,78 @@
+
+.session-form-btn{
+  background-color:#e72ebe;
+  color:white;
+  font-family: 'Ropa Sans', sans-serif;
+  min-width:120px;
+  padding:0 48px;
+  height:48px;
+  border:none;
+  border-radius:4px;
+  font-size:14.5px;
+  margin-top:42px;
+  letter-spacing: 0.65px;
+}
+
+.session-form-btn:hover{
+  background-color:#ff57e4;
+  cursor:pointer;
+}
+
+.sessionlink{
+  color:#e72ebe;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+.sessionlink:hover{
+  color:#ff57e4;
+}
+
+.input-field{
+  background-color:	#414142;
+  padding: 15px 20px;
+  border-radius:4px;
+  border: 1px solid transparent;
+  color:white;
+  width:370px;
+  margin: 10px 0;
+  transition: all .4s ease-out
+}
+
+.input-field:hover{
+  background-color:#6e6d6e;
+  border:1px solid grey;
+}
+.input-field:focus{
+  outline: none !important;
+  background-color:#6e6d6e;
+  border:1px solid #e72ebe;
+}
+
+.input-field::placeholder{
+  color:lightgray;
+}
+
+.half{
+  width: 155px;
+  margin-right: 20px;
+}
+
+.login-form-wrapper{
+  margin-left: 52px;
+}
+
+.login-form label{
+  line-height:20px;
+}
+
+.login-form-wrapper h2{
+    font-size: 28px;
+    letter-spacing: 0.4px;
+    font-weight: 500;
+    line-height: 30px;
+    margin: 26px 0 24px;
+}
+.demo-btn{
+  border:none;
+}

@@ -16,23 +16,45 @@ class UserShowPage extends React.Component{
 
   componentDidMount(){
     this.props.needsLoading();
-    this.props.findAllShares(this.props.currentUser.id);
-    if (this.props.watchlist.length > 0){
-      this.props.altFetchStocks(this.props.watchlist);
-    }else{
-      this.props.doneLoading();
-    }
-
+    this.props.findAllShares(this.props.currentUser.id).then(
+      response=>   {if (this.props.watchlist.length > 0){
+          const shareIds = Object.keys(this.props.shares);
+          const shareArr = [];
+          for (var i = 0; i < shareIds.length; i++) {
+            const shareId = parseInt(shareIds[i]);
+            if (!this.props.watchlist.includes(shareId)){
+              shareArr.push(shareId);
+            }
+          }
+          const allIds = shareArr.concat(this.props.watchlist);
+          this.props.altFetchStocks(allIds);
+        }else{
+          this.props.doneLoading();
+        }
+      }
+    );
   }
 
   componentDidUpdate(oldprops){
     if (this.props.match.params !== oldprops.match.params){
       this.props.needsLoading();
-      if (this.props.watchlist.length > 0){
-        this.props.altFetchStocks(this.props.watchlist);
-      }else{
-        this.props.doneLoading();
-      }
+      this.props.findAllShares(this.props.currentUser.id).then(
+        response=>   {if (this.props.watchlist.length > 0){
+            const shareIds = Object.keys(this.props.shares);
+            const shareArr = [];
+            for (var i = 0; i < shareIds.length; i++) {
+              const shareId = parseInt(shareIds[i]);
+              if (!this.props.watchlist.includes(shareId)){
+                shareArr.push(shareId);
+              }
+            }
+            const allIds = shareArr.concat(this.props.watchlist);
+            this.props.altFetchStocks(allIds);
+          }else{
+            this.props.doneLoading();
+          }
+        }
+      );
     }
   }
 
@@ -86,17 +108,31 @@ class UserShowPage extends React.Component{
             }
           }
          ownedShares = shareArr.map((stockId)=>{
-           if (stockslist[stockId] && stockslist[stockId].USD && stockslist[stockId].USD.CHANGEPCT24HOUR > 0){
-             graphClass = "watchlist-graph-up";
-           }else{
-             graphClass = "watchlist-graph-down"
+           if (stockslist[stockId] && stockslist[stockId].USD){
+             price = "$" +this.round(stockslist[stockId].USD.PRICE,5).toString();
+             if (stockslist[stockId].USD.CHANGEPCT24HOUR > 0){
+               graphClass = "watchlist-graph-up";
+             }else{
+               graphClass = "watchlist-graph-down"
+             }
            }
            if (stockslist[stockId]){
              return(
               <Link to={`/stocks/${stockId}`} key={stockId}>
                 <ul className="watchlist-item">
-                  <li>{stockslist[stockId].symbol}</li>
-                  <li>{sharelist[stockId]} shares</li>
+                  <div className="watchlist-share-item">
+                    <li>{stockslist[stockId].symbol}</li>
+                    <li>{sharelist[stockId]} shares</li>
+                  </div>
+                    <LineChart className={graphClass} width={45} height={40}
+                      margin={{ top: 25, right: 0, left: 0, bottom: 0 }} onMouseLeave={this.resetData}
+                       data={stockslist[stockId].daily}>
+                       <filter id="hello"></filter>
+                      <Line type="monotone" dataKey="close" stroke="white" dot={false}/>
+                        <XAxis dataKey="time" hide={true} padding={{ left: 0, right: 0 }} />
+                        <YAxis type="number" domain={['dataMin', 'dataMax']} hide={true}/>
+                    </LineChart>
+                  <li>{price}</li>
                 </ul>
               </Link>
             )}
