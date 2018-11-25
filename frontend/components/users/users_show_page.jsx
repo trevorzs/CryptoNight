@@ -103,7 +103,8 @@ class UserShowPage extends React.Component{
           for (var i = 0; i < Object.keys(sharelist).length; i++) {
             const stockId = Object.keys(sharelist)[i];
             const shareAmount = sharelist[stockId];
-            if (this.props.stocks[stockId].USD && this.props.stocks[stockId].USD.PRICE*shareAmount){
+            const stock = this.props.stocks[stockId];
+            if (stock && stock.USD && stock.USD.PRICE*shareAmount){
               shareworth += this.props.stocks[stockId].USD.PRICE*shareAmount;
             }
           }
