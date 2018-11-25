@@ -2,9 +2,11 @@
   width:660px;
   height:160px;
   display:flex;
-  overflow-x:scroll;
+  overflow-x:hidden;
 }
-.movers-div::-webkit-scrollbar{
+
+.movers-div:hover{
+  overflow-x:scroll;
 }
 
 .movers-div:hover::-webkit-scrollbar{
