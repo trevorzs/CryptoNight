@@ -108,7 +108,7 @@ class Navbar extends React.Component{
         </div>
           <div className="nav-links">
             <Link id="navlink" to="/" className={this.navlink}>Home</Link>
-            <a id="navlink" className={this.navlink}>Notifications</a>
+            <a id="navlink" className={this.navlink} href="https://trevorzs.github.io">Developer</a>
             <button id="navlink" className={this.navlink} onClick={this.props.logout}>Log Out</button>
           </div>
       </div>

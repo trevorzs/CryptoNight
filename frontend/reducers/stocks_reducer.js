@@ -27,6 +27,7 @@ const StocksReducer = (state = {}, action) => {
           newState[ids[i]].price = "loading";
           newState[ids[i]].todayChange = "loading";
         }
+        
         return newState;
       case CLEAR_DATA:
         return {};

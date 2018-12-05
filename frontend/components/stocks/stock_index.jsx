@@ -9,7 +9,7 @@ class StockIndex extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      name_up: false,
+      name_up: true,
       symbol_up: false,
       price_up: true,
       today_up: true,
@@ -18,20 +18,21 @@ class StockIndex extends React.Component{
     this.arrangeStocksAscending = this.arrangeStocksAscending.bind(this);
   }
 
+  arrangeStocksAscending(param, up, option = false){
+    const sorted = this.props.stocks.sort(this.sortCallback(param,up,option));
+    this.props.receiveSortedStocks(sorted);
+  }
+
   componentDidMount(){
     this.props.needsLoading();
     this.props.fetchStocks();
     this.interval1 = setInterval(()=>(this.props.updateStocks(this.props.symbols)),10000);
+
   }
 
   componentWillUnmount(){
     clearInterval(this.interval1);
     this.props.needsLoading();
-  }
-
-  arrangeStocksAscending(param, up, option = false){
-    const sorted = this.props.stocks.sort(this.sortCallback(param,up,option));
-    this.props.receiveSortedStocks(sorted);
   }
 
   sortCallback(param,up,option){
