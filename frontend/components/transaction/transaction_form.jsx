@@ -24,7 +24,7 @@ class TransactionForm extends React.Component{
     const currentStockId = this.props.stock.id;
     const func = this.props.findShares;
     this.props.fetchPrice(this.props.stock.symbol,this.props.stock.id);
-    this.props.findShares(currentUserId,currentStockId);
+    this.props.findAllShares(currentUserId);
   }
 
   handleSubmit(e){
@@ -34,9 +34,9 @@ class TransactionForm extends React.Component{
     transaction.amount = parseInt(transaction.amount);
     if (this.state.sell === true){
       transaction.amount = (-1 * transaction.amount);
-      if ((this.props.share[this.props.stock.id] + transaction.amount)>=0){
+      if ((this.props.shares[this.props.stock.id] + transaction.amount)>=0){
         this.props.addTransaction(transaction,this.props.currentUser);
-        if (this.props.share[this.props.stock.id]){
+        if (this.props.shares[this.props.stock.id]){
           this.setState({sell:false});
         }
       }
@@ -98,18 +98,18 @@ class TransactionForm extends React.Component{
     }else{
       buttonval = "Sell";
       sb = activeclass;
-      if (this.props.share[this.props.stock.id] > 1){
+      if (this.props.shares[this.props.stock.id] > 1){
         shares = (
-          <h2 className="transaction-ownership-detail">{this.props.share[this.props.stock.id]} Shares Available</h2>
+          <h2 className="transaction-ownership-detail">{this.props.shares[this.props.stock.id]} Shares Available</h2>
         )
       }else{
         shares = (
-          <h2 className="transaction-ownership-detail">{this.props.share[this.props.stock.id]} Share Available</h2>
+          <h2 className="transaction-ownership-detail">{this.props.shares[this.props.stock.id]} Share Available</h2>
         )
       }
 
     }
-    if (this.props.share[this.props.stock.id]){
+    if (this.props.shares[this.props.stock.id]){
       sb = (
         <h2 className={sb} onClick={()=>this.setState({sell: true})}>Sell</h2>
       )

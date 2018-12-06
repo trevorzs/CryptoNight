@@ -19,6 +19,14 @@ class User < ApplicationRecord
     foreign_key: :user_id,
     class_name: 'Watchlist'
 
+  has_one :portfolio_history,
+    foreign_key: :user_id,
+    class_name: 'PortfolioHistory'
+
+  has_many :portfolios,
+    through: :portfolio_history,
+    source: :portfolios
+
   has_many :transactions,
     foreign_key: :user_id,
     class_name: 'Transaction'

@@ -19,6 +19,9 @@ class Api::UsersController < ApplicationController
             watchlist_id: @user.watchlist.id,
             stock_id: Stock.find_by(symbol: "BTC").id,
           }])
+        PortfolioHistory.create!([{
+            user_id: @user.id
+          }])
       login!(@user)
       render "api/users/show"
     else

@@ -47,13 +47,15 @@ export const addTransaction = (transaction,user) => dispatch => {
   );}
 
 
-export const findShares = (user_id, stock_id) =>dispatch => (
-  TransactionApiUtil.findShares(user_id, stock_id).then(response=>{
-    return(
-      dispatch(receiveShares(response))
-    )
-  })
-)
+export const findShares = (user_id, stock_id) => dispatch =>{
+  return(
+    TransactionApiUtil.findShares(user_id, stock_id).then(response=>{
+      return(
+        dispatch(receiveShares(response))
+      )
+    })
+  )
+}
 
 export const findAllShares = (user_id) => dispatch => {
   return(

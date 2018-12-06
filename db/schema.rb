@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_23_162755) do
+ActiveRecord::Schema.define(version: 2018_12_06_183434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "portfolio_histories", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_portfolio_histories_on_user_id", unique: true
+  end
+
+  create_table "portfolios", force: :cascade do |t|
+    t.integer "portfolio_history_id", null: false
+    t.string "assets"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["portfolio_history_id"], name: "index_portfolios_on_portfolio_history_id", unique: true
+  end
 
   create_table "stocks", force: :cascade do |t|
     t.string "name", null: false
@@ -30,6 +45,7 @@ ActiveRecord::Schema.define(version: 2018_11_23_162755) do
     t.integer "amount", null: false
     t.datetime "created_at", null: false
     t.float "price", null: false
+    t.float "user_value"
     t.index ["stock_id"], name: "index_transactions_on_stock_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
