@@ -1,24 +1,33 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## About
+This project is a full-stack, single-page web application built using React/Redux, hosted on Heroku with a Rails backend. The web app is inspired by Robinhood Crypto, and contains design elements from both Robinhood and Robinhood Crypto.
 
-Things you may want to cover:
+## Technologies
+React/Redux front-end
+Ruby on Rails backend
+Recharts library for data-graphing
+Cryptocompare API
 
-* Ruby version
+## MVPs
+#### User's portfolio history graph
 
-* System dependencies
+#### User's watchlist
 
-* Configuration
+#### User's owned shares watchlist
 
-* Database creation
+#### User's curated news
 
-* Database initialization
+#### Cryptocurrencies index
 
-* How to run the test suite
+#### Cryptocurrencies sorting
 
-* Services (job queues, cache servers, search engines, etc.)
+#### Search by crypto name/symbol
 
-* Deployment instructions
+#### Cryptocurrency historical data chart
 
-* ...
+#### Buy/Sell Cryptocurrency
+
+#### Cryptocurrency related news
+
+#### Login/Signup (user authentication)
