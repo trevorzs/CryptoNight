@@ -142,7 +142,7 @@ class UserShowPage extends React.Component{
             )}
            }
          )
-          }
+       }
       }
 
       watchlistitems = this.props.watchlist.map((id)=>{

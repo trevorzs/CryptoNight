@@ -60,7 +60,7 @@ class Dashboard extends React.Component{
       <div class="portfolio-chart">
         <h1 id="pctChangeLabel">Your Portfolio:</h1>
         <h1 id="pricelabel">${initialprice}</h1>
-        <LineChart width={500} height={200}
+        <LineChart width={640} height={240}
           margin={{ top: 25, right: 0, left: 0, bottom: 0 }} onMouseLeave={this.resetData}
            data={this.props.portfolios}>
           <Line type="monotone" dataKey="account_value" stroke="white" dot={false}/>
