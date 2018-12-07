@@ -4,6 +4,7 @@ import TransactionForm from './transaction_form';
 import {addTransaction} from '../../actions/transaction_actions';
 import {createPortfolio} from '../../actions/portfolio_actions';
 import {fetchPrice} from '../../actions/stocks_actions';
+import {needsLoading} from '../../actions/ui_actions';
 import {findAllShares} from '../../actions/transaction_actions';
 
 const msp = (state, ownProps) => {
@@ -19,7 +20,8 @@ const mdp = dispatch => (
     addTransaction: (transaction,user) => dispatch(addTransaction(transaction,user)),
     createPortfolio: (portfolio) => dispatch(createPortfolio(portfolio)),
     fetchPrice: (sym,id) => dispatch(fetchPrice(sym,id)),
-    findAllShares: (user_id) => dispatch(findAllShares(user_id))
+    findAllShares: (user_id) => dispatch(findAllShares(user_id)),
+    needsLoading: () => dispatch(needsLoading())
   }
 );
 

@@ -1,5 +1,6 @@
-import {RECEIVE_TRANSACTION, RECEIVE_ALL_SHARES, RECEIVE_SHARES} from '../actions/transaction_actions';
+import {RECEIVE_TRANSACTION, RECEIVE_ALL_SHARES, RECEIVE_SHARES, CLEAR_DATA} from '../actions/transaction_actions';
 import {RECEIVE_USER} from '../actions/session_actions';
+import {RECEIVE_NEEDS_LOADING} from '../actions/ui_actions';
 import {merge} from 'lodash';
 
 const SharesReducer = (state = {}, action) => {
@@ -23,6 +24,8 @@ const SharesReducer = (state = {}, action) => {
       case RECEIVE_SHARES:
         return merge({},state,action.shares);
       case RECEIVE_USER:
+        return {};
+      case RECEIVE_NEEDS_LOADING:
         return {};
       default:
         return state;

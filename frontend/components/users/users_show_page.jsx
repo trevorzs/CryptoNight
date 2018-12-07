@@ -76,7 +76,7 @@ class UserShowPage extends React.Component{
     let graphClass;
     let news, movers;
     let sharelist, ownedShares,  stockslist, shareheader;
-          let shareworth = 0.0;
+    let shareworth = 0.0;
     const shareArr = Object.keys(this.props.shares);
     if (this.props.watchlist){
       let stock, price, symbol;
@@ -102,15 +102,16 @@ class UserShowPage extends React.Component{
           )
           let stockslist = this.props.stocks;
           sharelist = this.props.shares;
+          let stock, shareAmount, stockId;
           for (var i = 0; i < Object.keys(sharelist).length; i++) {
-            const stockId = Object.keys(sharelist)[i];
-            const shareAmount = sharelist[stockId];
-            const stock = this.props.stocks[stockId];
+            stockId = Object.keys(sharelist)[i];
+            shareAmount = sharelist[stockId];
+            stock = this.props.stocks[stockId];
             if (stock && stock.USD && stock.USD.PRICE*shareAmount){
               shareworth += this.props.stocks[stockId].USD.PRICE*shareAmount;
             }
           }
-        this.props.createPortfolio({account_value: (shareworth+this.props.currentUser.funds)});
+          this.props.createPortfolio({account_value: (shareworth+this.props.currentUser.funds)});
          ownedShares = shareArr.map((stockId)=>{
            if (stockslist[stockId] && stockslist[stockId].USD){
              price = "$" +this.round(stockslist[stockId].USD.PRICE,5).toString();

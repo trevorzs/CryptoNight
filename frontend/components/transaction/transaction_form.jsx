@@ -26,6 +26,9 @@ class TransactionForm extends React.Component{
     this.props.fetchPrice(this.props.stock.symbol,this.props.stock.id);
     this.props.findAllShares(currentUserId);
   }
+  componentWillUnmount(){
+    this.props.needsLoading();
+  }
 
   handleSubmit(e){
     e.preventDefault();
