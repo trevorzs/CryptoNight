@@ -35,14 +35,20 @@ class Dashboard extends React.Component{
           time = `${hour}:${minutes} AM`
         }
       }
-
       const day = date.toDateString();
       document.getElementById("pricelabel").innerHTML = "$"+e.payload[0].payload.account_value;
+
       return(
-        <div className="tooltip">{time} {day.slice(4,-5)}</div>
+        <div className="tooltip">{time} {day}</div>
       )
     }
 
+
+  }
+
+  tickFormat(tick){
+    const d = new Date(tick);
+    return (d.toDateString());
   }
 
   render(){
@@ -51,13 +57,14 @@ class Dashboard extends React.Component{
         initialprice = this.props.portfolios.slice(-1)[0].account_value;
     }
     return (
-      <div>
+      <div class="portfolio-chart">
+        <h1 id="pctChangeLabel">Your Portfolio:</h1>
         <h1 id="pricelabel">${initialprice}</h1>
         <LineChart width={500} height={200}
           margin={{ top: 25, right: 0, left: 0, bottom: 0 }} onMouseLeave={this.resetData}
            data={this.props.portfolios}>
           <Line type="monotone" dataKey="account_value" stroke="white" dot={false}/>
-            <XAxis dataKey="created_at" hide={true} padding={{ left: 0, right: 0 }} />
+            <XAxis dataKey="created_at" scale='time' type='number' tickFormatter={this.tickFormat} domain={['dataMin', 'dataMax']} padding={{ left: 0, right: 0 }} />
             <YAxis type="number" hide={true} domain={['dataMin', 'dataMax']}/>
             <Tooltip isAnimationActive={false} position={{ y: 10 }} offset={-32} content={this.tooltipRender.bind(this)}/>
         </LineChart>
