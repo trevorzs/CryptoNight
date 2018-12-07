@@ -11,7 +11,7 @@ class Api::PortfoliosController < ApplicationController
   end
 
   def allportfolios
-    @portfolios = current_user.portfolios
+    @portfolios = current_user.portfolios.order('portfolios.id ASC')
   end
 
   private

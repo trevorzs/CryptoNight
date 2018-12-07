@@ -53,7 +53,7 @@ class Dashboard extends React.Component{
 
   render(){
     let initialprice;
-    if (this.props.portfolios.legth>0){
+    if (this.props.portfolios.length>0){
         initialprice = this.props.portfolios.slice(-1)[0].account_value;
     }
     return (
