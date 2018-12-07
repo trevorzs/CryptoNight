@@ -14,5 +14,6 @@ Rails.application.routes.draw do
     get 'allshares', :to=> 'transactions#allshares'
     resources :portfolio_histories, only: [:create]
     resources :portfolios, only: [:create]
+    get 'allportfolios', :to=> 'portfolios#allportfolios'
   end
 end

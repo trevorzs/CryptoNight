@@ -7,3 +7,12 @@ export const createPortfolio = (portfolio) => {
     })
   )
 }
+
+export const fetchPortfolios = () => {
+  return(
+    $.ajax({
+      url: "api/allportfolios",
+      method: "GET",
+    })
+  )
+}

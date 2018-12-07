@@ -10,8 +10,12 @@ class Api::PortfoliosController < ApplicationController
     end
   end
 
+  def allportfolios
+    @portfolios = current_user.portfolios
+  end
+
   private
-  def watchlist_params
-    params.require(:portfolio).permit(:shares)
+  def portfolio_params
+    params.require(:portfolio).permit(:account_value)
   end
 end

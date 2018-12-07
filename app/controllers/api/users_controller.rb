@@ -15,13 +15,10 @@ class Api::UsersController < ApplicationController
           price: 4444,
           amount:1
         }])
-        WatchlistJoin.create!([{
-            watchlist_id: @user.watchlist.id,
-            stock_id: Stock.find_by(symbol: "BTC").id,
-          }])
-        PortfolioHistory.create!([{
-            user_id: @user.id
-          }])
+      WatchlistJoin.create!([{
+          watchlist_id: @user.watchlist.id,
+          stock_id: Stock.find_by(symbol: "BTC").id,
+        }])
       login!(@user)
       render "api/users/show"
     else

@@ -36,17 +36,16 @@ class User < ApplicationRecord
     source: :stock
 
   after_initialize :ensure_session_token
-  after_create :assign_watchlist
+  after_create :assign_watchlist, :assign_portfolio_history
   attr_reader :password
 
   def assign_watchlist
     self.create_watchlist
   end
 
-  # def assign_bitcoin
-  #   debugger
-  #   Transaction.create(self.id)
-  # end
+  def assign_portfolio_history
+    self.create_portfolio_history
+  end
 
   def password=(password)
     @password = password

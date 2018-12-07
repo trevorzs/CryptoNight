@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import NavbarContainer from '../navbar/navbar_container';
 import NewsContainer from '../news/news_container';
 import MoversContainer from '../movers/movers_container';
+import DashboardContainer from '../dashboard/dashboard_container';
 import Loading from '../loading/loading';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
@@ -28,6 +29,7 @@ class UserShowPage extends React.Component{
           }
           const allIds = shareArr.concat(this.props.watchlist);
           this.props.altFetchStocks(allIds);
+          this.props.fetchPortfolios();
         }else{
           this.props.doneLoading();
         }
@@ -108,6 +110,7 @@ class UserShowPage extends React.Component{
               shareworth += this.props.stocks[stockId].USD.PRICE*shareAmount;
             }
           }
+        this.props.createPortfolio({account_value: (shareworth+this.props.currentUser.funds)});
          ownedShares = shareArr.map((stockId)=>{
            if (stockslist[stockId] && stockslist[stockId].USD){
              price = "$" +this.round(stockslist[stockId].USD.PRICE,5).toString();
@@ -188,8 +191,7 @@ class UserShowPage extends React.Component{
             <h2 className="user-show-name">{this.props.currentUser.first_name} {this.props.currentUser.last_name}{"'s"} Dashboard</h2>
             <h2 className="user-show-name">Buying Power: ${this.round(this.props.currentUser.funds,4)}</h2>
             <h2 className="user-show-name">Account Value: ${this.round((shareworth + this.props.currentUser.funds),4)}</h2>
-            <Link className="user-show-button" to="/stocks">Cryptocurrencies</Link>
-            <div className="filler"></div>
+            <DashboardContainer />
             {movers}
             {news}
           </div>

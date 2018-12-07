@@ -261,6 +261,3 @@ stocks = Stock.create!([{
         watchlist_id: User.find_by(username: "Potential_Cryptonaut").watchlist.id,
         stock_id: Stock.find_by(symbol: "BTC").id,
       }])
-    PortfolioHistory.create!([{
-      user_id: User.find_by(username: "Potential_Cryptonaut").id
-      }])
