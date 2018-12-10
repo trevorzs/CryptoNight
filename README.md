@@ -83,7 +83,7 @@ All stocks are fetched in the user's show page and sorted to find the top 10 wit
 ![movers](readme_images/movers.png)
 
 #### Curated News
-User's show page also has a news feed which goes through the user's watched stocks, concatenates all watched stocks' symbols, and looks up news in the cryptocompare API that pertains to the those symbols. This helps tailor the news to the user's interested cryptocurrencies.
+User's show page also has a news feed which goes through the user's watched stocks, concatenates all watched stocks' symbols, and looks up news in the cryptocompare API that pertains to the those symbols. This helps tailor the news to the user's interested cryptocurrencies. 
 
 ![portfolio](readme_images/curated_news.png)
 
