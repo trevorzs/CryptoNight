@@ -1,6 +1,7 @@
 # README
 ## CryptoNight
 [Live Site](https://crypto-night.herokuapp.com)
+
 ![screenshot](readme_images/screenshot1.png)
 
 ## About
