@@ -1,13 +1,21 @@
 # README
+## CryptoNight
+[Live Site](https://crypto-night.herokuapp.com)
+![screenshot](readme_images/screenshot1.png)
 
 ## About
-This project is a full-stack, single-page web application built using React/Redux, hosted on Heroku with a Rails backend. The web app is inspired by Robinhood Crypto, and contains design elements from both Robinhood and Robinhood Crypto.
+This project is a full-stack, single-page Cryptocurrency investment app inspired by Robinhood Crypto, and contains design elements from both Robinhood and Robinhood Crypto.
 
 ## Technologies
 React/Redux front-end
-Ruby on Rails backend
+
+Ruby on Rails backend with PostgreSQL database
+
 Recharts library for data-graphing
+
 Cryptocompare API
+
+HTML5 and CSS3 for styling
 
 ## MVPs
 #### User's portfolio history graph
