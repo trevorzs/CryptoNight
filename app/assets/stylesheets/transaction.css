@@ -6,11 +6,24 @@
 .transaction-ownership{
   display:flex;
   justify-content: center;
+  flex-direction: column;
+  text-align: center;
 }
 
 .transaction-ownership-detail{
   position:relative;
   top:20px;
+}
+
+.transaction-error{
+  position:relative;
+  top:30px;
+  color:red;
+}
+.transaction-success{
+  position:relative;
+  top:30px;
+  color:green;
 }
 
 .share-item{

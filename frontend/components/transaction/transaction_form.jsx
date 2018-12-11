@@ -15,7 +15,8 @@ class TransactionForm extends React.Component{
       price: "",
       amount: "",
       cost: "0",
-      sell: false
+      sell: false,
+      message: null
     }
   }
 
@@ -39,13 +40,20 @@ class TransactionForm extends React.Component{
       transaction.amount = (-1 * transaction.amount);
       if ((this.props.shares[this.props.stock.id] + transaction.amount)>=0){
         this.props.addTransaction(transaction,this.props.currentUser);
-        if (this.props.shares[this.props.stock.id]){
-          this.setState({sell:false});
+        if (this.props.shares[this.props.stock.id] <= 1){
+          this.setState({sell:false, message:"Transaction Successful"});
+        }else{
+          this.setState({message:"Transaction Successful"});
         }
+      }else{
+        this.setState({message:"You don't own that many shares"})
       }
     }else{
       if (this.props.currentUser.funds > transaction.amount*transaction.price){
         this.props.addTransaction(transaction,this.props.currentUser);
+        this.setState({message:"Transaction Successful"})
+      }else{
+        this.setState({message:"Insufficient funds"})
       }
     }
     this.setState({
@@ -114,17 +122,23 @@ class TransactionForm extends React.Component{
     }
     if (this.props.shares[this.props.stock.id]){
       sb = (
-        <h2 className={sb} onClick={()=>this.setState({sell: true})}>Sell</h2>
+        <h2 className={sb} onClick={()=>this.setState({sell: true, message: ""})}>Sell</h2>
       )
     }else{
       sb = (
         <h2></h2>
       )
     }
+    let message;
+    if (this.state.message === "Transaction Successful"){
+      message = (<p class="transaction-success">{this.state.message}</p>);
+    }else{
+      message = (<p class="transaction-error">{this.state.message}</p>);
+    }
     return(
         <form className="transaction-form" onSubmit={this.handleSubmit.bind(this)}>
           <div className="transaction-options">
-            <h2 className={bb} onClick={()=>this.setState({sell: false})}>Buy</h2>
+            <h2 className={bb} onClick={()=>this.setState({sell: false, message:""})}>Buy</h2>
             {sb}
           </div>
           <div className="transaction-input">
@@ -142,7 +156,9 @@ class TransactionForm extends React.Component{
           <input className={transactionFormButton} type="submit" value={buttonval}></input>
             <div className="transaction-ownership">
               {shares}
+              {message}
             </div>
+
         </form>
 
     )
