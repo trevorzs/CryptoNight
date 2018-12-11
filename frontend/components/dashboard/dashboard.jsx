@@ -23,14 +23,14 @@ class Dashboard extends React.Component{
       if (date.getHours() > 12){
         hour = date.getHours()%12;
         if (hour === 0){
-          time = `12:00 AM`
+          time = `12:${minutes} AM`
         }else{
           time = `${hour}:${minutes} PM`
         }
       }else{
         hour = date.getHours()%12;
         if (hour === 0){
-          time = `12:00 PM`
+          time = `12:${minutes} PM`
         }else{
           time = `${hour}:${minutes} AM`
         }
