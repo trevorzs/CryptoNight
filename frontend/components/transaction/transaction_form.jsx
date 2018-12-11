@@ -40,7 +40,7 @@ class TransactionForm extends React.Component{
       transaction.amount = (-1 * transaction.amount);
       if ((this.props.shares[this.props.stock.id] + transaction.amount)>=0){
         this.props.addTransaction(transaction,this.props.currentUser);
-        if (this.props.shares[this.props.stock.id] <= 1){
+        if (this.props.shares[this.props.stock.id] <= 0){
           this.setState({sell:false, message:"Transaction Successful"});
         }else{
           this.setState({message:"Transaction Successful"});
