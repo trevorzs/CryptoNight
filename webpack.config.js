@@ -10,11 +10,6 @@ var prodPlugins = [
       'NODE_ENV': JSON.stringify('production')
     }
   }),
-  new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: true
-    }
-  })
 ];
 
 plugins = plugins.concat(
@@ -24,7 +19,7 @@ plugins = plugins.concat(
 module.exports = {
   context: __dirname,
   entry: './frontend/entry.jsx',
-  output: { 
+  output: {
     path: path.resolve(__dirname, 'app', 'assets', 'javascripts'),
     filename: 'bundle.js'
   },
