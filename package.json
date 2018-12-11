@@ -13,7 +13,6 @@
     "react-router-dom": "^4.3.1",
     "recharts": "^1.4.0",
     "redux": "^4.0.1",
-    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2"
@@ -51,6 +50,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0"
+    "eslint-plugin-standard": "^4.0.0",
+    "redux-logger": "^3.0.6"
   }
 }

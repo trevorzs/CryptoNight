@@ -57,7 +57,7 @@ class Dashboard extends React.Component{
         initialprice = this.props.portfolios.slice(-1)[0].account_value;
     }
     return (
-      <div class="portfolio-chart">
+      <div className="portfolio-chart">
         <h1 id="pctChangeLabel">Your Portfolio:</h1>
         <h1 id="pricelabel">${initialprice}</h1>
         <LineChart width={640} height={240}
