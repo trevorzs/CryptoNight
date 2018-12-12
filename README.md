@@ -41,11 +41,11 @@ The entire page's theme, including link styling and background gradient, are tog
 ![stock show](readme_images/stockshowup.png)
 
 #### Cryptocurrency related news
-Fires of an Ajax request to cryptocompare API to fetch related news based on visited cryptocurrencies' symbol. Iterates over the listings and displays them as links with calculations to display how long ago the news article was published.
+Fires off an Ajax request to cryptocompare API to fetch related news based on visited cryptocurrencies' symbol. Iterates over the listings and displays them as links with calculations to display how long ago the news article was published.
 ![watchlist](readme_images/news.png)
 
 #### Buy/Sell Cryptocurrency
-Transactions are held in the ```Trasactions``` table. Users can make transactions if they have enough funds to. Users on the ```Users``` table have a funds attribute. On signup, a transaction is created giving a new user one Bitcoin. The user can sell this Bitcoin in a transaction in order to receive funds to make other purchases and trades.
+Transactions are held in the ```Transactions``` table. Users can make transactions if they have enough funds to. Users on the ```Users``` table have a funds attribute. On signup, a transaction is created giving a new user one Bitcoin. The user can sell this Bitcoin in a transaction in order to receive funds to make other purchases and trades.
 
 Estimated cost is displayed in the buy/sell table. This is linked to the fetched stock price and is fetched on an interval of 10 seconds. This means that all transactions are based on live market data up to 10 second accuracy, so users can simulate real cryptocurrency trading.
 
@@ -89,5 +89,5 @@ User's show page also has a news feed which goes through the user's watched stoc
 ![portfolio](readme_images/curated_news.png)
 
 #### Login/Signup (user authentication)
-Simple user authentication with security via hashing/salting using the BCrypt gem in Ruby. Users can create accounts that live on the `Users` table and log-in sessions are stored in the `Sessions` table. The current user is bootstrapped to the window so that users don't have to log in every time, unless they explicitly log out.
+Simple user authentication with security via hashing/salting using the BCrypt gem in Ruby. Users can create accounts that live on the `Users` table. The current user is bootstrapped to the window so that users don't have to log in every time, unless they explicitly log out.
 ![signup](readme_images/signup.png)
