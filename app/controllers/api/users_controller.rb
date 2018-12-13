@@ -7,7 +7,7 @@ class Api::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.funds = 0;
+    @user.funds = 5000;
     if @user.save
       Transaction.create!([{
           user_id: @user.id,
