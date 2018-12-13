@@ -32,6 +32,7 @@ class Navbar extends React.Component{
           enter: true,
           link : `/stocks/${this.props.search[0].id}`
         })
+        this.props.clearSearch();
       }
     }
   }
