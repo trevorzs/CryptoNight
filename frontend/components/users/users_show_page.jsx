@@ -111,7 +111,9 @@ class UserShowPage extends React.Component{
               shareworth += this.props.stocks[stockId].USD.PRICE*shareAmount;
             }
           }
-          this.props.createPortfolio({account_value: this.round((shareworth+this.props.currentUser.funds),4)});
+          if (!(this.props.stocks instanceof Array)){
+            this.props.createPortfolio({account_value: this.round((shareworth+this.props.currentUser.funds),4)});
+          }
          ownedShares = shareArr.map((stockId)=>{
            if (stockslist[stockId] && stockslist[stockId].USD){
              price = "$" +this.round(stockslist[stockId].USD.PRICE,5).toString();

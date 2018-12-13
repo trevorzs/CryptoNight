@@ -1,3 +1,8 @@
+.recharts-cartesian-axis-tick {
+  stroke:none;
+  font-size:0;
+  display:none;
+}
 
 .news-div{
   width:680px;
