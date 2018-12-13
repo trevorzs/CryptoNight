@@ -32,6 +32,7 @@ class StockIndex extends React.Component{
 
   componentWillUnmount(){
     clearInterval(this.interval1);
+    this.props.clearData();
     this.props.needsLoading();
   }
 
