@@ -24,6 +24,7 @@ const SharesReducer = (state = {}, action) => {
       case RECEIVE_SHARES:
         return merge({},state,action.shares);
       case RECEIVE_USER:
+      case CLEAR_DATA:
         return {};
       case RECEIVE_NEEDS_LOADING:
         return {};
