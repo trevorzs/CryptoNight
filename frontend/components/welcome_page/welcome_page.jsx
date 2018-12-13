@@ -17,7 +17,7 @@ class WelcomePage extends React.Component{
     }else{
       content =
     ( <div className="splash">
-      <h1 className="splash-title">Don't Sleep</h1>
+      <h1 className="splash-title">CryptoNight</h1>
       <nav className="splash-navbar">
         <div/>
         <div className="navlinks">
