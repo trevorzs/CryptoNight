@@ -38,6 +38,18 @@ class Navbar extends React.Component{
   }
 
   renderSearch(){
+    if (this.props.search && this.props.search.length === 0){
+      const items = (
+        <p className="no-results">
+          No results
+        </p>
+      );
+      return (
+        <ul className="search-results">
+          {items}
+        </ul>
+      );
+    }
     if (this.props.search && this.props.search.length>0){
       let string = "";
       let query = this.props.query;
@@ -47,7 +59,7 @@ class Navbar extends React.Component{
           if (object.name[i].toLowerCase() === query[i].toLowerCase()){
             namestring = namestring + object.name[i]
           }else{
-            i = 100;
+            break;
           }
         }
         let symbolstring = ""
@@ -58,7 +70,7 @@ class Navbar extends React.Component{
             if (i>symbolstring.length){
               symbolstring = "";
             }
-            i = 100;
+            break;
           }
         }
         if (namestring.length>symbolstring.length){

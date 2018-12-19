@@ -79,6 +79,13 @@
 .search-match{
   color: #e72ebe;
 }
+.no-results{
+  padding:10px 30px 10px 20px;
+  min-width:200px;
+  width: 40vw;
+  max-width:400px;
+  display:flex;
+}
 
 .search-result-item:hover{
   background-color: #261538;
