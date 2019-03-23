@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import WelcomePage from './welcome_page';
-import {logout} from '../../actions/session_actions';
+import {login,logout} from '../../actions/session_actions';
 
 const msp = state => (
   {
@@ -13,7 +13,11 @@ const msp = state => (
 
 const mdp = dispatch => (
   {
-    logout: () => dispatch(logout())
+    logout: () => dispatch(logout()),
+    demoLogin: () => {
+      const user = {username:"Potential_Cryptonaut", password:"starwars"}
+      return (dispatch(login(user)))
+    }
   }
 );
 
