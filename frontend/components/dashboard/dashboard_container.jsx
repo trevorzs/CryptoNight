@@ -5,7 +5,6 @@ import Dashboard from './dashboard';
 const msp = (state, ownProps) => {
   return (
     {
-      currentUser: state.entities.users[state.session.id],
       portfolios: state.entities.portfolios
     }
   )

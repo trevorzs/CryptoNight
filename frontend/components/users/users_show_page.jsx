@@ -6,8 +6,8 @@ import NavbarContainer from '../navbar/navbar_container';
 import NewsContainer from '../news/news_container';
 import MoversContainer from '../movers/movers_container';
 import DashboardContainer from '../dashboard/dashboard_container';
+import TinyChartContainer from '../tiny_chart/tiny_chart_container';
 import Loading from '../loading/loading';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
 
 class UserShowPage extends React.Component{
@@ -18,7 +18,7 @@ class UserShowPage extends React.Component{
   componentDidMount(){
     this.props.needsLoading();
     this.props.findAllShares(this.props.currentUser.id).then(
-      response=>   {if (this.props.watchlist.length > 0){
+      response=>   {
           const shareIds = Object.keys(this.props.shares);
           const shareArr = [];
           for (var i = 0; i < shareIds.length; i++) {
@@ -30,9 +30,6 @@ class UserShowPage extends React.Component{
           const allIds = shareArr.concat(this.props.watchlist);
           this.props.altFetchStocks(allIds);
           this.props.fetchPortfolios();
-        }else{
-          this.props.doneLoading();
-        }
       }
     );
   }
@@ -41,7 +38,7 @@ class UserShowPage extends React.Component{
     if (this.props.match.params !== oldprops.match.params){
       this.props.needsLoading();
       this.props.findAllShares(this.props.currentUser.id).then(
-        response=>   {if (this.props.watchlist.length > 0){
+        response=>   {
             const shareIds = Object.keys(this.props.shares);
             const shareArr = [];
             for (var i = 0; i < shareIds.length; i++) {
@@ -52,9 +49,6 @@ class UserShowPage extends React.Component{
             }
             const allIds = shareArr.concat(this.props.watchlist);
             this.props.altFetchStocks(allIds);
-          }else{
-            this.props.doneLoading();
-          }
         }
       );
     }
@@ -71,10 +65,7 @@ class UserShowPage extends React.Component{
         <Loading />
       )
     }
-    let watchlistitems;
-    let chart;
-    let graphClass;
-    let news, movers;
+    let watchlistitems, chart, graphClass, news, movers;
     let sharelist, ownedShares,  stockslist, shareheader;
     let shareworth = 0.0;
     const shareArr = Object.keys(this.props.shares);
@@ -131,14 +122,7 @@ class UserShowPage extends React.Component{
                     <li>{stockslist[stockId].symbol}</li>
                     <li>{sharelist[stockId]} shares</li>
                   </div>
-                    <LineChart className={graphClass} width={45} height={40}
-                      margin={{ top: 25, right: 0, left: 0, bottom: 0 }} onMouseLeave={this.resetData}
-                       data={stockslist[stockId].daily}>
-                       <filter id="hello"></filter>
-                      <Line type="monotone" dataKey="close" stroke="white" dot={false}/>
-                        <XAxis dataKey="time" hide={true} padding={{ left: 0, right: 0 }} />
-                        <YAxis type="number" domain={['dataMin', 'dataMax']} hide={true}/>
-                    </LineChart>
+                    <TinyChartContainer graphClass = {graphClass} data={stockslist[stockId].daily}/>
                   <li>{price}</li>
                 </ul>
               </Link>
@@ -159,14 +143,7 @@ class UserShowPage extends React.Component{
           symbol = stock.USD.FROMSYMBOL;
           price = "$" +this.round(stock.USD.PRICE,5).toString();
           chart = (
-            <LineChart className={graphClass} width={50} height={40}
-              margin={{ top: 25, right: 0, left: 0, bottom: 0 }} onMouseLeave={this.resetData}
-               data={stock.daily}>
-               <filter id="hello"></filter>
-              <Line type="monotone" dataKey="close" stroke="white" dot={false}/>
-                <XAxis dataKey="time" hide={true} padding={{ left: 0, right: 0 }} />
-                <YAxis type="number" domain={['dataMin', 'dataMax']} hide={true}/>
-            </LineChart>
+            <TinyChartContainer graphClass = {graphClass} data={stock.daily} />
           )
           return(
             <Link to={`/stocks/${stock.id}`} key={stock.id}>

@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import NavbarContainer from '../navbar/navbar_container';
 import NewsContainer from '../news/news_container';
+import ChartContainer from '../chart/chart_container';
 import TransactionFormContainer from '../transaction/transaction_form_container';
 import Loading from '../loading/loading';
 
@@ -14,8 +15,6 @@ class StockShowPage extends React.Component{
     this.state  = {
       timescale: "daily"
     }
-    this.resetData = this.resetData.bind(this);
-    this.tooltipRender = this.tooltipRender.bind(this);
   }
 
   componentDidMount(){
@@ -39,80 +38,6 @@ class StockShowPage extends React.Component{
 
   round(number, places){
     return +(Math.round(number + "e+" + places)  + "e-" + places);
-  }
-
-  tooltipRender(e){
-    if (e.payload && e.payload.length > 0){
-      const price = e.payload[0].payload.close;
-      let change = this.round(e.payload[0].payload.change,8).toString();
-      let pctChange = e.payload[0].payload.pctchange.toFixed(2);
-      if (pctChange.toString().includes("Infinity") || pctChange.toString().includes("NaN")){
-        pctChange = "0";
-        change = "0";
-      }
-      const date = new Date(e.payload[0].payload.time*1000);
-      let hour, minutes, time;
-      if (date.getMinutes() < 10){
-        minutes = "0" + date.getMinutes().toString();
-      }else{
-        minutes = date.getMinutes();
-      }
-      if (date.getHours() > 12){
-        hour = date.getHours()%12;
-        if (hour === 0){
-          time = `12:00 AM`
-        }else{
-          time = `${hour}:${minutes} PM`
-        }
-      }else{
-        hour = date.getHours()%12;
-        if (hour === 0){
-          time = `12:00 PM`
-        }else{
-          time = `${hour}:${minutes} AM`
-        }
-      }
-
-      const day = date.toDateString();
-      document.getElementById("pricelabel").innerHTML = "$"+price;
-
-      if (change < 0){
-        document.getElementById("pctChangeLabel").innerHTML = `-$${change.slice(1)} (${pctChange}%)`;
-      }else{
-        document.getElementById("pctChangeLabel").innerHTML = `+$${change} (${pctChange}%)`;
-      }
-      if (this.state.timescale === "daily" || this.state.timescale === "weekly"){
-        return(
-          <div className="tooltip">{time} {day.slice(4,-5)}</div>
-        )
-      }else{
-        return(
-          <div className="tooltip">{day.slice(4,-5)}, {day.slice(-5)}</div>
-        )
-      }
-    }
-  }
-
-  resetData(){
-      let initialPrice;
-      let change;
-      let initialChange;
-      let monthly;
-      let pctChange;
-      let news;
-        const monthData = this.props.data[this.state.timescale] || [];
-        pctChange = monthData[monthData.length-1].pctchange.toFixed(2);
-        initialChange = this.round(monthData[monthData.length-1].change,8);
-        if (initialChange < 0){
-          initialChange = `-$${initialChange.toString().slice(1)} (${pctChange}%)`;
-        }else{
-          initialChange = `+$${initialChange} (${pctChange}%)`;
-        }
-        initialChange = initialChange
-        initialPrice = "$" + monthData[monthData.length-1].close;
-        monthly = this.props.data[this.state.timescale].slice(1);
-        document.getElementById("pricelabel").innerHTML = initialPrice;
-        document.getElementById("pctChangeLabel").innerHTML = initialChange;
   }
 
   clearTimescaleButtons(){
@@ -213,22 +138,20 @@ class StockShowPage extends React.Component{
             <div id="gradient" className={gd}>
             </div>
           </div>
+
           <NavbarContainer navlink={nv}/>
+
           <div className="main-wrapper">
             <div className="stock-show-main">
               <Link to="/stocks"><h2 id="return-button" className={rb}>Cryptocurrencies</h2></Link>
               <h1 id="stockLabel">{this.props.stock.name}</h1>
               <h1 id="pricelabel">{initialPrice}</h1>
               <h2 id="pctChangeLabel">{initialChange}</h2>
-                <LineChart width={800} height={240}
-                  margin={{ top: 30, right: 70, left: -30, bottom: 5 }} onMouseLeave={this.resetData}
-                   data={monthly}>
-                   <filter id="hello"></filter>
-                  <Line type="monotone" dataKey="close" stroke="white" dot={false}/>
-                    <XAxis dataKey="time" hide={true} padding={{ left: 40, right: 40 }} />
-                    <YAxis type="number" domain={['dataMin', 'dataMax']} hide={true}/>
-                    <Tooltip isAnimationActive={false} position={{ y: 10 }} offset={-32} content={this.tooltipRender.bind(this)}/>
-                </LineChart>
+              <ChartContainer width={800} height={240}
+                margin={{ top:30, right:70, left:-30, bottom:5}}
+                data={monthly} timescale={this.state.timescale}
+                xDataKey={"time"} yDataKey={"close"}/>
+
                 <ul className="timescale-btn-list">
                   <button id="tdaily" className="timescale-btn active-timescale" onClick={()=>{
                       this.setState(merge(this.state,{timescale:"daily"}));
@@ -261,11 +184,13 @@ class StockShowPage extends React.Component{
                         document.getElementById("tfiveyearly").classList.add("active-timescale");
                     }}>5 Y</button>
                 </ul>
+
               <div className="news-div">
                 <h1 className="news-header">News</h1>
                 {news}
               </div>
             </div>
+
             <div className="stock-action-menu">
               <TransactionFormContainer button={transactionbutton} stock={this.props.stock}/>
               {button}

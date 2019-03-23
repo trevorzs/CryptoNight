@@ -100,6 +100,7 @@ class TransactionForm extends React.Component{
     }else{
       price = "loading";
     }
+
     if (this.state.sell === false){
       buttonval = "Buy";
       bb = activeclass;
@@ -131,9 +132,9 @@ class TransactionForm extends React.Component{
     }
     let message;
     if (this.state.message === "Transaction Successful"){
-      message = (<p class="transaction-success">{this.state.message}</p>);
+      message = (<p className="transaction-success">{this.state.message}</p>);
     }else{
-      message = (<p class="transaction-error">{this.state.message}</p>);
+      message = (<p className="transaction-error">{this.state.message}</p>);
     }
     return(
         <form className="transaction-form" onSubmit={this.handleSubmit.bind(this)}>
