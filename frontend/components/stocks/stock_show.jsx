@@ -55,17 +55,12 @@ class StockShowPage extends React.Component{
         <Loading />
       )
     }
-      let initialPrice;
-      let change;
-      let initialChange;
-      let monthly;
-      let pctChange;
-      let news;
-      let rb, gd, at, nv;
-      let addedStocks;
-      let button;
+      let initialPrice, change, initialChange, monthly, pctChange;
+      let news, rb, gd, at, nv, addedStocks, button;
       let watchlistbutton, transactionbutton;
 
+
+      //was using jquery before i learned not to :(
       if (this.props.data[this.state.timescale]){
         const monthData = this.props.data[this.state.timescale];
         pctChange = monthData[monthData.length-1].pctchange.toFixed(2);

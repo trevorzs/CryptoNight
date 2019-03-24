@@ -151,6 +151,7 @@ class StockIndex extends React.Component{
         );
       }
     });
+
     return (
       <div className="overall fullsize scroll">
         <div className="displace">
@@ -162,27 +163,34 @@ class StockIndex extends React.Component{
           <div className="stock-index">
             <h1>Cryptocurrencies</h1>
             <p>{stocks.length} Cryptocurrencies</p>
+
             <div className="stock-index-list">
               <ul className="stock-index-list-header">
+
                 <li className={nameClass} onClick={() => {
                     this.setState({name_up: !this.state.name_up, active: "name"})
                     this.arrangeStocksAscending("name",!this.state.name_up);
                   }}>Name {nameArrow}</li>
+
                 <li className={symbolClass} onClick={() => {
                     this.setState({symbol_up: !this.state.symbol_up, active: "symbol"})
                     this.arrangeStocksAscending("symbol",!this.state.symbol_up);
                   }}>Symbol {symbolArrow}</li>
+
                 <li className={priceClass} onClick={() => {
                     this.setState({price_up: !this.state.price_up, active: "price"})
                     this.arrangeStocksAscending("PRICE",!this.state.price_up,true);
                   }}>Price {priceArrow}</li>
+
                 <li className={todayClass} onClick={() => {
                     this.setState({today_up: !this.state.today_up, active: "today"})
                     this.arrangeStocksAscending("CHANGEPCT24HOUR",!this.state.today_up,true);
                   }}>Today {todayArrow}</li>
+
               </ul>
               {stocks}
             </div>
+
           </div>
         </div>
       </div>

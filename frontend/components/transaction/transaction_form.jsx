@@ -23,10 +23,10 @@ class TransactionForm extends React.Component{
   componentDidMount(){
     const currentUserId = this.props.currentUser.id;
     const currentStockId = this.props.stock.id;
-    const func = this.props.findShares;
     this.props.fetchPrice(this.props.stock.symbol,this.props.stock.id);
     this.props.findAllShares(currentUserId);
   }
+
   componentWillUnmount(){
     this.props.needsLoading();
   }
@@ -36,6 +36,7 @@ class TransactionForm extends React.Component{
     const transaction = Object.assign({},this.state);
     transaction.price = this.props.data.price;
     transaction.amount = parseInt(transaction.amount);
+
     if (this.state.sell === true){
       transaction.amount = (-1 * transaction.amount);
       if ((this.props.shares[this.props.stock.id] + transaction.amount)>=0){
