@@ -47,13 +47,14 @@ class UserShowPage extends React.Component{
         <Loading />
       )
     }
-    let watchListItems, chart, graphClass, news, movers;
+    let watchListItems, chart, graphClass;
     let sharelist, ownedShares,  stockslist, shareHeader, shareArr;
     let shareworth = 0.0;
     let stock, price, symbol;
 
 
     //calculate portfolio worth to add to portfolio history
+    //relegate to helper function
     shareArr = Object.keys(this.props.shares);
     if (shareArr.length > 0){
       shareHeader = (
