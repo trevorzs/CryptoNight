@@ -167,11 +167,6 @@ stocks = Stock.create!([{
               details: "My precious"
               },
             {
-              name: "Bitcoin Cash Satoshi's Vision",
-              symbol: "BCHSV",
-              details: "All hail satoshi"
-              },
-            {
               name: "Bitshares",
               symbol: "BTS",
               details: "Bite sized shares"
@@ -200,11 +195,6 @@ stocks = Stock.create!([{
                 name: "GXChain",
                 symbol: "GXS",
                 details: "Spectacular"
-                },
-              {
-                name: "IOTA",
-                symbol: "IOT",
-                details: "Tiny"
                 },
                 {
                   name: "Huobi Token",
